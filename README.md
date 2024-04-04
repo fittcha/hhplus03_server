@@ -25,13 +25,17 @@
 - 2024.04.04
   - ERD 재설계
   - Mock API 작성
-  - Dummy Data 반환 및 테스트
+  - Dummy Data 반환 및 http 테스트
+  - SecurityConfiguration 작성 (postman 테스트용)
 
 
 
 
 
 ### 3주차 인사이트
+요구사항을 api 명세로 녹여내고, 기능 구현 흐름을 작성해보는 것
+DB를 적절한 정규화 방식으로 설계하는 것
+테이블도 결국 캡슐화? 의존성을 줄여..
 
 
 ### 기술 스택 결정
