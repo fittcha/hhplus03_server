@@ -24,6 +24,8 @@
   - Mock API 작성 중
 - 2024.04.04
   - ERD 재설계
+  - Mock API 작성
+  - Dummy Data 반환 및 테스트
 
 
 
