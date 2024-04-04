@@ -13,11 +13,11 @@ public interface ConcertInterface {
     List<GetConcertsResponse> getConcerts();
 
     // 콘서트 상세 조회
-    GetConcertResponse getConcert();
+    GetConcertResponse getConcert(Long concertId);
 
     // 예약 가능 날짜 조회
-    List<GetDatesResponse> getDates();
+    List<GetDatesResponse> getDates(Long concertId);
 
     // 좌석 조회
-    GetSeatsResponse getSeats();
+    List<GetSeatsResponse> getSeats(Long concertId, Long concertDateId);
 }

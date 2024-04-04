@@ -5,8 +5,8 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicUpdate;
 
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -14,30 +14,39 @@ import java.util.Objects;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "concert_date")
-public class ConcertDate extends BaseDateTimeEntity {
+@DynamicUpdate
+@Table(name = "hall")
+public class Hall extends BaseDateTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long concertDateId;
+    private Long hallId;
 
     @Column(nullable = false)
-    private ZonedDateTime concertDate;
+    private String name;
 
-    public ConcertDate(ZonedDateTime concertDate, int seats) {
-        this.concertDate = concertDate;
+    @Column(nullable = false)
+    private int seats_cnt = 0;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "seat_id")
+    private List<Seat> seatList = new ArrayList();
+
+    public Hall(String name, int seats_cnt) {
+        this.name = name;
+        this.seats_cnt = seats_cnt;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ConcertDate that = (ConcertDate) o;
-        return Objects.equals(concertDateId, that.concertDateId);
+        Hall hall = (Hall) o;
+        return Objects.equals(hallId, hall.hallId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(concertDateId);
+        return Objects.hash(hallId);
     }
 }

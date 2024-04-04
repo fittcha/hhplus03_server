@@ -1,11 +1,11 @@
 package io.hhplus.server.controller.reservation.dto.request;
 
-import java.time.ZonedDateTime;
+import jakarta.validation.constraints.NotNull;
 
 public record ReserveRequest(
-        Long concertId,
-        ZonedDateTime date,
-        int seatNum,
-        Long userId
+        @NotNull Long concertId,
+        @NotNull Long concertDateId,
+        @NotNull Long seatId,
+        @NotNull Long userId
 ) {
 }

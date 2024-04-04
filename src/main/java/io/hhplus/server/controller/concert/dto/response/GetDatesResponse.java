@@ -1,15 +1,10 @@
 package io.hhplus.server.controller.concert.dto.response;
 
 import java.time.ZonedDateTime;
-import java.util.List;
 
 public record GetDatesResponse(
-        List<DatesStatus> dates
+        Long concertDateId,
+        ZonedDateTime date,
+        boolean isSoldOut
 ) {
-
-    public record DatesStatus(
-            ZonedDateTime date,
-            boolean isSoldOut
-    ) {
-    }
 }

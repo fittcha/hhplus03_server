@@ -10,5 +10,5 @@ public interface ReservationInterface {
     ReserveResponse reserve(ReserveRequest request);
 
     // 좌석 예매 취소
-    void cancel(CancelRequest request);
+    void cancel(Long reservationId, CancelRequest request);
 }

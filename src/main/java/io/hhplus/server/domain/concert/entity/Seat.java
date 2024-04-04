@@ -18,17 +18,18 @@ public class Seat extends BaseDateTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "seat_id")
     private Long seatId;
 
     @Column(nullable = false)
     private int seatNum;
 
     @Column(nullable = false)
-    private boolean isReserved;
+    private int price = 0;
 
-    public Seat(int seatNum, boolean isReserved) {
+    public Seat(int seatNum, int price) {
         this.seatNum = seatNum;
-        this.isReserved = isReserved;
+        this.price = price;
     }
 
     @Override

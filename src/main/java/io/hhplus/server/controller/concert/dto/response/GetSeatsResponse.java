@@ -1,14 +1,8 @@
 package io.hhplus.server.controller.concert.dto.response;
 
-import java.util.List;
-
 public record GetSeatsResponse(
-        List<SeatsStatus> seats
+        Long seatId,
+        int seatNum,
+        boolean isReserved
 ) {
-
-    public record SeatsStatus(
-            int seatNum,
-            boolean available
-    ) {
-    }
 }

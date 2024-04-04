@@ -1,4 +1,4 @@
-package io.hhplus.server.controller.reservation.dto.response;
+package io.hhplus.server.controller.user.dto.response;
 
 import io.hhplus.server.domain.payment.PaymentEnums;
 import io.hhplus.server.domain.reservation.ReservationEnums;
@@ -6,15 +6,15 @@ import lombok.Builder;
 
 import java.time.ZonedDateTime;
 
-public record ReserveResponse(
+public record GetMyReservationsResponse(
+
         Long reservationId,
         ReservationEnums.Status status,
         ConcertInfo concertInfo,
         PaymentInfo paymentInfo
 ) {
-
     @Builder
-    public ReserveResponse {
+    public GetMyReservationsResponse {
     }
 
     @Builder
