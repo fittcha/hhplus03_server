@@ -5,9 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2dba11e2-779e-4013-82d7-fe0971d334cc" name="Changes" comment="feat: Mock API 구현, dummy data 반환">
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/config/SecurityConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/postman_getConcerts.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/postman_reserve.PNG" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/config/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +52,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -61,6 +66,8 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Docker.docker: Compose Deployment.executor": "Run",
+    "Gradle.Build hhplus03_server.executor": "Run",
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
     "RequestMappingsPanelWidth0": "75",
@@ -68,10 +75,13 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.ServerApplication.executor": "Run",
     "WebServerToolWindowFactoryState": "false",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "last_opened_file_path": "/Users/chacha/development/hhplus/hhplus03_server/src/main/java/io/hhplus/server",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/cseun/hhplus/hhplus03_server",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -93,11 +103,11 @@
       <recent name="io.hhplus.server" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\cseun\hhplus\hhplus03_server" />
       <recent name="$PROJECT_DIR$/src/main/java/io/hhplus/server" />
       <recent name="$PROJECT_DIR$/src/main/java/io/hhplus/server/concert/domain/seat" />
       <recent name="$PROJECT_DIR$/src/main/java/io/hhplus/server/concert/domain/concert" />
       <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/src/main/java/io/hhplus/server/reservation" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
@@ -114,7 +124,7 @@
       <recent name="io.hhplus.server.domain.payment.entity" />
     </key>
   </component>
-  <component name="RunManager" selected="HTTP Request.ServerApplication | #2">
+  <component name="RunManager" selected="Spring Boot.ServerApplication">
     <configuration name="ServerApplication | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/ServerApplication.http" requestIdentifier="#1" runType="Run single request">
       <method v="2" />
     </configuration>
@@ -157,9 +167,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Docker.docker: Compose Deployment" />
         <item itemvalue="HTTP Request.ServerApplication | #2" />
         <item itemvalue="HTTP Request.ServerApplication | #1" />
-        <item itemvalue="Docker.docker: Compose Deployment" />
         <item itemvalue="Docker.docker.mysql: Compose Deployment" />
       </list>
     </recent_temporary>
