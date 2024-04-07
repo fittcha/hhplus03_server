@@ -2,6 +2,7 @@ package io.hhplus.server.controller.payment;
 
 import io.hhplus.server.controller.payment.dto.request.PayRequest;
 import io.hhplus.server.controller.payment.dto.response.PayResponse;
+import io.hhplus.server.domain.payment.PaymentEnums;
 import io.hhplus.server.domain.payment.service.PaymentService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -18,6 +19,12 @@ public class PaymentController {
     @PostMapping("/{paymentId}")
     public PayResponse pay(@PathVariable(value = "paymentId") @NotNull Long paymentId,
                            @RequestBody @Valid PayRequest request) {
-        return service.pay(paymentId, request);
+        // dummy data
+        return PayResponse.builder()
+                .paymentId(1L)
+                .status(PaymentEnums.Status.COMPLETE)
+                .paymentPrice(79000)
+                .balance(1000)
+                .build();
     }
 }
