@@ -15,10 +15,7 @@ public class SecurityConfig {
         http
                 .authorizeRequests()
                 // 특정 API에 대해 모든 사용자에게 접근 허용
-                .requestMatchers("/concerts/**").permitAll()
-                .requestMatchers("/reservations/**").permitAll()
-                .requestMatchers("/users/**").permitAll()
-                .requestMatchers("/payments/**").permitAll()
+                .requestMatchers("/**").permitAll()
                 // --------------------------------------------
                 .anyRequest().authenticated(); // 나머지 API에 대해서는 인증을 요구
         http

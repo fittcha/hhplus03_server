@@ -7,8 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -24,7 +22,7 @@ public class ConcertDate extends BaseDateTimeEntity {
     @Column(nullable = false)
     private ZonedDateTime concertDate;
 
-    public ConcertDate(ZonedDateTime concertDate, int seats) {
+    public ConcertDate(ZonedDateTime concertDate) {
         this.concertDate = concertDate;
     }
 
