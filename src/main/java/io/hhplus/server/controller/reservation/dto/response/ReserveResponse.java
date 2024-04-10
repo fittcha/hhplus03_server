@@ -47,7 +47,8 @@ public record ReserveResponse(
                 .build();
     }
 
-    public record ConcertInfo(
+    @Builder
+    public static record ConcertInfo(
             Long concertId,
             Long concertDateId,
             String name,
@@ -55,20 +56,14 @@ public record ReserveResponse(
             Long seatId,
             int seatNum
     ) {
-        @Builder
-        public ConcertInfo {
-        }
     }
 
-    public record PaymentInfo(
+    @Builder
+    public static record PaymentInfo(
             Long paymentId,
             PaymentEnums.Status status,
             BigDecimal paymentPrice
     ) {
-
-        @Builder
-        public PaymentInfo {
-        }
     }
 
 }

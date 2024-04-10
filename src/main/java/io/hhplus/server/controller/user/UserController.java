@@ -11,6 +11,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class UserController {
     @GetMapping("/{userId}/balance")
     public GetBalanceResponse getBalance(@PathVariable(value = "userId") @NotNull Long userId) {
         // dummy data
-        return new GetBalanceResponse(1000);
+        return new GetBalanceResponse(BigDecimal.valueOf(1000));
     }
 
     @PatchMapping("/{userId}/charge")
@@ -50,7 +51,7 @@ public class UserController {
                 .paymentInfo(GetMyReservationsResponse.PaymentInfo.builder()
                         .paymentId(1L)
                         .status(PaymentEnums.Status.READY)
-                        .paymentPrice(79000)
+                        .paymentPrice(BigDecimal.valueOf(79000))
                         .build())
                 .build());
     }

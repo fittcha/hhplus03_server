@@ -53,7 +53,7 @@ public class ConcertService implements ConcertInterface {
         List<Long> reservedSeatIds = reservationManager.getReservedSeatIdsByConcertDate(concertDateId);
 
         return allSeats.stream()
-                .map(seat -> new GetSeatsResponse(seat.getSeatId(), seat.getSeatNum(), !reservedSeatIds.contains(seat.getSeatId())))
+                .map(seat -> new GetSeatsResponse(seat.getSeatId(), seat.getSeatNum(), reservedSeatIds.contains(seat.getSeatId())))
                 .collect(Collectors.toList());
     }
 }
