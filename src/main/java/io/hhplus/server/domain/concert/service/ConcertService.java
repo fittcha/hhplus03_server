@@ -5,13 +5,9 @@ import io.hhplus.server.controller.concert.dto.response.GetConcertsResponse;
 import io.hhplus.server.controller.concert.dto.response.GetDatesResponse;
 import io.hhplus.server.controller.concert.dto.response.GetSeatsResponse;
 import io.hhplus.server.domain.concert.entity.Concert;
+import io.hhplus.server.domain.concert.entity.Place;
+import io.hhplus.server.domain.concert.entity.Seat;
 import io.hhplus.server.domain.concert.repository.ConcertRepository;
-import io.hhplus.server.domain.place.entity.Place;
-import io.hhplus.server.domain.place.entity.Seat;
-import io.hhplus.server.domain.place.service.PlaceService;
-import io.hhplus.server.domain.reservation.ReservationEnums;
-import io.hhplus.server.domain.reservation.entity.Reservation;
-import io.hhplus.server.domain.reservation.service.ReservationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -24,9 +20,8 @@ public class ConcertService implements ConcertInterface {
 
     private final ConcertRepository concertRepository;
     private final ConcertValidator concertValidator;
-
-    private final PlaceService placeService;
-    private final ReservationService reservationService;
+    private final ConcertPlaceManager placeManager;
+    private final ConcertReservationManager reservationManager;
 
     @Override
     public List<GetConcertsResponse> getConcerts() {
@@ -37,7 +32,7 @@ public class ConcertService implements ConcertInterface {
     @Override
     public GetConcertResponse getConcert(Long concertId) {
         Concert concert = concertRepository.findById(concertId);
-        Place place = placeService.getPlace(concert.getPlaceId());
+        Place place = placeManager.getPlace(concert.getPlaceId());
         return GetConcertResponse.from(concert, place);
     }
 
@@ -53,16 +48,9 @@ public class ConcertService implements ConcertInterface {
     @Override
     public List<GetSeatsResponse> getSeats(Long concertId, Long concertDateId) {
         // 콘서트 전체 좌석 정보
-        Concert concert = concertRepository.findById(concertId);
-        List<Seat> allSeats = placeService.getSeatsByPlace(concert.getPlaceId());
-
-        // 예약된 좌석 조회
-        List<Reservation> reservations = reservationService.getReservationsByConcertDate(concertDateId);
-        List<Long> reservedSeatIds = reservations.stream()
-                .filter(v -> List.of(ReservationEnums.Status.RESERVED, ReservationEnums.Status.ING).contains(v.getStatus()))
-                .map(Reservation::getSeat)
-                .map(Seat::getSeatId)
-                .toList();
+        List<Seat> allSeats = placeManager.getSeatsByPlace(concertId);
+        // 예약된 좌석 PK 조회
+        List<Long> reservedSeatIds = reservationManager.getReservedSeatIdsByConcertDate(concertDateId);
 
         return allSeats.stream()
                 .map(seat -> new GetSeatsResponse(seat.getSeatId(), seat.getSeatNum(), !reservedSeatIds.contains(seat.getSeatId())))

@@ -1,12 +1,16 @@
 package io.hhplus.server.domain.reservation.entity;
 
 import io.hhplus.server.BaseDateTimeEntity;
+import io.hhplus.server.domain.concert.entity.Concert;
 import io.hhplus.server.domain.concert.entity.ConcertDate;
-import io.hhplus.server.domain.place.entity.Seat;
+import io.hhplus.server.domain.concert.entity.Seat;
+import io.hhplus.server.domain.payment.PaymentEnums;
+import io.hhplus.server.domain.payment.service.dto.CreatePaymentReqDto;
 import io.hhplus.server.domain.reservation.ReservationEnums;
 import io.hhplus.server.domain.user.entity.User;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
@@ -30,6 +34,10 @@ public class Reservation extends BaseDateTimeEntity {
     private User user;
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "concert_id")
+    private Concert concert;
+
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "concert_date_id")
     private ConcertDate concertDate;
 
@@ -42,12 +50,18 @@ public class Reservation extends BaseDateTimeEntity {
 
     private ZonedDateTime reservedAt;
 
-    public Reservation(User user, ConcertDate concertDate, Seat seat, ReservationEnums.Status status, ZonedDateTime reservedAt) {
+    @Builder
+    public Reservation(User user, Concert concert, ConcertDate concertDate, Seat seat, ReservationEnums.Status status, ZonedDateTime reservedAt) {
         this.user = user;
+        this.concert = concert;
         this.concertDate = concertDate;
         this.seat = seat;
         this.status = status;
         this.reservedAt = reservedAt;
+    }
+
+    public CreatePaymentReqDto toCreatePayment() {
+        return new CreatePaymentReqDto(this, PaymentEnums.Status.READY, this.seat.getPrice());
     }
 
     @Override

@@ -1,7 +1,9 @@
-package io.hhplus.server.infra_structure;
+package io.hhplus.server.infra_structure.user;
 
+import io.hhplus.server.domain.user.entity.User;
 import io.hhplus.server.domain.user.repository.UserJpaRepository;
 import io.hhplus.server.domain.user.repository.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -11,5 +13,10 @@ public class UserRepositoryImpl implements UserRepository {
 
     public UserRepositoryImpl(UserJpaRepository userJpaRepository) {
         this.userJpaRepository = userJpaRepository;
+    }
+
+    @Override
+    public User findById(Long userId) {
+        return userJpaRepository.findById(userId).orElseThrow(EntityNotFoundException::new);
     }
 }

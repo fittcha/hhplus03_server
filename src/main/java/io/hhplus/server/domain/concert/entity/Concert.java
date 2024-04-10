@@ -33,9 +33,10 @@ public class Concert extends BaseDateTimeEntity {
     private List<ConcertDate> concertDateList = new ArrayList();
 
     @Builder
-    public Concert(String name, Long placeId) {
+    public Concert(String name, Long placeId, List<ConcertDate> concertDateList) {
         this.name = name;
         this.placeId = placeId;
+        this.concertDateList = concertDateList;
     }
 
     @Override

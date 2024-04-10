@@ -1,14 +1,13 @@
-package io.hhplus.server.domain.concert;
+package io.hhplus.server;
 
-import io.hhplus.server.MessageCommInterface;
 import lombok.Getter;
 
-public class ConcertCustomException extends RuntimeException {
+public class CustomException extends RuntimeException {
     @Getter
     private final String errorCode;
     private final String message;
 
-    public ConcertCustomException(MessageCommInterface messageCommInterface) {
+    public CustomException(MessageCommInterface messageCommInterface) {
         super(messageCommInterface.getMessage());
         this.errorCode = messageCommInterface.getCode();
         this.message = messageCommInterface.getMessage();

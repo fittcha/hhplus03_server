@@ -1,8 +1,9 @@
-package io.hhplus.server.domain.place.entity;
+package io.hhplus.server.domain.concert.entity;
 
 import io.hhplus.server.BaseDateTimeEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
@@ -32,9 +33,11 @@ public class Place extends BaseDateTimeEntity {
     @JoinColumn(name = "seat_id")
     private List<Seat> seatList = new ArrayList();
 
-    public Place(String name, int seats_cnt) {
+    @Builder
+    public Place(String name, int seats_cnt, List<Seat> seatList) {
         this.name = name;
         this.seats_cnt = seats_cnt;
+        this.seatList = seatList;
     }
 
     @Override

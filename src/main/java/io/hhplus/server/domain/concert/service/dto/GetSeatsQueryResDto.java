@@ -1,4 +1,4 @@
-package io.hhplus.server.domain.concert.dto;
+package io.hhplus.server.domain.concert.service.dto;
 
 public record GetSeatsQueryResDto(
         Long seatId,

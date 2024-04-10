@@ -7,5 +7,4 @@ public class ReservationEnums {
         RESERVED,
         CANCEL
     }
-
 }
