@@ -2,8 +2,8 @@ package io.hhplus.server.controller.concert.dto.response;
 
 import io.hhplus.server.domain.concert.entity.Concert;
 import io.hhplus.server.domain.concert.entity.ConcertDate;
-import io.hhplus.server.domain.concert.entity.Place;
-import io.hhplus.server.domain.concert.entity.Seat;
+import io.hhplus.server.domain.place.entity.Place;
+import io.hhplus.server.domain.place.entity.Seat;
 import lombok.Builder;
 
 import java.text.DecimalFormat;

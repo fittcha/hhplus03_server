@@ -1,11 +1,8 @@
 package io.hhplus.server.domain.payment.entity;
 
 import io.hhplus.server.BaseDateTimeEntity;
-import io.hhplus.server.domain.concert.entity.ConcertDate;
-import io.hhplus.server.domain.concert.entity.Seat;
 import io.hhplus.server.domain.payment.PaymentEnums;
 import io.hhplus.server.domain.reservation.entity.Reservation;
-import io.hhplus.server.domain.user.entity.User;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;

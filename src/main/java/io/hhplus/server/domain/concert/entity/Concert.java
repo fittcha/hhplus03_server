@@ -3,6 +3,7 @@ package io.hhplus.server.domain.concert.entity;
 import io.hhplus.server.BaseDateTimeEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
@@ -31,6 +32,7 @@ public class Concert extends BaseDateTimeEntity {
     @JoinColumn(name = "concert_id")
     private List<ConcertDate> concertDateList = new ArrayList();
 
+    @Builder
     public Concert(String name, Long placeId) {
         this.name = name;
         this.placeId = placeId;
