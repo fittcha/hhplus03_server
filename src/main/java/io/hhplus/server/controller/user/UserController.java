@@ -14,8 +14,6 @@ import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
-
 @Tag(name = "유저", description = "user-controller")
 @RequestMapping("/users")
 @RestController
@@ -28,8 +26,7 @@ public class UserController {
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = GetBalanceResponse.class)))
     @GetMapping("/{userId}/balance")
     public ApiResult<GetBalanceResponse> getBalance(@PathVariable(value = "userId") @NotNull Long userId) {
-        // dummy data
-        return ApiResult.success(new GetBalanceResponse(1L, BigDecimal.valueOf(1000)));
+        return ApiResult.success(service.getBalance(userId));
     }
 
     @Operation(summary = "잔액 충전")
@@ -37,6 +34,6 @@ public class UserController {
     @PatchMapping("/{userId}/charge")
     public ApiResult<GetBalanceResponse> charge(@PathVariable(value = "userId") @NotNull Long userId,
                        @RequestBody @Valid ChargeRequest request) {
-        return ApiResult.success(new GetBalanceResponse(1L, BigDecimal.valueOf(110000)));
+        return ApiResult.success(service.charge(userId, request));
     }
 }
