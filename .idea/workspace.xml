@@ -4,36 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2dba11e2-779e-4013-82d7-fe0971d334cc" name="Changes" comment="feat: read.me Swagger UI 캡처본 추가">
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/service/ReservationMonitor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/service/dto/OccupyTempReservationDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/io/hhplus/server/domain/reservation/service/ReservationServiceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/io/hhplus/server/domain/waiting/service/WaitingServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/payment/dto/response/PayResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/payment/dto/response/PayResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/reservation/dto/request/ReserveRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/reservation/dto/request/ReserveRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/reservation/dto/response/ReserveResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/reservation/dto/response/ReserveResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/user/dto/response/GetMyReservationsResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/user/dto/response/GetMyReservationsResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/concert/service/ConcertReservationManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/concert/service/ConcertReservationManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/PaymentEnums.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/entity/Payment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/entity/Payment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/repository/PaymentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/repository/PaymentRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/service/PaymentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/service/PaymentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/service/PaymentValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/service/PaymentValidator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/service/dto/CancelPaymentResultResDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/service/dto/CancelPaymentResultResDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/service/dto/CreatePaymentReqDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/service/dto/CreatePaymentReqDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/ReservationEnums.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/entity/Reservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/entity/Reservation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/service/ReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/service/ReservationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/service/ReservationValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/service/ReservationValidator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/waiting/repository/WaitingQueueJpaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/waiting/repository/WaitingQueueJpaRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/waiting/repository/WaitingQueueRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/waiting/repository/WaitingQueueRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/waiting/service/WaitingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/waiting/service/WaitingService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/infra_structure/payment/PaymentRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/infra_structure/payment/PaymentRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/infra_structure/waiting/WaitingQueueRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/infra_structure/waiting/WaitingQueueRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/io/hhplus/server/domain/payment/service/PaymentServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/io/hhplus/server/domain/payment/service/PaymentServiceTest.java" afterDir="false" />
-    </list>
+    <list default="true" id="2dba11e2-779e-4013-82d7-fe0971d334cc" name="Changes" comment="feat: 예약 서비스 대기열 로직 추가 + 단위테스트 작성" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -371,7 +342,7 @@
       <workItem from="1712745253505" duration="1148000" />
       <workItem from="1712832598833" duration="2312000" />
       <workItem from="1712834941457" duration="10416000" />
-      <workItem from="1712845412648" duration="8745000" />
+      <workItem from="1712845412648" duration="8885000" />
     </task>
     <task id="LOCAL-00001" summary="feat: gradle, mysql 세팅">
       <created>1712065343445</created>
@@ -432,7 +403,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712846945421</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="feat: 예약 서비스 대기열 로직 추가 + 단위테스트 작성">
+      <option name="closed" value="true" />
+      <created>1712856041267</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1712856041267</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -447,7 +426,8 @@
     <MESSAGE value="feat: 기본 API 기능 구현 + 단위테스트 작성" />
     <MESSAGE value="feat: 대기열 기능 구현" />
     <MESSAGE value="feat: read.me Swagger UI 캡처본 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: read.me Swagger UI 캡처본 추가" />
+    <MESSAGE value="feat: 예약 서비스 대기열 로직 추가 + 단위테스트 작성" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: 예약 서비스 대기열 로직 추가 + 단위테스트 작성" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
 </project>

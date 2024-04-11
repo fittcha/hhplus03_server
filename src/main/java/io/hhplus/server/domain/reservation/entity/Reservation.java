@@ -49,6 +49,9 @@ public class Reservation extends BaseDateTimeEntity {
 
     private ZonedDateTime reservedAt;
 
+    @Version
+    private Long version; // 낙관적 락 버전 필드
+
     public void toComplete() {
         this.status = Status.RESERVED;
     }

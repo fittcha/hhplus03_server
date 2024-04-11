@@ -1,5 +1,6 @@
 package io.hhplus.server.domain.reservation.service;
 
+import io.hhplus.server.base.exception.CustomException;
 import io.hhplus.server.controller.reservation.dto.request.CancelRequest;
 import io.hhplus.server.controller.reservation.dto.request.ReserveRequest;
 import io.hhplus.server.controller.reservation.dto.response.ReserveResponse;
@@ -9,12 +10,14 @@ import io.hhplus.server.domain.payment.entity.Payment;
 import io.hhplus.server.domain.payment.service.PaymentReader;
 import io.hhplus.server.domain.payment.service.PaymentService;
 import io.hhplus.server.domain.payment.service.dto.CancelPaymentResultResDto;
+import io.hhplus.server.domain.reservation.ReservationExceptionEnum;
 import io.hhplus.server.domain.reservation.entity.Reservation;
 import io.hhplus.server.domain.reservation.repository.ReservationRepository;
 import io.hhplus.server.domain.reservation.service.dto.GetReservationAndPaymentResDto;
 import io.hhplus.server.domain.user.service.UserReader;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,17 +42,23 @@ public class ReservationService implements ReservationInterface {
 
     @Override
     public ReserveResponse reserve(ReserveRequest request) {
-        // validator
-        reservationValidator.checkReserved(request.concertDateId(), request.seatId());
+        try {
+            // validator
+            reservationValidator.checkReserved(request.concertDateId(), request.seatId());
 
-        // 좌석 예약
-        Reservation reservation = reservationRepository.save(request.toEntity(concertReader, userReader));
-        // 결제 정보 생성
-        Payment payment = paymentService.create(reservation.toCreatePayment());
-        // 예약 임시 점유 (5분)
-        reservationMonitor.occupyReservation(reservation.getReservationId());
+            // 좌석 예약
+            Reservation reservation = reservationRepository.save(request.toEntity(concertReader, userReader));
+            // 결제 정보 생성
+            Payment payment = paymentService.create(reservation.toCreatePayment());
+            // 예약 임시 점유 (5분)
+            reservationMonitor.occupyReservation(reservation.getReservationId());
 
-        return ReserveResponse.from(reservation, payment);
+            return ReserveResponse.from(reservation, payment);
+
+        } catch (ObjectOptimisticLockingFailureException e) {
+            // 버전 충돌 -> "이미 선택된 좌석입니다." 반환
+            throw new CustomException(ReservationExceptionEnum.ALREADY_RESERVED);
+        }
     }
 
     @Override
