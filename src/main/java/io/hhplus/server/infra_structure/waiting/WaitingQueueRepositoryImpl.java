@@ -29,6 +29,11 @@ public class WaitingQueueRepositoryImpl implements WaitingQueueRepository {
     }
 
     @Override
+    public long countByRequestTimeBeforeAndStatusIs(WaitingQueue.Status status, Timestamp requestTime) {
+        return waitingQueueJpaRepository.countByRequestTimeBeforeAndStatusIs(requestTime, status);
+    }
+
+    @Override
     public void save(WaitingQueue waitingQueue) {
         waitingQueueJpaRepository.save(waitingQueue);
     }

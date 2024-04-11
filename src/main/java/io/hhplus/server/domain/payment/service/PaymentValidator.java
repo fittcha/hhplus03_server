@@ -1,8 +1,8 @@
 package io.hhplus.server.domain.payment.service;
 
 import io.hhplus.server.base.exception.CustomException;
-import io.hhplus.server.domain.payment.PaymentEnums;
 import io.hhplus.server.domain.payment.PaymentExceptionEnum;
+import io.hhplus.server.domain.payment.entity.Payment;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -18,14 +18,14 @@ public class PaymentValidator {
         }
     }
 
-    public void checkPayStatus(PaymentEnums.Status status) {
-        if (!status.equals(PaymentEnums.Status.READY)) {
+    public void checkPayStatus(Payment.Status status) {
+        if (!status.equals(Payment.Status.READY)) {
             throw new CustomException(PaymentExceptionEnum.NOT_AVAILABLE_PAY);
         }
     }
 
-    public void checkCancelStatus(PaymentEnums.Status status) {
-        if (!(status.equals(PaymentEnums.Status.READY) || status.equals(PaymentEnums.Status.COMPLETE))) {
+    public void checkCancelStatus(Payment.Status status) {
+        if (!(status.equals(Payment.Status.READY) || status.equals(Payment.Status.COMPLETE))) {
             throw new CustomException(PaymentExceptionEnum.NOT_AVAILABLE_CANCEL);
         }
     }

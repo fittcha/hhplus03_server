@@ -1,7 +1,6 @@
 package io.hhplus.server.domain.payment.entity;
 
 import io.hhplus.server.base.entity.BaseDateTimeEntity;
-import io.hhplus.server.domain.payment.PaymentEnums;
 import io.hhplus.server.domain.reservation.entity.Reservation;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -30,21 +29,28 @@ public class Payment extends BaseDateTimeEntity {
     private Reservation reservation;
 
     @Column(nullable = false)
-    private PaymentEnums.Status status;
+    private Payment.Status status;
 
     @Column(nullable = false)
     private BigDecimal price;
 
     private ZonedDateTime paidAt;
 
+    public enum Status {
+        READY,
+        COMPLETE,
+        CANCEL,
+        REFUND
+    }
+
     @Builder
-    public Payment(Reservation reservation, PaymentEnums.Status status, BigDecimal price) {
+    public Payment(Reservation reservation, Payment.Status status, BigDecimal price) {
         this.reservation = reservation;
         this.status = status;
         this.price = price;
     }
 
-    public Payment updateStatus(PaymentEnums.Status status) {
+    public Payment updateStatus(Payment.Status status) {
         if (status == null) {
             return null;
         }
@@ -53,8 +59,8 @@ public class Payment extends BaseDateTimeEntity {
         return this;
     }
 
-    public Payment applyPay() {
-        this.status = PaymentEnums.Status.COMPLETE;
+    public Payment toPaid() {
+        this.status = Payment.Status.COMPLETE;
         this.paidAt = ZonedDateTime.now();
         return this;
     }

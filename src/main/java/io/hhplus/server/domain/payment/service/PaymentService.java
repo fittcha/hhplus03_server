@@ -2,7 +2,6 @@ package io.hhplus.server.domain.payment.service;
 
 import io.hhplus.server.controller.payment.dto.request.PayRequest;
 import io.hhplus.server.controller.payment.dto.response.PayResponse;
-import io.hhplus.server.domain.payment.PaymentEnums;
 import io.hhplus.server.domain.payment.entity.Payment;
 import io.hhplus.server.domain.payment.repository.PaymentRepository;
 import io.hhplus.server.domain.payment.service.dto.CancelPaymentResultResDto;
@@ -11,6 +10,7 @@ import io.hhplus.server.domain.user.entity.User;
 import io.hhplus.server.domain.user.service.UserReader;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 
@@ -23,6 +23,7 @@ public class PaymentService implements PaymentInterface {
     private final UserReader userReader;
 
     @Override
+    @Transactional
     public PayResponse pay(Long paymentId, PayRequest request) {
         // validator - 결제 상태 검증
         Payment payment = paymentRepository.findById(paymentId);
@@ -35,9 +36,10 @@ public class PaymentService implements PaymentInterface {
         // 결제
         // 1. 결제
         boolean isSuccess = false;
-        Payment paymentResult = payment.applyPay();
+        Payment paymentResult = payment.toPaid();   // 결제 완료 처리
+        paymentResult.getReservation().toComplete();    // 예약 완료 처리
         BigDecimal usedBalance = user.getBalance();
-        if (paymentResult.getStatus().equals(PaymentEnums.Status.COMPLETE)) {
+        if (paymentResult.getStatus().equals(Payment.Status.COMPLETE)) {
             // 2. 사용자 잔액 차감
             usedBalance = user.useBalance(payment.getPrice());
             isSuccess = true;
@@ -52,6 +54,7 @@ public class PaymentService implements PaymentInterface {
     }
 
     @Override
+    @Transactional
     public CancelPaymentResultResDto cancel(Long paymentId) {
         Payment payment = paymentRepository.findById(paymentId);
 
@@ -74,12 +77,12 @@ public class PaymentService implements PaymentInterface {
         Payment updatedPayment = payment;
         User user = payment.getReservation().getUser();
 
-        if (PaymentEnums.Status.READY.equals(payment.getStatus())) {
+        if (Payment.Status.READY.equals(payment.getStatus())) {
             // 결제 대기 상태일 경우 - 즉시 취소
-            updatedPayment = payment.updateStatus(PaymentEnums.Status.CANCEL);
-        } else if (PaymentEnums.Status.COMPLETE.equals(payment.getStatus())) {
+            updatedPayment = payment.updateStatus(Payment.Status.CANCEL);
+        } else if (Payment.Status.COMPLETE.equals(payment.getStatus())) {
             // 결제 완료 상태일 경우 - 환불
-            updatedPayment = payment.updateStatus(PaymentEnums.Status.REFUND);
+            updatedPayment = payment.updateStatus(Payment.Status.REFUND);
             // 잔액 환불
             user.refundBalance(payment.getPrice());
         }

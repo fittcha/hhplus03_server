@@ -1,10 +1,10 @@
 package io.hhplus.server.domain.payment.service.dto;
 
-import io.hhplus.server.domain.payment.PaymentEnums;
+import io.hhplus.server.domain.payment.entity.Payment;
 
 public record CancelPaymentResultResDto(
         boolean isSuccess,
         Long paymentId,
-        PaymentEnums.Status status
+        Payment.Status status
 ) {
 }

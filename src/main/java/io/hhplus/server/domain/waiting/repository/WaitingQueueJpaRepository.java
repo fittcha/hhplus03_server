@@ -18,4 +18,6 @@ public interface WaitingQueueJpaRepository extends JpaRepository<WaitingQueue, L
     List<WaitingQueue> findAllByRequestTimeBeforeAndStatusIs(Timestamp expireBefore, WaitingQueue.Status status);
 
     List<WaitingQueue> findByStatusIsOrderByRequestTimeAsc(WaitingQueue.Status status, Pageable pageable);
+
+    long countByRequestTimeBeforeAndStatusIs(Timestamp requestTime, WaitingQueue.Status status);
 }

@@ -4,9 +4,8 @@ import io.hhplus.server.base.entity.BaseDateTimeEntity;
 import io.hhplus.server.domain.concert.entity.Concert;
 import io.hhplus.server.domain.concert.entity.ConcertDate;
 import io.hhplus.server.domain.concert.entity.Seat;
-import io.hhplus.server.domain.payment.PaymentEnums;
+import io.hhplus.server.domain.payment.entity.Payment;
 import io.hhplus.server.domain.payment.service.dto.CreatePaymentReqDto;
-import io.hhplus.server.domain.reservation.ReservationEnums;
 import io.hhplus.server.domain.user.entity.User;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -46,12 +45,22 @@ public class Reservation extends BaseDateTimeEntity {
     private Seat seat;
 
     @Column(nullable = false)
-    private ReservationEnums.Status status;
+    private Reservation.Status status;
 
     private ZonedDateTime reservedAt;
 
+    public void toComplete() {
+        this.status = Status.RESERVED;
+    }
+
+    public enum Status {
+        ING,
+        RESERVED,
+        CANCEL
+    }
+    
     @Builder
-    public Reservation(User user, Concert concert, ConcertDate concertDate, Seat seat, ReservationEnums.Status status, ZonedDateTime reservedAt) {
+    public Reservation(User user, Concert concert, ConcertDate concertDate, Seat seat, Reservation.Status status, ZonedDateTime reservedAt) {
         this.user = user;
         this.concert = concert;
         this.concertDate = concertDate;
@@ -61,7 +70,7 @@ public class Reservation extends BaseDateTimeEntity {
     }
 
     public CreatePaymentReqDto toCreatePayment() {
-        return new CreatePaymentReqDto(this, PaymentEnums.Status.READY, this.seat.getPrice());
+        return new CreatePaymentReqDto(this, Payment.Status.READY, this.seat.getPrice());
     }
 
     @Override

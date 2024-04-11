@@ -14,6 +14,8 @@ public interface WaitingQueueRepository {
 
     long countByStatusIs(WaitingQueue.Status status);
 
+    long countByRequestTimeBeforeAndStatusIs(WaitingQueue.Status status, Timestamp requestTime);
+
     void save(WaitingQueue waitingQueue);
 
     WaitingQueue findByUserIdAndToken(Long userId, String token);

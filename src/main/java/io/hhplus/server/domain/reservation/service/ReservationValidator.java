@@ -1,7 +1,6 @@
 package io.hhplus.server.domain.reservation.service;
 
 import io.hhplus.server.base.exception.CustomException;
-import io.hhplus.server.domain.reservation.ReservationEnums;
 import io.hhplus.server.domain.reservation.ReservationExceptionEnum;
 import io.hhplus.server.domain.reservation.entity.Reservation;
 import io.hhplus.server.domain.reservation.repository.ReservationRepository;
@@ -20,7 +19,7 @@ public class ReservationValidator {
         Reservation reservation = reservationRepository.findOneByConcertDateIdAndSeatId(concertDateId, seatId);
         // 이미 선택된 좌석
         if (reservation != null
-                && List.of(ReservationEnums.Status.RESERVED, ReservationEnums.Status.ING).contains(reservation.getStatus())) {
+                && List.of(Reservation.Status.RESERVED, Reservation.Status.ING).contains(reservation.getStatus())) {
             throw new CustomException(ReservationExceptionEnum.ALREADY_RESERVED);
         }
     }

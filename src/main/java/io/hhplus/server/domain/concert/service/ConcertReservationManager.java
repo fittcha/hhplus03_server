@@ -1,7 +1,6 @@
 package io.hhplus.server.domain.concert.service;
 
 import io.hhplus.server.domain.concert.entity.Seat;
-import io.hhplus.server.domain.reservation.ReservationEnums;
 import io.hhplus.server.domain.reservation.entity.Reservation;
 import io.hhplus.server.domain.reservation.repository.ReservationRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +20,7 @@ public class ConcertReservationManager {
         List<Reservation> reservations = reservationRepository.findAllByConcertDateId(concertDateId);
         // 예약완료, 예약중인 좌석 PK 반환
         return reservations.stream()
-                .filter(v -> List.of(ReservationEnums.Status.RESERVED, ReservationEnums.Status.ING).contains(v.getStatus()))
+                .filter(v -> List.of(Reservation.Status.RESERVED, Reservation.Status.ING).contains(v.getStatus()))
                 .map(Reservation::getSeat)
                 .map(Seat::getSeatId)
                 .toList();

@@ -13,8 +13,10 @@ import io.hhplus.server.domain.reservation.entity.Reservation;
 import io.hhplus.server.domain.reservation.repository.ReservationRepository;
 import io.hhplus.server.domain.reservation.service.dto.GetReservationAndPaymentResDto;
 import io.hhplus.server.domain.user.service.UserReader;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -24,10 +26,16 @@ public class ReservationService implements ReservationInterface {
 
     private final ReservationRepository reservationRepository;
     private final ReservationValidator reservationValidator;
+    private final ReservationMonitor reservationMonitor;
     private final ConcertReader concertReader;
     private final UserReader userReader;
     private final PaymentService paymentService;
     private final PaymentReader paymentReader;
+
+    @PostConstruct
+    public void init() {
+        reservationMonitor.reservationMonitoring();
+    }
 
     @Override
     public ReserveResponse reserve(ReserveRequest request) {
@@ -38,12 +46,14 @@ public class ReservationService implements ReservationInterface {
         Reservation reservation = reservationRepository.save(request.toEntity(concertReader, userReader));
         // 결제 정보 생성
         Payment payment = paymentService.create(reservation.toCreatePayment());
-        // TODO - 5분 선점
+        // 예약 임시 점유 (5분)
+        reservationMonitor.occupyReservation(reservation.getReservationId());
 
         return ReserveResponse.from(reservation, payment);
     }
 
     @Override
+    @Transactional
     public void cancel(Long reservationId, CancelRequest request) {
         Reservation reservation = reservationRepository.findByIdAndUserId(reservationId, request.userId());
 

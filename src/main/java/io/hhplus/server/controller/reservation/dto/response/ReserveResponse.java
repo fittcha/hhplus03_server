@@ -3,9 +3,7 @@ package io.hhplus.server.controller.reservation.dto.response;
 import io.hhplus.server.domain.concert.entity.Concert;
 import io.hhplus.server.domain.concert.entity.ConcertDate;
 import io.hhplus.server.domain.concert.entity.Seat;
-import io.hhplus.server.domain.payment.PaymentEnums;
 import io.hhplus.server.domain.payment.entity.Payment;
-import io.hhplus.server.domain.reservation.ReservationEnums;
 import io.hhplus.server.domain.reservation.entity.Reservation;
 import lombok.Builder;
 
@@ -14,7 +12,7 @@ import java.time.ZonedDateTime;
 
 public record ReserveResponse(
         Long reservationId,
-        ReservationEnums.Status status,
+        Reservation.Status status,
         ConcertInfo concertInfo,
         PaymentInfo paymentInfo
 ) {
@@ -61,7 +59,7 @@ public record ReserveResponse(
     @Builder
     public static record PaymentInfo(
             Long paymentId,
-            PaymentEnums.Status status,
+            Payment.Status status,
             BigDecimal paymentPrice
     ) {
     }

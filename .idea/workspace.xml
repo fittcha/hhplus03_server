@@ -4,46 +4,35 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2dba11e2-779e-4013-82d7-fe0971d334cc" name="Changes" comment="feat: build 오류 수정">
-      <change afterPath="$PROJECT_DIR$/image/swagger-concert1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/swagger-concert2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/swagger-payment1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/swagger-reservation1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/swagger-reservation2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/swagger-user1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/swagger-waiting1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/swagger-waiting2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/swagger_main.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/base/config/SwaggerConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/base/jwt/JwtConstants.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/base/jwt/JwtInterface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/base/jwt/JwtService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/waiting/dto/request/AddWaitingQueueRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/waiting/dto/request/CheckActiveRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/waiting/dto/request/IssueTokenRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/waiting/dto/response/CheckActiveResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/waiting/dto/response/IssueTokenResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/waiting/WaitingConstants.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/waiting/repository/WaitingQueueJpaRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/waiting/service/WaitingScheduler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/infra_structure/waiting/WaitingQueueRepositoryImpl.java" afterDir="false" />
+    <list default="true" id="2dba11e2-779e-4013-82d7-fe0971d334cc" name="Changes" comment="feat: read.me Swagger UI 캡처본 추가">
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/service/ReservationMonitor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/service/dto/OccupyTempReservationDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/io/hhplus/server/domain/reservation/service/ReservationServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/io/hhplus/server/domain/waiting/service/WaitingServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/erd.png" beforeDir="false" afterPath="$PROJECT_DIR$/image/erd.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/postman_getConcerts.PNG" beforeDir="false" afterPath="$PROJECT_DIR$/image/postman_getConcerts.PNG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/postman_reserve.PNG" beforeDir="false" afterPath="$PROJECT_DIR$/image/postman_reserve.PNG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/concert/ConcertController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/concert/ConcertController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/payment/PaymentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/payment/PaymentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/reservation/ReservationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/reservation/ReservationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/user/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/user/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/waiting/WaitingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/waiting/WaitingController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/waiting/entity/Waiting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/waiting/entity/WaitingQueue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/waiting/repository/WaitingRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/waiting/repository/WaitingQueueRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/waiting/service/WaitingInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/waiting/service/WaitingInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/payment/dto/response/PayResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/payment/dto/response/PayResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/reservation/dto/request/ReserveRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/reservation/dto/request/ReserveRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/reservation/dto/response/ReserveResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/reservation/dto/response/ReserveResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/user/dto/response/GetMyReservationsResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/user/dto/response/GetMyReservationsResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/concert/service/ConcertReservationManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/concert/service/ConcertReservationManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/PaymentEnums.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/entity/Payment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/entity/Payment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/repository/PaymentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/repository/PaymentRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/service/PaymentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/service/PaymentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/service/PaymentValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/service/PaymentValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/service/dto/CancelPaymentResultResDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/service/dto/CancelPaymentResultResDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/service/dto/CreatePaymentReqDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/service/dto/CreatePaymentReqDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/ReservationEnums.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/entity/Reservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/entity/Reservation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/service/ReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/service/ReservationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/service/ReservationValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/service/ReservationValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/waiting/repository/WaitingQueueJpaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/waiting/repository/WaitingQueueJpaRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/waiting/repository/WaitingQueueRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/waiting/repository/WaitingQueueRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/waiting/service/WaitingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/waiting/service/WaitingService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uml.png" beforeDir="false" afterPath="$PROJECT_DIR$/image/uml.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/infra_structure/payment/PaymentRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/infra_structure/payment/PaymentRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/infra_structure/waiting/WaitingQueueRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/infra_structure/waiting/WaitingQueueRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/io/hhplus/server/domain/payment/service/PaymentServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/io/hhplus/server/domain/payment/service/PaymentServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,10 +73,10 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="AnnotationType" />
-        <option value="JUnit5 Test Class" />
         <option value="Interface" />
         <option value="Class" />
         <option value="Record" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -118,57 +107,65 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Docker.docker: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Build hhplus03_server.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.ConcertServiceTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PaymentServiceTest.cancelTest_결제_대기건은_즉시취소.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PaymentServiceTest.cancelTest_결제_완료건은_환불.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PaymentServiceTest.cancelTest_결제_취소_불가능한_상태.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PaymentServiceTest.createTest_결제_생성.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PaymentServiceTest.payTest_결제_요청_처리_성공.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PaymentServiceTest.payTest_결제_잔액_부족하여_실패.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PaymentServiceTest.payTest_결제요청_불가능한_상태.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.UserServiceTest.chargeTest_잔액_충전.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.UserServiceTest.getBalanceTest_잔액_조회.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.hhplus03_server [buildDependents].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.hhplus03_server [build].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.hhplus03_server [clean].executor&quot;: &quot;Run&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
-    &quot;Spring Boot.ServerApplication.executor&quot;: &quot;Run&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/cseun/hhplus/hhplus03_server&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.annotationProcessors&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;26837b2678581e8838c5ceceaa0a6bbe&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Docker.docker: Compose Deployment.executor": "Run",
+    "Gradle.Build hhplus03_server.executor": "Run",
+    "Gradle.ConcertServiceTest.executor": "Run",
+    "Gradle.PaymentServiceTest.cancelTest_결제_대기건은_즉시취소.executor": "Run",
+    "Gradle.PaymentServiceTest.cancelTest_결제_완료건은_환불.executor": "Run",
+    "Gradle.PaymentServiceTest.cancelTest_결제_취소_불가능한_상태.executor": "Run",
+    "Gradle.PaymentServiceTest.createTest_결제_생성.executor": "Run",
+    "Gradle.PaymentServiceTest.payTest_결제_요청_처리_성공.executor": "Run",
+    "Gradle.PaymentServiceTest.payTest_결제_잔액_부족하여_실패.executor": "Run",
+    "Gradle.PaymentServiceTest.payTest_결제요청_불가능한_상태.executor": "Run",
+    "Gradle.ReservationServiceTest.cancelTest_예약_취소.executor": "Run",
+    "Gradle.ReservationServiceTest.getMyReservationsTest_예약_내역_조회.executor": "Run",
+    "Gradle.ReservationServiceTest.reserveTest_이미_선택된_좌석입니다.executor": "Run",
+    "Gradle.ReservationServiceTest.reserveTest_좌석_예약_성공.executor": "Run",
+    "Gradle.UserServiceTest.chargeTest_잔액_충전.executor": "Run",
+    "Gradle.UserServiceTest.getBalanceTest_잔액_조회.executor": "Run",
+    "Gradle.WaitingServiceTest.addWaitingQueueTest_대기열_추가_대기유저.executor": "Run",
+    "Gradle.WaitingServiceTest.checkActiveTest_대기열_상태_확인_대기열_정보_없거나_만료됨.executor": "Run",
+    "Gradle.WaitingServiceTest.checkActiveTest_대기열_상태_확인_대기유저.executor": "Run",
+    "Gradle.WaitingServiceTest.checkActiveTest_대기열_상태_확인_활성유저.executor": "Run",
+    "Gradle.hhplus03_server [buildDependents].executor": "Run",
+    "Gradle.hhplus03_server [build].executor": "Run",
+    "Gradle.hhplus03_server [clean].executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
+    "Spring Boot.ServerApplication.executor": "Run",
+    "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/cseun/hhplus/hhplus03_server",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.projectsettings.compiler.annotationProcessors",
+    "spring.configuration.checksum": "26837b2678581e8838c5ceceaa0a6bbe",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="io.hhplus.server" />
@@ -189,10 +186,11 @@
       <recent name="" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="io.hhplus.server.domain.waiting.service" />
+      <recent name="io.hhplus.server.domain.reservation.service" />
       <recent name="io.hhplus.server.domain.user.service" />
       <recent name="io.hhplus.server.domain.payment.service" />
       <recent name="io.hhplus.server.domain.concert.service" />
-      <recent name="io.hhplus.server.controller.concert" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="io.hhplus.server.controller.waiting.dto.request" />
@@ -202,8 +200,8 @@
       <recent name="io.hhplus.server.domain.reservation" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.ServerApplication">
-    <configuration name="PaymentServiceTest.cancelTest_결제_완료건은_환불" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="Gradle.WaitingServiceTest.checkActiveTest_대기열_상태_확인_대기유저">
+    <configuration name="ReservationServiceTest.getMyReservationsTest_예약_내역_조회" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -216,7 +214,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;io.hhplus.server.domain.payment.service.PaymentServiceTest.cancelTest_결제_완료건은_환불&quot;" />
+            <option value="&quot;io.hhplus.server.domain.reservation.service.ReservationServiceTest.getMyReservationsTest_예약_내역_조회&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -227,7 +225,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="PaymentServiceTest.cancelTest_결제_취소_불가능한_상태" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="WaitingServiceTest.addWaitingQueueTest_대기열_추가_대기유저" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -240,7 +238,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;io.hhplus.server.domain.payment.service.PaymentServiceTest.cancelTest_결제_취소_불가능한_상태&quot;" />
+            <option value="&quot;io.hhplus.server.domain.waiting.service.WaitingServiceTest.addWaitingQueueTest_대기열_추가_대기유저&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -251,7 +249,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="UserServiceTest.chargeTest_잔액_충전" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="WaitingServiceTest.checkActiveTest_대기열_상태_확인_활성유저" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -264,7 +262,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;io.hhplus.server.domain.user.service.UserServiceTest.chargeTest_잔액_충전&quot;" />
+            <option value="&quot;io.hhplus.server.domain.waiting.service.WaitingServiceTest.checkActiveTest_대기열_상태_확인_활성유저&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -275,7 +273,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="UserServiceTest.getBalanceTest_잔액_조회" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="WaitingServiceTest.checkActiveTest_대기열_상태_확인_대기유저" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -288,7 +286,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;io.hhplus.server.domain.user.service.UserServiceTest.getBalanceTest_잔액_조회&quot;" />
+            <option value="&quot;io.hhplus.server.domain.waiting.service.WaitingServiceTest.checkActiveTest_대기열_상태_확인_대기유저&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -299,48 +297,28 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="hhplus03_server [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="WaitingServiceTest.checkActiveTest_대기열_상태_확인_대기열_정보_없거나_만료됨" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
+        <option name="scriptParameters" value="" />
         <option name="taskDescriptions">
           <list />
         </option>
         <option name="taskNames">
           <list>
-            <option value="build" />
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;io.hhplus.server.domain.waiting.service.WaitingServiceTest.checkActiveTest_대기열_상태_확인_대기열_정보_없거나_만료됨&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="hhplus03_server [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="clean" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
+      <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
     <configuration name="ServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
@@ -358,11 +336,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.hhplus03_server [build]" />
-        <item itemvalue="Gradle.hhplus03_server [clean]" />
-        <item itemvalue="Gradle.UserServiceTest.chargeTest_잔액_충전" />
-        <item itemvalue="Gradle.UserServiceTest.getBalanceTest_잔액_조회" />
-        <item itemvalue="Gradle.PaymentServiceTest.cancelTest_결제_취소_불가능한_상태" />
+        <item itemvalue="Gradle.WaitingServiceTest.checkActiveTest_대기열_상태_확인_대기유저" />
+        <item itemvalue="Gradle.WaitingServiceTest.checkActiveTest_대기열_상태_확인_활성유저" />
+        <item itemvalue="Gradle.WaitingServiceTest.checkActiveTest_대기열_상태_확인_대기열_정보_없거나_만료됨" />
+        <item itemvalue="Gradle.WaitingServiceTest.addWaitingQueueTest_대기열_추가_대기유저" />
+        <item itemvalue="Gradle.ReservationServiceTest.getMyReservationsTest_예약_내역_조회" />
       </list>
     </recent_temporary>
   </component>
@@ -393,7 +371,7 @@
       <workItem from="1712745253505" duration="1148000" />
       <workItem from="1712832598833" duration="2312000" />
       <workItem from="1712834941457" duration="10416000" />
-      <workItem from="1712845412648" duration="1465000" />
+      <workItem from="1712845412648" duration="8745000" />
     </task>
     <task id="LOCAL-00001" summary="feat: gradle, mysql 세팅">
       <created>1712065343445</created>
@@ -438,7 +416,23 @@
       <option name="project" value="LOCAL" />
       <updated>1712586026064</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="feat: 대기열 기능 구현">
+      <option name="closed" value="true" />
+      <created>1712846922475</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1712846922475</updated>
+    </task>
+    <task id="LOCAL-00008" summary="feat: read.me Swagger UI 캡처본 추가">
+      <option name="closed" value="true" />
+      <created>1712846945421</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1712846945421</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -451,7 +445,9 @@
     <MESSAGE value="feat: dummy data controller에서 반환하도록 수정" />
     <MESSAGE value="feat: 기본 기능 개발 중" />
     <MESSAGE value="feat: 기본 API 기능 구현 + 단위테스트 작성" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: 기본 API 기능 구현 + 단위테스트 작성" />
+    <MESSAGE value="feat: 대기열 기능 구현" />
+    <MESSAGE value="feat: read.me Swagger UI 캡처본 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: read.me Swagger UI 캡처본 추가" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
 </project>

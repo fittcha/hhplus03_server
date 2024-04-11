@@ -1,6 +1,5 @@
 package io.hhplus.server.controller.payment.dto.response;
 
-import io.hhplus.server.domain.payment.PaymentEnums;
 import io.hhplus.server.domain.payment.entity.Payment;
 import lombok.Builder;
 
@@ -9,7 +8,7 @@ import java.math.BigDecimal;
 public record PayResponse(
         boolean isSuccess,
         Long paymentId,
-        PaymentEnums.Status status,
+        Payment.Status status,
         BigDecimal paymentPrice,
         BigDecimal balance
 ) {
