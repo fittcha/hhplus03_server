@@ -12,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -20,6 +19,7 @@ public class ConcertService implements ConcertInterface {
 
     private final ConcertRepository concertRepository;
     private final ConcertValidator concertValidator;
+    private final ConcertReader concertReader;
     private final ConcertPlaceManager placeManager;
     private final ConcertReservationManager reservationManager;
 
@@ -32,7 +32,7 @@ public class ConcertService implements ConcertInterface {
     @Override
     public GetConcertResponse getConcert(Long concertId) {
         Concert concert = concertRepository.findById(concertId);
-        Place place = placeManager.getPlace(concert.getPlaceId());
+        Place place = concertReader.findPlace(concert.getPlaceId());
         return GetConcertResponse.from(concert, place);
     }
 
@@ -48,12 +48,12 @@ public class ConcertService implements ConcertInterface {
     @Override
     public List<GetSeatsResponse> getSeats(Long concertId, Long concertDateId) {
         // 콘서트 전체 좌석 정보
-        List<Seat> allSeats = placeManager.getSeatsByPlace(concertId);
+        List<Seat> allSeats = placeManager.getSeatsByConcertId(concertId);
         // 예약된 좌석 PK 조회
         List<Long> reservedSeatIds = reservationManager.getReservedSeatIdsByConcertDate(concertDateId);
 
         return allSeats.stream()
                 .map(seat -> new GetSeatsResponse(seat.getSeatId(), seat.getSeatNum(), reservedSeatIds.contains(seat.getSeatId())))
-                .collect(Collectors.toList());
+                .toList();
     }
 }

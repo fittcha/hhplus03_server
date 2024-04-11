@@ -6,6 +6,9 @@
 ## 1. 요구사항 분석
 ### 프로젝트 Milestone & 요구사항 명세서 & API 명세서
 [구글닥스 문서 바로가기](https://docs.google.com/spreadsheets/d/1xUItBPr_C1zbzSHNcl8WOv9zL6cymvzz5DRU_7oKDZM/edit#gid=983380097)
+
+[Swagger UI](http://localhost:8080/swagger-ui/index.html#/)
+
 ### UML 다이어그램
 ![uml.png](uml.png)
 ### ERD 명세

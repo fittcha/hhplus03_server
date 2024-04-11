@@ -8,11 +8,11 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class UserReader {
-    /* 타 도메인에서 User 관련 정보 단순 조회용 */
+    /* User 관련 정보 단순 조회용 */
 
     private final UserRepository userRepository;
 
-    public User getUser(Long userId) {
+    public User findUser(Long userId) {
         return userRepository.findById(userId);
     }
 }

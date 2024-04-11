@@ -1,6 +1,6 @@
 package io.hhplus.server.domain.concert.entity;
 
-import io.hhplus.server.BaseDateTimeEntity;
+import io.hhplus.server.base.entity.BaseDateTimeEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package io.hhplus.server;
+package io.hhplus.server.base.enums;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 

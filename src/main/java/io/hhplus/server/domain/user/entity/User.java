@@ -33,6 +33,15 @@ public class User {
         return this.balance;
     }
 
+    public User chargeBalance(BigDecimal amount) {
+        this.balance = balance.add(amount);
+        return this;
+    }
+
+    public void refundBalance(BigDecimal price) {
+        this.balance = balance.add(price);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

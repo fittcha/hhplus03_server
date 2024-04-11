@@ -1,6 +1,6 @@
 package io.hhplus.server.domain.reservation.service;
 
-import io.hhplus.server.CustomException;
+import io.hhplus.server.base.exception.CustomException;
 import io.hhplus.server.domain.reservation.ReservationEnums;
 import io.hhplus.server.domain.reservation.ReservationExceptionEnum;
 import io.hhplus.server.domain.reservation.entity.Reservation;

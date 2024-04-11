@@ -1,10 +1,11 @@
 package io.hhplus.server.domain.payment.entity;
 
-import io.hhplus.server.BaseDateTimeEntity;
+import io.hhplus.server.base.entity.BaseDateTimeEntity;
 import io.hhplus.server.domain.payment.PaymentEnums;
 import io.hhplus.server.domain.reservation.entity.Reservation;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
@@ -36,6 +37,7 @@ public class Payment extends BaseDateTimeEntity {
 
     private ZonedDateTime paidAt;
 
+    @Builder
     public Payment(Reservation reservation, PaymentEnums.Status status, BigDecimal price) {
         this.reservation = reservation;
         this.status = status;
@@ -51,7 +53,7 @@ public class Payment extends BaseDateTimeEntity {
         return this;
     }
 
-    public Payment completePay() {
+    public Payment applyPay() {
         this.status = PaymentEnums.Status.COMPLETE;
         this.paidAt = ZonedDateTime.now();
         return this;

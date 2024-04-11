@@ -12,24 +12,24 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class ConcertReader {
-    /* 타 도메인에서 Concert 관련 정보 단순 조회용 */
+    /* Concert 관련 정보 단순 조회용 */
 
     private final ConcertRepository concertRepository;
     private final PlaceRepository placeRepository;
 
-    public Concert getConcert(Long concertId) {
+    public Concert findConcert(Long concertId) {
         return concertRepository.findById(concertId);
     }
 
-    public ConcertDate getConcertDate(Long concertDateId) {
+    public ConcertDate findConcertDate(Long concertDateId) {
         return concertRepository.findConcertDateById(concertDateId);
     }
 
-    public Place getPlace(Long placeId) {
+    public Place findPlace(Long placeId) {
         return placeRepository.findById(placeId);
     }
 
-    public Seat getSeat(Long seatId) {
+    public Seat findSeat(Long seatId) {
         return placeRepository.findSeatById(seatId);
     }
 }

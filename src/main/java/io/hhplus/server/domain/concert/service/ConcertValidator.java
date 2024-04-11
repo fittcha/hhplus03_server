@@ -1,6 +1,6 @@
 package io.hhplus.server.domain.concert.service;
 
-import io.hhplus.server.CustomException;
+import io.hhplus.server.base.exception.CustomException;
 import io.hhplus.server.domain.concert.ConcertExceptionEnum;
 import io.hhplus.server.domain.concert.entity.ConcertDate;
 import lombok.RequiredArgsConstructor;

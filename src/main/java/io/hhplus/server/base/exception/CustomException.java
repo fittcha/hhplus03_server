@@ -1,5 +1,6 @@
-package io.hhplus.server;
+package io.hhplus.server.base.exception;
 
+import io.hhplus.server.base.enums.MessageCommInterface;
 import lombok.Getter;
 
 public class CustomException extends RuntimeException {

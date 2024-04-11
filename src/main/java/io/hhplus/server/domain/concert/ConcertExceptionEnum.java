@@ -1,6 +1,6 @@
 package io.hhplus.server.domain.concert;
 
-import io.hhplus.server.MessageCommInterface;
+import io.hhplus.server.base.enums.MessageCommInterface;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 

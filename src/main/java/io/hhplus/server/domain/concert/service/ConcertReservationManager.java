@@ -15,6 +15,7 @@ public class ConcertReservationManager {
 
     private final ReservationRepository reservationRepository;
 
+    /* 콘서트 회차별 예약된 좌석 PK 목록 조회 */
     public List<Long> getReservedSeatIdsByConcertDate(Long concertDateId) {
         // 예약 정보 조회
         List<Reservation> reservations = reservationRepository.findAllByConcertDateId(concertDateId);

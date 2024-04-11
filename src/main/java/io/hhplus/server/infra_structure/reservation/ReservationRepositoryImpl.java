@@ -3,6 +3,8 @@ package io.hhplus.server.infra_structure.reservation;
 import io.hhplus.server.domain.reservation.entity.Reservation;
 import io.hhplus.server.domain.reservation.repository.ReservationJpaRepository;
 import io.hhplus.server.domain.reservation.repository.ReservationRepository;
+import io.hhplus.server.domain.reservation.service.dto.GetReservationAndPaymentResDto;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -39,5 +41,15 @@ public class ReservationRepositoryImpl implements ReservationRepository {
     @Override
     public void delete(Reservation reservation) {
         reservationJpaRepository.delete(reservation);
+    }
+
+    @Override
+    public Reservation findById(Long reservationId) {
+        return reservationJpaRepository.findById(reservationId).orElseThrow(EntityNotFoundException::new);
+    }
+
+    @Override
+    public List<GetReservationAndPaymentResDto> getMyReservations(Long userId) {
+        return reservationJpaRepository.getMyReservations(userId);
     }
 }

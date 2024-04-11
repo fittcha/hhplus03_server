@@ -1,4 +1,4 @@
-package io.hhplus.server;
+package io.hhplus.server.base.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;

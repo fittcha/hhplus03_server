@@ -1,6 +1,6 @@
 package io.hhplus.server.domain.concert.service;
 
-import io.hhplus.server.CustomException;
+import io.hhplus.server.base.exception.CustomException;
 import io.hhplus.server.controller.concert.dto.response.GetConcertResponse;
 import io.hhplus.server.controller.concert.dto.response.GetConcertsResponse;
 import io.hhplus.server.controller.concert.dto.response.GetDatesResponse;
@@ -36,6 +36,7 @@ class ConcertServiceTest {
     private ConcertService concertService;
     private ConcertRepository concertRepository;
     private ConcertValidator concertValidator;
+    private ConcertReader concertReader;
     private ConcertPlaceManager placeManager;
     private ConcertReservationManager reservationManager;
 
@@ -47,17 +48,19 @@ class ConcertServiceTest {
         // mocking
         concertRepository = Mockito.mock(ConcertRepository.class);
         concertValidator = Mockito.mock(ConcertValidator.class);
+        concertReader = Mockito.mock(ConcertReader.class);
         placeManager = Mockito.mock(ConcertPlaceManager.class);
         reservationManager = Mockito.mock(ConcertReservationManager.class);
 
         concertService = new ConcertService(
                 concertRepository,
                 concertValidator,
+                concertReader,
                 placeManager,
                 reservationManager
         );
 
-        // 임영웅 콘서트 정보 세팅
+        // 콘서트 정보 세팅
         임영웅_콘서트 = Concert.builder()
                 .name("2024 임영웅 콘서트 [IM HERO - THE STADIUM]")
                 .placeId(1L)
@@ -107,7 +110,7 @@ class ConcertServiceTest {
 
         // when
         when(concertRepository.findById(concertId)).thenReturn(임영웅_콘서트);
-        when(placeManager.getPlace(임영웅_콘서트.getPlaceId())).thenReturn(상암_월드컵경기장);
+        when(concertReader.findPlace(임영웅_콘서트.getPlaceId())).thenReturn(상암_월드컵경기장);
         GetConcertResponse response = concertService.getConcert(concertId);
 
         // then
@@ -126,7 +129,7 @@ class ConcertServiceTest {
 
         // when
         when(concertRepository.findById(concertId)).thenReturn(임영웅_콘서트);
-        when(placeManager.getPlace(임영웅_콘서트.getPlaceId())).thenReturn(null);
+        when(concertReader.findPlace(임영웅_콘서트.getPlaceId())).thenReturn(null);
         GetConcertResponse response = concertService.getConcert(concertId);
 
         // then
@@ -182,7 +185,7 @@ class ConcertServiceTest {
         Long concertDateId = 1L;
 
         // when
-        when(placeManager.getSeatsByPlace(concertId)).thenReturn(상암_월드컵경기장.getSeatList());
+        when(placeManager.getSeatsByConcertId(concertId)).thenReturn(상암_월드컵경기장.getSeatList());
         when(reservationManager.getReservedSeatIdsByConcertDate(concertDateId)).thenReturn(List.of(2L, 4L));
         List<GetSeatsResponse> responses = concertService.getSeats(concertId, concertDateId);
 

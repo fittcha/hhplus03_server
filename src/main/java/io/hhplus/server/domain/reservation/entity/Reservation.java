@@ -1,6 +1,6 @@
 package io.hhplus.server.domain.reservation.entity;
 
-import io.hhplus.server.BaseDateTimeEntity;
+import io.hhplus.server.base.entity.BaseDateTimeEntity;
 import io.hhplus.server.domain.concert.entity.Concert;
 import io.hhplus.server.domain.concert.entity.ConcertDate;
 import io.hhplus.server.domain.concert.entity.Seat;
