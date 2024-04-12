@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2dba11e2-779e-4013-82d7-fe0971d334cc" name="Changes" comment="feat: 예약 서비스 대기열 로직 추가 + 단위테스트 작성" />
+    <list default="true" id="2dba11e2-779e-4013-82d7-fe0971d334cc" name="Changes" comment="feat: 예약 서비스 대기열 로직 추가 + 단위테스트 작성">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/service/PaymentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/service/PaymentService.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -87,6 +90,7 @@
     "Gradle.PaymentServiceTest.cancelTest_결제_완료건은_환불.executor": "Run",
     "Gradle.PaymentServiceTest.cancelTest_결제_취소_불가능한_상태.executor": "Run",
     "Gradle.PaymentServiceTest.createTest_결제_생성.executor": "Run",
+    "Gradle.PaymentServiceTest.executor": "Run",
     "Gradle.PaymentServiceTest.payTest_결제_요청_처리_성공.executor": "Run",
     "Gradle.PaymentServiceTest.payTest_결제_잔액_부족하여_실패.executor": "Run",
     "Gradle.PaymentServiceTest.payTest_결제요청_불가능한_상태.executor": "Run",
@@ -171,8 +175,8 @@
       <recent name="io.hhplus.server.domain.reservation" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.WaitingServiceTest.checkActiveTest_대기열_상태_확인_대기유저">
-    <configuration name="ReservationServiceTest.getMyReservationsTest_예약_내역_조회" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="Gradle.PaymentServiceTest.payTest_결제_요청_처리_성공">
+    <configuration name="PaymentServiceTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -185,7 +189,31 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;io.hhplus.server.domain.reservation.service.ReservationServiceTest.getMyReservationsTest_예약_내역_조회&quot;" />
+            <option value="&quot;io.hhplus.server.domain.payment.service.PaymentServiceTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="PaymentServiceTest.payTest_결제_요청_처리_성공" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;io.hhplus.server.domain.payment.service.PaymentServiceTest.payTest_결제_요청_처리_성공&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -293,7 +321,7 @@
       <method v="2" />
     </configuration>
     <configuration name="ServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <module name="hhplus.architecture.hhplus03_server.main" />
+      <module name="hhplus03_server.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="io.hhplus.server.ServerApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -307,21 +335,13 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.WaitingServiceTest.checkActiveTest_대기열_상태_확인_대기유저" />
+        <item itemvalue="Gradle.PaymentServiceTest.payTest_결제_요청_처리_성공" />
+        <item itemvalue="Gradle.PaymentServiceTest" />
         <item itemvalue="Gradle.WaitingServiceTest.checkActiveTest_대기열_상태_확인_활성유저" />
         <item itemvalue="Gradle.WaitingServiceTest.checkActiveTest_대기열_상태_확인_대기열_정보_없거나_만료됨" />
         <item itemvalue="Gradle.WaitingServiceTest.addWaitingQueueTest_대기열_추가_대기유저" />
-        <item itemvalue="Gradle.ReservationServiceTest.getMyReservationsTest_예약_내역_조회" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
-        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
-      </set>
-    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
