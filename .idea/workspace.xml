@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2dba11e2-779e-4013-82d7-fe0971d334cc" name="Changes" comment="feat: 예약 서비스 대기열 로직 추가 + 단위테스트 작성">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="2dba11e2-779e-4013-82d7-fe0971d334cc" name="Changes" comment="feat: 결제 요청 로직 순서 변경">
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/concert/service/ConcertReservationManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/concert/service/ConcertReservationManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/service/PaymentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/service/PaymentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/service/ReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/service/ReservationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/waiting/service/WaitingInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/waiting/service/WaitingInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/waiting/service/WaitingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/waiting/service/WaitingService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -168,11 +171,11 @@
       <recent name="io.hhplus.server.domain.concert.service" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="io.hhplus.server.domain.payment.service" />
       <recent name="io.hhplus.server.controller.waiting.dto.request" />
       <recent name="io.hhplus.server.base.jwt" />
       <recent name="io.hhplus.server.base.exception" />
       <recent name="io.hhplus.server.domain.concert.dto" />
-      <recent name="io.hhplus.server.domain.reservation" />
     </key>
   </component>
   <component name="RunManager" selected="Gradle.PaymentServiceTest.payTest_결제_요청_처리_성공">
@@ -431,7 +434,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712856041267</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="feat: 결제 요청 로직 순서 변경">
+      <option name="closed" value="true" />
+      <created>1712884983835</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1712884983835</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -447,7 +458,8 @@
     <MESSAGE value="feat: 대기열 기능 구현" />
     <MESSAGE value="feat: read.me Swagger UI 캡처본 추가" />
     <MESSAGE value="feat: 예약 서비스 대기열 로직 추가 + 단위테스트 작성" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: 예약 서비스 대기열 로직 추가 + 단위테스트 작성" />
+    <MESSAGE value="feat: 결제 요청 로직 순서 변경" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: 결제 요청 로직 순서 변경" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
 </project>

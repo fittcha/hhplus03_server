@@ -31,7 +31,7 @@ public class WaitingService implements WaitingInterface {
         Long waitingNum = null;
         Long expectedWaitTimeInSeconds = null;
 
-        // 기존 토큰 있으면 만료시킴
+        // 기존 토큰 있으면 만료
         expiredIfExist(userId);
 
         // 대기열 활성 유저 수 확인

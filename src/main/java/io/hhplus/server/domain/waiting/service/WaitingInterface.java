@@ -11,7 +11,7 @@ public interface WaitingInterface {
     /*
      * 대기열 저장
      *
-     * 첫 진입 시 또는 새로고침 시 호출
+     * 첫 진입 시 or 새로고침 시 호출
      */
     CheckActiveResponse addWaitingQueue(Long userId, String token);
 
