@@ -1,9 +1,10 @@
-package io.hhplus.server.domain.user.service;
+package io.hhplus.server.domain.unit.service;
 
 import io.hhplus.server.controller.user.dto.request.ChargeRequest;
 import io.hhplus.server.controller.user.dto.response.GetBalanceResponse;
 import io.hhplus.server.domain.user.entity.User;
 import io.hhplus.server.domain.user.repository.UserRepository;
+import io.hhplus.server.domain.user.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

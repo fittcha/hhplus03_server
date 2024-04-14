@@ -1,4 +1,4 @@
-package io.hhplus.server.domain.payment.service;
+package io.hhplus.server.domain.unit.service;
 
 import io.hhplus.server.base.exception.CustomException;
 import io.hhplus.server.controller.payment.dto.request.PayRequest;
@@ -9,6 +9,8 @@ import io.hhplus.server.domain.concert.entity.Seat;
 import io.hhplus.server.domain.payment.PaymentExceptionEnum;
 import io.hhplus.server.domain.payment.entity.Payment;
 import io.hhplus.server.domain.payment.repository.PaymentRepository;
+import io.hhplus.server.domain.payment.service.PaymentService;
+import io.hhplus.server.domain.payment.service.PaymentValidator;
 import io.hhplus.server.domain.payment.service.dto.CancelPaymentResultResDto;
 import io.hhplus.server.domain.payment.service.dto.CreatePaymentReqDto;
 import io.hhplus.server.domain.reservation.entity.Reservation;
@@ -18,6 +20,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.springframework.boot.logging.LogLevel;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -86,7 +89,7 @@ class PaymentServiceTest {
 
         // when
         when(paymentRepository.findById(paymentId)).thenReturn(완료된_결제건);
-        doThrow(new CustomException(PaymentExceptionEnum.NOT_AVAILABLE_PAY)).when(paymentValidator).checkPayStatus(any());
+        doThrow(new CustomException(PaymentExceptionEnum.NOT_AVAILABLE_PAY, null, LogLevel.INFO)).when(paymentValidator).checkPayStatus(any());
 
         // then
         CustomException expected = assertThrows(CustomException.class, () ->
@@ -110,7 +113,7 @@ class PaymentServiceTest {
         // when
         when(paymentRepository.findById(paymentId)).thenReturn(결제건);
         when(userReader.findUser(request.userId())).thenReturn(사용자);
-        doThrow(new CustomException(PaymentExceptionEnum.INSUFFICIENT_BALANCE)).when(paymentValidator).checkBalance(결제건.getPrice(), 사용자.getBalance());
+        doThrow(new CustomException(PaymentExceptionEnum.INSUFFICIENT_BALANCE, null, LogLevel.INFO)).when(paymentValidator).checkBalance(결제건.getPrice(), 사용자.getBalance());
 
         // then
         CustomException expected = assertThrows(CustomException.class, () ->
@@ -218,7 +221,7 @@ class PaymentServiceTest {
 
         // when
         when(paymentRepository.findById(paymentId)).thenReturn(결제취소건);
-        doThrow(new CustomException(PaymentExceptionEnum.NOT_AVAILABLE_CANCEL)).when(paymentValidator).checkCancelStatus(결제취소건.getStatus());
+        doThrow(new CustomException(PaymentExceptionEnum.NOT_AVAILABLE_CANCEL, null, LogLevel.INFO)).when(paymentValidator).checkCancelStatus(결제취소건.getStatus());
 
         // then
         CustomException expected = assertThrows(CustomException.class, () ->

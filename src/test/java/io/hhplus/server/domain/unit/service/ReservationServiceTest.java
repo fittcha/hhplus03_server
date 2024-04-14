@@ -1,4 +1,4 @@
-package io.hhplus.server.domain.reservation.service;
+package io.hhplus.server.domain.unit.service;
 
 import io.hhplus.server.base.exception.CustomException;
 import io.hhplus.server.controller.reservation.dto.request.CancelRequest;
@@ -16,6 +16,9 @@ import io.hhplus.server.domain.payment.service.dto.CancelPaymentResultResDto;
 import io.hhplus.server.domain.reservation.ReservationExceptionEnum;
 import io.hhplus.server.domain.reservation.entity.Reservation;
 import io.hhplus.server.domain.reservation.repository.ReservationRepository;
+import io.hhplus.server.domain.reservation.service.ReservationMonitor;
+import io.hhplus.server.domain.reservation.service.ReservationService;
+import io.hhplus.server.domain.reservation.service.ReservationValidator;
 import io.hhplus.server.domain.reservation.service.dto.GetReservationAndPaymentResDto;
 import io.hhplus.server.domain.user.entity.User;
 import io.hhplus.server.domain.user.service.UserReader;
@@ -23,6 +26,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.springframework.boot.logging.LogLevel;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -106,7 +110,7 @@ class ReservationServiceTest {
 
         // when
         when(reservationRepository.findOneByConcertDateIdAndSeatId(request.concertDateId(), request.seatId())).thenReturn(예약건);
-        doThrow(new CustomException(ReservationExceptionEnum.ALREADY_RESERVED)).when(reservationValidator).checkReserved(anyLong(), anyLong());
+        doThrow(new CustomException(ReservationExceptionEnum.ALREADY_RESERVED, null, LogLevel.INFO)).when(reservationValidator).checkReserved(anyLong(), anyLong());
 
         // then
         CustomException expected = assertThrows(CustomException.class, () ->

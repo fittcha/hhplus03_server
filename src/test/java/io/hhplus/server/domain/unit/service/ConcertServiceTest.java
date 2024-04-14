@@ -1,4 +1,4 @@
-package io.hhplus.server.domain.concert.service;
+package io.hhplus.server.domain.unit.service;
 
 import io.hhplus.server.base.exception.CustomException;
 import io.hhplus.server.controller.concert.dto.response.GetConcertResponse;
@@ -11,11 +11,13 @@ import io.hhplus.server.domain.concert.entity.ConcertDate;
 import io.hhplus.server.domain.concert.entity.Place;
 import io.hhplus.server.domain.concert.entity.Seat;
 import io.hhplus.server.domain.concert.repository.ConcertRepository;
+import io.hhplus.server.domain.concert.service.*;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.springframework.boot.logging.LogLevel;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -152,7 +154,7 @@ class ConcertServiceTest {
                         .placeId(1L)
                         .concertDateList(new ArrayList<>())
                 .build());
-        doThrow(new CustomException(ConcertExceptionEnum.DATE_IS_NULL)).when(concertValidator).dateIsNull(any());
+        doThrow(new CustomException(ConcertExceptionEnum.DATE_IS_NULL, null, LogLevel.INFO)).when(concertValidator).dateIsNull(any());
 
         // then
         CustomException expected = assertThrows(CustomException.class, () ->

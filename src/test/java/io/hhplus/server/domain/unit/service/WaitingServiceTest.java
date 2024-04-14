@@ -1,10 +1,11 @@
-package io.hhplus.server.domain.waiting.service;
+package io.hhplus.server.domain.unit.service;
 
 import io.hhplus.server.base.jwt.JwtService;
 import io.hhplus.server.controller.waiting.dto.response.CheckActiveResponse;
 import io.hhplus.server.controller.waiting.dto.response.IssueTokenResponse;
 import io.hhplus.server.domain.waiting.entity.WaitingQueue;
 import io.hhplus.server.domain.waiting.repository.WaitingQueueRepository;
+import io.hhplus.server.domain.waiting.service.WaitingService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;

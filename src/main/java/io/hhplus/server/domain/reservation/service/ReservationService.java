@@ -17,6 +17,7 @@ import io.hhplus.server.domain.reservation.service.dto.GetReservationAndPaymentR
 import io.hhplus.server.domain.user.service.UserReader;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.logging.LogLevel;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -57,7 +58,7 @@ public class ReservationService implements ReservationInterface {
 
         } catch (ObjectOptimisticLockingFailureException e) {
             // 버전 충돌 -> "이미 선택된 좌석입니다." 반환
-            throw new CustomException(ReservationExceptionEnum.ALREADY_RESERVED);
+            throw new CustomException(ReservationExceptionEnum.ALREADY_RESERVED, null, LogLevel.INFO);
         }
     }
 

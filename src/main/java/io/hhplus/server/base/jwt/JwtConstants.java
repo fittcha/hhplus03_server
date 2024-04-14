@@ -7,5 +7,5 @@ public final class JwtConstants {
     @Value("${jwt.secret-key}")
     public static String SECRET_KEY;
 
-    public final static long EXP_TIME = 60 * 60 * 24 * 7;
+    public final static long EXP_TIME = 5 * 60 * 60 * 1000;
 }
