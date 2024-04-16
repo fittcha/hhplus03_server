@@ -1,4 +1,4 @@
-package io.hhplus.server.infra_structure.user;
+package io.hhplus.server.infrastructure.user;
 
 import io.hhplus.server.domain.user.entity.User;
 import io.hhplus.server.domain.user.repository.UserJpaRepository;
@@ -18,5 +18,10 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public User findById(Long userId) {
         return userJpaRepository.findById(userId).orElseThrow(EntityNotFoundException::new);
+    }
+
+    @Override
+    public void save(User user) {
+        userJpaRepository.save(user);
     }
 }

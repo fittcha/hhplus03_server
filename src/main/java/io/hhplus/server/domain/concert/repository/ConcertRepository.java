@@ -14,4 +14,12 @@ public interface ConcertRepository {
     Concert findById(Long concertId);
 
     ConcertDate findConcertDateById(Long concertDateId);
+
+    void addConcertDates(List<ConcertDate> concertDates);
+
+    void addConcert(Concert concert);
+
+    void deleteAll();
+
+    void deleteAllDates();
 }

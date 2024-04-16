@@ -1,4 +1,4 @@
-package io.hhplus.server.infra_structure.waiting;
+package io.hhplus.server.infrastructure.waiting;
 
 import io.hhplus.server.domain.waiting.entity.WaitingQueue;
 import io.hhplus.server.domain.waiting.repository.WaitingQueueJpaRepository;

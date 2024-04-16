@@ -3,6 +3,7 @@ package io.hhplus.server.domain.concert.entity;
 import io.hhplus.server.base.entity.BaseDateTimeEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
@@ -22,14 +23,20 @@ public class Seat extends BaseDateTimeEntity {
     @Column(name = "seat_id")
     private Long seatId;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "place_id", nullable = false)
+    private Place place;
+
     @Column(nullable = false)
     private int seatNum;
 
     @Column(nullable = false)
     private BigDecimal price = BigDecimal.ZERO;
 
-    public Seat(Long seatId, int seatNum, BigDecimal price) {
+    @Builder
+    public Seat(Long seatId, Place place, int seatNum, BigDecimal price) {
         this.seatId = seatId;
+        this.place = place;
         this.seatNum = seatNum;
         this.price = price;
     }

@@ -3,6 +3,7 @@ package io.hhplus.server.domain.concert.entity;
 import io.hhplus.server.base.entity.BaseDateTimeEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -22,6 +23,7 @@ public class ConcertDate extends BaseDateTimeEntity {
     @Column(nullable = false)
     private ZonedDateTime concertDate;
 
+    @Builder
     public ConcertDate(Long concertDateId, ZonedDateTime concertDate) {
         this.concertDateId = concertDateId;
         this.concertDate = concertDate;

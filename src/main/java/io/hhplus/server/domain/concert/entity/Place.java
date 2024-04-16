@@ -27,17 +27,15 @@ public class Place extends BaseDateTimeEntity {
     private String name;
 
     @Column(nullable = false)
-    private int seats_cnt = 0;
+    private int seatsCnt = 0;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "seat_id")
+    @OneToMany(mappedBy = "place", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Seat> seatList = new ArrayList();
 
     @Builder
-    public Place(String name, int seats_cnt, List<Seat> seatList) {
+    public Place(String name, int seatsCnt) {
         this.name = name;
-        this.seats_cnt = seats_cnt;
-        this.seatList = seatList;
+        this.seatsCnt = seatsCnt;
     }
 
     @Override

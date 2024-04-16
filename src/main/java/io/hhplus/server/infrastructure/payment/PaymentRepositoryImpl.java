@@ -1,4 +1,4 @@
-package io.hhplus.server.infra_structure.payment;
+package io.hhplus.server.infrastructure.payment;
 
 import io.hhplus.server.domain.payment.entity.Payment;
 import io.hhplus.server.domain.payment.repository.PaymentJpaRepository;

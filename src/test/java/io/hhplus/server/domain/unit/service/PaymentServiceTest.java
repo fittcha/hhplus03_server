@@ -5,6 +5,7 @@ import io.hhplus.server.controller.payment.dto.request.PayRequest;
 import io.hhplus.server.controller.payment.dto.response.PayResponse;
 import io.hhplus.server.domain.concert.entity.Concert;
 import io.hhplus.server.domain.concert.entity.ConcertDate;
+import io.hhplus.server.domain.concert.entity.Place;
 import io.hhplus.server.domain.concert.entity.Seat;
 import io.hhplus.server.domain.payment.PaymentExceptionEnum;
 import io.hhplus.server.domain.payment.entity.Payment;
@@ -70,7 +71,7 @@ class PaymentServiceTest {
                         ZonedDateTime.of(
                                         LocalDateTime.of(2024, 5, 25, 18, 30, 0),
                                         ZoneId.of("Asia/Seoul"))))
-                .seat(new Seat(1L, 1, BigDecimal.valueOf(79000)))
+                .seat(new Seat(1L, Place.builder().build(), 1, BigDecimal.valueOf(79000)))
                 .status(Reservation.Status.ING)
                 .reservedAt(null)
                 .build();

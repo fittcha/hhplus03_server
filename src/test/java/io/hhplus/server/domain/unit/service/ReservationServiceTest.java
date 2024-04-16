@@ -7,6 +7,7 @@ import io.hhplus.server.controller.reservation.dto.response.ReserveResponse;
 import io.hhplus.server.controller.user.dto.response.GetMyReservationsResponse;
 import io.hhplus.server.domain.concert.entity.Concert;
 import io.hhplus.server.domain.concert.entity.ConcertDate;
+import io.hhplus.server.domain.concert.entity.Place;
 import io.hhplus.server.domain.concert.entity.Seat;
 import io.hhplus.server.domain.concert.service.ConcertReader;
 import io.hhplus.server.domain.payment.entity.Payment;
@@ -89,7 +90,7 @@ class ReservationServiceTest {
                         ZonedDateTime.of(
                                 LocalDateTime.of(2024, 5, 25, 18, 30, 0),
                                 ZoneId.of("Asia/Seoul"))))
-                .seat(new Seat(1L, 1, BigDecimal.valueOf(79000)))
+                .seat(new Seat(1L, Place.builder().build(), 1, BigDecimal.valueOf(79000)))
                 .status(Reservation.Status.ING)
                 .reservedAt(null)
                 .build();

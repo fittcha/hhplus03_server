@@ -1,4 +1,4 @@
-package io.hhplus.server.infra_structure.concert;
+package io.hhplus.server.infrastructure.concert;
 
 import io.hhplus.server.domain.concert.entity.Place;
 import io.hhplus.server.domain.concert.entity.Seat;
@@ -7,6 +7,8 @@ import io.hhplus.server.domain.concert.repository.PlaceRepository;
 import io.hhplus.server.domain.concert.repository.SeatJpaRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class PlaceRepositoryImpl implements PlaceRepository {
@@ -27,5 +29,15 @@ public class PlaceRepositoryImpl implements PlaceRepository {
     @Override
     public Seat findSeatById(Long seatId) {
         return seatJpaRepository.findById(seatId).orElseThrow(EntityNotFoundException::new);
+    }
+
+    @Override
+    public void addSeats(List<Seat> seats) {
+        seatJpaRepository.saveAll(seats);
+    }
+
+    @Override
+    public void addPlace(Place place) {
+        placeJpaRepository.save(place);
     }
 }

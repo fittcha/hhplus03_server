@@ -1,4 +1,4 @@
-package io.hhplus.server.infra_structure.reservation;
+package io.hhplus.server.infrastructure.reservation;
 
 import io.hhplus.server.domain.reservation.entity.Reservation;
 import io.hhplus.server.domain.reservation.repository.ReservationJpaRepository;
