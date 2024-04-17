@@ -24,11 +24,12 @@ public class Payment extends BaseDateTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long paymentId;
 
-    @OneToOne()
+    @OneToOne
     @JoinColumn(name = "reservation_id")
     private Reservation reservation;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private Payment.Status status;
 
     @Column(nullable = false)

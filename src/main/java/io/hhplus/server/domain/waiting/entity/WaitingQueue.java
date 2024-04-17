@@ -28,6 +28,7 @@ public class WaitingQueue {
     private String token;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private Status status;
 
     private Timestamp activeTime;

@@ -4,8 +4,6 @@ import io.hhplus.server.base.entity.BaseDateTimeEntity;
 import io.hhplus.server.domain.concert.entity.Concert;
 import io.hhplus.server.domain.concert.entity.ConcertDate;
 import io.hhplus.server.domain.concert.entity.Seat;
-import io.hhplus.server.domain.payment.entity.Payment;
-import io.hhplus.server.domain.payment.service.dto.CreatePaymentReqDto;
 import io.hhplus.server.domain.user.entity.User;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -13,8 +11,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.ZonedDateTime;
 import java.util.Objects;
@@ -31,32 +27,26 @@ public class Reservation extends BaseDateTimeEntity {
     private Long reservationId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "concert_id")
     private Concert concert;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "concert_date_id")
     private ConcertDate concertDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "seat_id")
     private Seat seat;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private Reservation.Status status;
 
     private ZonedDateTime reservedAt;
-
-    @Version
-    private Long version; // 낙관적 락 버전 필드
 
     public void toComplete() {
         this.status = Status.RESERVED;
@@ -76,10 +66,6 @@ public class Reservation extends BaseDateTimeEntity {
         this.seat = seat;
         this.status = status;
         this.reservedAt = reservedAt;
-    }
-
-    public CreatePaymentReqDto toCreatePayment() {
-        return new CreatePaymentReqDto(this, Payment.Status.READY, this.seat.getPrice());
     }
 
     @Override

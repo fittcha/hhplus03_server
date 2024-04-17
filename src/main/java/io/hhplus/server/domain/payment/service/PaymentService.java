@@ -33,7 +33,6 @@ public class PaymentService implements PaymentInterface {
         User user = userReader.findUser(request.userId());
         paymentValidator.checkBalance(payment.getPrice(), user.getBalance());
 
-        // 결제 요청
         boolean isSuccess = false;
         // 1. 사용자 잔액 차감
         BigDecimal previousBalance = user.getBalance();
@@ -64,10 +63,7 @@ public class PaymentService implements PaymentInterface {
         // validator
         paymentValidator.checkCancelStatus(payment.getStatus());
 
-        // 취소
         Payment updatedPayment = cancelPayment(payment);
-
-        // 성공 / 실패 응답 반환
         boolean isSuccess = updatedPayment != null;
         if (isSuccess) {
             return new CancelPaymentResultResDto(true, updatedPayment.getPaymentId(), updatedPayment.getStatus());

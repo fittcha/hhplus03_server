@@ -47,9 +47,7 @@ public class ConcertService implements ConcertInterface {
 
     @Override
     public GetSeatsResponse getSeats(Long concertId, Long concertDateId) {
-        // 콘서트 전체 좌석 정보
         List<Seat> allSeats = placeManager.getSeatsByConcertId(concertId);
-        // 예약된 좌석 PK 조회
         List<Long> reservedSeatIds = reservationManager.getReservedSeatIdsByConcertDate(concertDateId);
 
         return GetSeatsResponse.from(allSeats, reservedSeatIds);

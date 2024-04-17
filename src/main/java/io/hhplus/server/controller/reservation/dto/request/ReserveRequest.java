@@ -4,6 +4,8 @@ import io.hhplus.server.domain.concert.entity.Concert;
 import io.hhplus.server.domain.concert.entity.ConcertDate;
 import io.hhplus.server.domain.concert.entity.Seat;
 import io.hhplus.server.domain.concert.service.ConcertReader;
+import io.hhplus.server.domain.payment.entity.Payment;
+import io.hhplus.server.domain.payment.service.dto.CreatePaymentReqDto;
 import io.hhplus.server.domain.reservation.entity.Reservation;
 import io.hhplus.server.domain.user.entity.User;
 import io.hhplus.server.domain.user.service.UserReader;
@@ -29,5 +31,9 @@ public record ReserveRequest(
                 .user(user)
                 .status(Reservation.Status.ING)
                 .build();
+    }
+
+    public CreatePaymentReqDto toCreatePayment(Reservation reservation) {
+        return new CreatePaymentReqDto(reservation, Payment.Status.READY, reservation.getSeat().getPrice());
     }
 }

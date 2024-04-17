@@ -5,37 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2dba11e2-779e-4013-82d7-fe0971d334cc" name="Changes" comment="feat: Exception Handler">
-      <change afterPath="$PROJECT_DIR$/src/test/java/io/hhplus/server/intergration/ConcertIntegrationTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/io/hhplus/server/intergration/PaymentIntegrationTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/io/hhplus/server/intergration/ReservationIntegrationTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/io/hhplus/server/intergration/UserControllerTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/io/hhplus/server/intergration/base/BaseIntegrationTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/io/hhplus/server/intergration/base/DatabaseCleanup.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/io/hhplus/server/intergration/base/TestDataHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/event/ReservationEventListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/event/ReservationOccupiedEvent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/concert/ConcertController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/concert/ConcertController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/concert/dto/response/GetDatesResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/concert/dto/response/GetDatesResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/concert/dto/response/GetSeatsResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/concert/dto/response/GetSeatsResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/concert/entity/ConcertDate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/concert/entity/ConcertDate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/concert/entity/Place.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/concert/entity/Place.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/concert/entity/Seat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/concert/entity/Seat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/concert/repository/ConcertRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/concert/repository/ConcertRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/concert/repository/PlaceRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/concert/repository/PlaceRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/concert/service/ConcertInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/concert/service/ConcertInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/reservation/dto/request/ReserveRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/reservation/dto/request/ReserveRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/waiting/WaitingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/waiting/WaitingController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/concert/service/ConcertService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/concert/service/ConcertService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/entity/Payment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/entity/Payment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/service/PaymentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/service/PaymentService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/entity/Reservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/entity/Reservation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/user/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/user/repository/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/infra_structure/concert/ConcertRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/infrastructure/concert/ConcertRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/infra_structure/concert/PlaceRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/infrastructure/concert/PlaceRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/infra_structure/payment/PaymentRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/infrastructure/payment/PaymentRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/infra_structure/reservation/ReservationRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/infrastructure/reservation/ReservationRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/infra_structure/user/UserRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/infrastructure/user/UserRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/infra_structure/waiting/WaitingQueueRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/infrastructure/waiting/WaitingQueueRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/io/hhplus/server/domain/unit/service/ConcertServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/io/hhplus/server/domain/unit/service/ConcertServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/io/hhplus/server/domain/unit/service/PaymentServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/io/hhplus/server/domain/unit/service/PaymentServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/service/ReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/service/ReservationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/waiting/entity/WaitingQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/waiting/entity/WaitingQueue.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/io/hhplus/server/domain/unit/service/ReservationServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/io/hhplus/server/domain/unit/service/ReservationServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/io/hhplus/server/intergration/ReservationIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/io/hhplus/server/intergration/ReservationIntegrationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/io/hhplus/server/intergration/base/BaseIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/io/hhplus/server/intergration/base/BaseIntegrationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/io/hhplus/server/intergration/base/TestDataHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/io/hhplus/server/intergration/base/TestDataHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,8 +75,8 @@
         <option value="AnnotationType" />
         <option value="Interface" />
         <option value="Record" />
-        <option value="Class" />
         <option value="JUnit5 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -151,6 +135,8 @@
     "Gradle.PaymentServiceTest.payTest_결제_요청_처리_성공.executor": "Run",
     "Gradle.PaymentServiceTest.payTest_결제_잔액_부족하여_실패.executor": "Run",
     "Gradle.PaymentServiceTest.payTest_결제요청_불가능한_상태.executor": "Run",
+    "Gradle.ReservationIntegrationTest.reserveTest_ALREADY_RESERVED_lock.executor": "Run",
+    "Gradle.ReservationIntegrationTest.reserveTest_cancel_after_5min.executor": "Run",
     "Gradle.ReservationServiceTest.cancelTest_예약_취소.executor": "Run",
     "Gradle.ReservationServiceTest.getMyReservationsTest_예약_내역_조회.executor": "Run",
     "Gradle.ReservationServiceTest.reserveTest_이미_선택된_좌석입니다.executor": "Run",
@@ -232,7 +218,7 @@
       <recent name="io.hhplus.server.domain.concert.dto" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.PaymentIntegrationTest">
+  <component name="RunManager" selected="Gradle.ReservationIntegrationTest.reserveTest_cancel_after_5min">
     <configuration name="ConcertIntegrationTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -247,30 +233,6 @@
             <option value=":test" />
             <option value="--tests" />
             <option value="&quot;io.hhplus.server.intergration.ConcertIntegrationTest&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="ConcertIntegrationTest.getDatesTest_empty" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;io.hhplus.server.intergration.ConcertIntegrationTest.getDatesTest_empty&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -329,7 +291,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="PaymentIntegrationTest.payTest_success" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="ReservationIntegrationTest.reserveTest_ALREADY_RESERVED_lock" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -342,7 +304,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;io.hhplus.server.intergration.PaymentIntegrationTest.payTest_success&quot;" />
+            <option value="&quot;io.hhplus.server.intergration.ReservationIntegrationTest.reserveTest_ALREADY_RESERVED_lock&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -353,7 +315,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="WaitingServiceTest.checkActiveTest_대기열_상태_확인_대기유저" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="ReservationIntegrationTest.reserveTest_cancel_after_5min" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -366,7 +328,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;io.hhplus.server.domain.waiting.service.WaitingServiceTest.checkActiveTest_대기열_상태_확인_대기유저&quot;" />
+            <option value="&quot;io.hhplus.server.intergration.ReservationIntegrationTest.reserveTest_cancel_after_5min&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -392,11 +354,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.ReservationIntegrationTest.reserveTest_cancel_after_5min" />
+        <item itemvalue="Gradle.ReservationIntegrationTest.reserveTest_ALREADY_RESERVED_lock" />
         <item itemvalue="Gradle.PaymentIntegrationTest" />
         <item itemvalue="Gradle.ConcertIntegrationTest.getDatesTest_success" />
         <item itemvalue="Gradle.ConcertIntegrationTest" />
-        <item itemvalue="Gradle.ConcertIntegrationTest.getDatesTest_empty" />
-        <item itemvalue="Gradle.PaymentIntegrationTest.payTest_success" />
       </list>
     </recent_temporary>
   </component>
