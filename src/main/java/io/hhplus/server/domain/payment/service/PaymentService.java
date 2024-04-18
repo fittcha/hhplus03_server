@@ -1,11 +1,14 @@
 package io.hhplus.server.domain.payment.service;
 
+import io.hhplus.server.controller.payment.dto.request.CreateRequest;
 import io.hhplus.server.controller.payment.dto.request.PayRequest;
+import io.hhplus.server.controller.payment.dto.response.CreateResponse;
 import io.hhplus.server.controller.payment.dto.response.PayResponse;
 import io.hhplus.server.domain.payment.entity.Payment;
 import io.hhplus.server.domain.payment.repository.PaymentRepository;
 import io.hhplus.server.domain.payment.service.dto.CancelPaymentResultResDto;
-import io.hhplus.server.domain.payment.service.dto.CreatePaymentReqDto;
+import io.hhplus.server.domain.reservation.entity.Reservation;
+import io.hhplus.server.domain.reservation.service.ReservationReader;
 import io.hhplus.server.domain.user.entity.User;
 import io.hhplus.server.domain.user.service.UserReader;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +24,7 @@ public class PaymentService implements PaymentInterface {
     private final PaymentRepository paymentRepository;
     private final PaymentValidator paymentValidator;
     private final UserReader userReader;
+    private final ReservationReader reservationReader;
 
     @Override
     @Transactional
@@ -51,8 +55,14 @@ public class PaymentService implements PaymentInterface {
     }
 
     @Override
-    public Payment create(CreatePaymentReqDto reqDto) {
-        return paymentRepository.save(reqDto.toEntity());
+    @Transactional
+    public CreateResponse create(CreateRequest request) {
+        Reservation reservation = reservationReader.findReservation(request.reservationId());
+        Payment payment = paymentRepository.save(request.toEntity(reservation));
+        if (payment == null) {
+            return new CreateResponse(null);
+        }
+        return new CreateResponse(payment.getPaymentId());
     }
 
     @Override

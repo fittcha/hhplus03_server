@@ -58,15 +58,16 @@ public class TestDataHandler {
                 .concertDateList(concertDates)
                 .build());
         concertRepository.addConcertDates(concertDates);
+        ConcertDate concertDate = entityManager.find(ConcertDate.class, 1L);
 
         List<Seat> seats = new ArrayList<>();
         for (int i = 1; i <= seatsCnt; i++) {
             if (i <= 20) {
-                seats.add(Seat.builder().concertDate(concertDates.get(0)).seatNum(i).price(BigDecimal.valueOf(89000)).build());
+                seats.add(Seat.builder().concertDate(concertDate).seatNum(i).price(BigDecimal.valueOf(89000)).status(Seat.Status.AVAILABLE).build());
             } else if (i <= 40) {
-                seats.add(Seat.builder().concertDate(concertDates.get(0)).seatNum(i).price(BigDecimal.valueOf(119000)).build());
+                seats.add(Seat.builder().concertDate(concertDate).seatNum(i).price(BigDecimal.valueOf(119000)).status(Seat.Status.AVAILABLE).build());
             } else {
-                seats.add(Seat.builder().concertDate(concertDates.get(0)).seatNum(i).price(BigDecimal.valueOf(139000)).build());
+                seats.add(Seat.builder().concertDate(concertDate).seatNum(i).price(BigDecimal.valueOf(139000)).status(Seat.Status.AVAILABLE).build());
             }
         }
         concertRepository.addSeats(seats);
@@ -74,9 +75,6 @@ public class TestDataHandler {
 
     // 5, 10번 좌석 예약
     public void reserveSeats() {
-        long concertId = 1L;
-        long concertDateId = 1L;
-
         reservationRepository.save(Reservation.builder()
                 .concertId(1L)
                 .concertDateId(1L)

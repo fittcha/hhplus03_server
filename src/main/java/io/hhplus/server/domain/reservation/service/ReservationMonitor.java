@@ -1,7 +1,6 @@
 package io.hhplus.server.domain.reservation.service;
 
 import io.hhplus.server.domain.payment.entity.Payment;
-import io.hhplus.server.domain.payment.repository.PaymentRepository;
 import io.hhplus.server.domain.payment.service.PaymentReader;
 import io.hhplus.server.domain.reservation.entity.Reservation;
 import io.hhplus.server.domain.reservation.repository.ReservationRepository;
@@ -20,7 +19,6 @@ public class ReservationMonitor {
     /* 예약 요청을 5분 동안 임시 점유하고, 5분 후 상태를 추적하여 점유 해제 처리하는 모니터링 클래스 */
     
     private final ReservationRepository reservationRepository;
-    private final PaymentRepository paymentRepository;
     private final PaymentReader paymentReader;
     
     // 예약 요청을 저장할 큐
@@ -43,12 +41,10 @@ public class ReservationMonitor {
                     Reservation reservation = reservationRepository.findById(occupyDto.reservationId());
                     Payment payment = paymentReader.findPaymentByReservation(reservation);
                     if ((reservation != null && reservation.getStatus().equals(Reservation.Status.ING)) 
-                            && (payment != null && payment.getStatus().equals(Payment.Status.READY))) {
+                            && (payment == null)) {
                         // 임시 점유 해제: 완료되지 않은 예약 취소
                         reservationRepository.delete(reservation);
                         log.info("완료되지 않은 예약 취소: {}", occupyDto.reservationId());
-                        // 결제 건 취소
-                        paymentRepository.delete(payment);
                         // 처리된 요청을 큐에서 제거
                         tempReservationQueue.remove();
                     }

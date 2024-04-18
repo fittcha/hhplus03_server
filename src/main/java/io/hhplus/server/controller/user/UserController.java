@@ -33,7 +33,7 @@ public class UserController {
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = GetBalanceResponse.class)))
     @PatchMapping("/{userId}/charge")
     public ApiResult<GetBalanceResponse> charge(@PathVariable(value = "userId") @NotNull Long userId,
-                       @RequestBody @Valid ChargeRequest request) {
+                                                @RequestBody @Valid ChargeRequest request) {
         return ApiResult.success(service.charge(userId, request));
     }
 }

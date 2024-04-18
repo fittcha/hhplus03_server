@@ -1,7 +1,9 @@
 package io.hhplus.server.controller.payment;
 
 import io.hhplus.server.base.exception.ApiResult;
+import io.hhplus.server.controller.payment.dto.request.CreateRequest;
 import io.hhplus.server.controller.payment.dto.request.PayRequest;
+import io.hhplus.server.controller.payment.dto.response.CreateResponse;
 import io.hhplus.server.controller.payment.dto.response.PayResponse;
 import io.hhplus.server.domain.payment.service.PaymentService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,6 +23,13 @@ import org.springframework.web.bind.annotation.*;
 public class PaymentController {
 
     private final PaymentService service;
+
+    @Operation(summary = "결제 생성")
+    @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = PayResponse.class)))
+    @PostMapping("")
+    public ApiResult<CreateResponse> create(@RequestBody @Valid CreateRequest request) {
+        return ApiResult.success(service.create(request));
+    }
 
     @Operation(summary = "결제 요청")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = PayResponse.class)))

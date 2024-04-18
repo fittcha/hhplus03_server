@@ -45,7 +45,8 @@ public class Payment extends BaseDateTimeEntity {
     }
 
     @Builder
-    public Payment(Reservation reservation, Payment.Status status, BigDecimal price) {
+    public Payment(Long paymentId, Reservation reservation, Payment.Status status, BigDecimal price) {
+        this.paymentId = paymentId;
         this.reservation = reservation;
         this.status = status;
         this.price = price;

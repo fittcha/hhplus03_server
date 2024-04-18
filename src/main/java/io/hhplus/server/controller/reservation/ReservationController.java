@@ -38,7 +38,7 @@ public class ReservationController {
     @ApiResponse(responseCode = "200", description = "OK")
     @DeleteMapping("/{reservationId}")
     public ApiResult<Void> cancel(@PathVariable(value = "reservationId") Long reservationId,
-                       @RequestBody @Valid CancelRequest request) {
+                                  @RequestBody @Valid CancelRequest request) {
         service.cancel(reservationId, request);
         return ApiResult.successNoContent();
     }

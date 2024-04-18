@@ -9,6 +9,7 @@ import io.hhplus.server.domain.concert.entity.Concert;
 import io.hhplus.server.domain.concert.entity.ConcertDate;
 import io.hhplus.server.domain.concert.entity.Seat;
 import io.hhplus.server.domain.concert.service.ConcertReader;
+import io.hhplus.server.domain.payment.entity.Payment;
 import io.hhplus.server.domain.payment.service.PaymentReader;
 import io.hhplus.server.domain.payment.service.PaymentService;
 import io.hhplus.server.domain.reservation.ReservationExceptionEnum;
@@ -76,6 +77,11 @@ public class ReservationService implements ReservationInterface {
         // validator
         reservationValidator.isNull(reservation);
 
+        Payment payment = paymentReader.findPaymentByReservation(reservation);
+        if (payment != null) {
+            // 결제 내역 존재하면 환불 처리
+            paymentService.cancel(payment.getPaymentId());
+        }
         reservationRepository.delete(reservation);
     }
 

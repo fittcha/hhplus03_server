@@ -44,8 +44,8 @@ class WaitingServiceTest {
     }
 
     @Test
-    @DisplayName("토큰_생성")
-    void issueTokenTest_토큰_생성() {
+    @DisplayName("토큰을 생성한다.")
+    void issueTokenTest_create() {
         // given
         Long userId = 1L;
 
@@ -58,8 +58,8 @@ class WaitingServiceTest {
     }
 
     @Test
-    @DisplayName("대기열_추가_활성유저")
-    void addWaitingQueueTest_대기열_추가_활성유저() {
+    @DisplayName("진입 가능하면 활성유저로 대기열에 추가한다.")
+    void addWaitingQueueTest_active() {
         // given
         Long userId = 1L;
         String token = 토큰;
@@ -74,8 +74,8 @@ class WaitingServiceTest {
     }
 
     @Test
-    @DisplayName("대기열_추가_대기유저")
-    void addWaitingQueueTest_대기열_추가_대기유저() {
+    @DisplayName("진입 불가능할 시 대기유저로 대기열에 추가한다.")
+    void addWaitingQueueTest_wait() {
         // given
         Long userId = 1L;
         String token = 토큰;
@@ -93,8 +93,8 @@ class WaitingServiceTest {
     }
 
     @Test
-    @DisplayName("대기열_상태_확인_대기열_정보_없거나_만료됨")
-    void checkActiveTest_대기열_상태_확인_대기열_정보_없거나_만료됨() {
+    @DisplayName("대기열 상태를 확인하였을 때, 대기열 정보가 없거나 만료된 상태")
+    void checkActiveTest_expired() {
         // given
         Long userId = 1L;
         String token = 토큰;
@@ -109,8 +109,8 @@ class WaitingServiceTest {
     }
 
     @Test
-    @DisplayName("대기열_상태_확인_활성유저")
-    void checkActiveTest_대기열_상태_확인_활성유저() {
+    @DisplayName("대기열 상태를 확인하였을 때, 진입 가능")
+    void checkActiveTest_active() {
         // given
         Long userId = 1L;
         String token = 토큰;
@@ -124,8 +124,8 @@ class WaitingServiceTest {
     }
 
     @Test
-    @DisplayName("대기열_상태_확인_대기유저")
-    void checkActiveTest_대기열_상태_확인_대기유저() {
+    @DisplayName("대기열 상태를 확인하였을 때, 진입 불가")
+    void checkActiveTest_wait() {
         // given
         Long userId = 1L;
         String token = 토큰;
