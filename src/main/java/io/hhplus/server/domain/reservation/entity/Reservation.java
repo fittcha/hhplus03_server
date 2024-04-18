@@ -1,10 +1,6 @@
 package io.hhplus.server.domain.reservation.entity;
 
 import io.hhplus.server.base.entity.BaseDateTimeEntity;
-import io.hhplus.server.domain.concert.entity.Concert;
-import io.hhplus.server.domain.concert.entity.ConcertDate;
-import io.hhplus.server.domain.concert.entity.Seat;
-import io.hhplus.server.domain.user.entity.User;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -26,27 +22,33 @@ public class Reservation extends BaseDateTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reservationId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+    @Column(nullable = false)
+    private Long userId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "concert_id")
-    private Concert concert;
+    @Column(nullable = false)
+    private Long concertId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "concert_date_id")
-    private ConcertDate concertDate;
+    @Column(nullable = false)
+    private Long concertDateId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "seat_id")
-    private Seat seat;
+    @Column(nullable = false)
+    private Long seatId;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Reservation.Status status;
 
     private ZonedDateTime reservedAt;
+
+    @Builder
+    public Reservation(Long userId, Long concertId, Long concertDateId, Long seatId, Status status, ZonedDateTime reservedAt) {
+        this.userId = userId;
+        this.concertId = concertId;
+        this.concertDateId = concertDateId;
+        this.seatId = seatId;
+        this.status = status;
+        this.reservedAt = reservedAt;
+    }
 
     public void toComplete() {
         this.status = Status.RESERVED;
@@ -56,16 +58,6 @@ public class Reservation extends BaseDateTimeEntity {
         ING,
         RESERVED,
         CANCEL
-    }
-    
-    @Builder
-    public Reservation(User user, Concert concert, ConcertDate concertDate, Seat seat, Reservation.Status status, ZonedDateTime reservedAt) {
-        this.user = user;
-        this.concert = concert;
-        this.concertDate = concertDate;
-        this.seat = seat;
-        this.status = status;
-        this.reservedAt = reservedAt;
     }
 
     @Override

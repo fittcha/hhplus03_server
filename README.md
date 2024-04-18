@@ -10,25 +10,15 @@
 [Swagger UI](http://localhost:8080/swagger-ui/index.html#/)
 
 ![swagger_main.png](image/swagger_main.png)
-![swagger-concert1.png](image/swagger-concert1.png)
-![swagger-concert2.png](image/swagger-concert2.png)
-![swagger-waiting1.png](image/swagger-waiting1.png)
-![swagger-waiting2.png](image/swagger-waiting2.png)
-![swagger-reservation1.png](image/swagger-reservation1.png)
-![swagger-reservation2.png](image/swagger-reservation2.png)
-![swagger-user1.png](image/swagger-user1.png)
-![swagger-payment1.png](image/swagger-payment1.png)
 
 ### UML 다이어그램
 ![uml.png](image/uml.png)
 ### ERD 명세
-![erd.png](image/erd.png)
+![ERD.png](image%2FERD.png)
 ---
 ### Dummy data - postman 호출
 - API: http://localhost:8080/concerts/
   ![postman_getConcerts.PNG](image/postman_getConcerts.PNG)
-- API: http://localhost:8080/reservations/
-  ![postman_reserve.PNG](image/postman_reserve.PNG)
 
 ---
 ## 2. 작업 내용
@@ -46,6 +36,7 @@
   - Mock API 작성
   - Dummy Data 반환 및 http 테스트
   - SecurityConfiguration 작성 (postman 테스트용)
+  
 4주차
 - ~2024.04.09
   - swagger UI
@@ -56,6 +47,17 @@
 - 2024.04.11
   - 대기열 서비스 로직 구현
   - 단위테스트 작성
+  
+5주차
+- ~2024.04.18
+  - 테이블 재설계: 도메인 어그리게이트 별로 분리하여 재설계
+  - 통합테스트 작성
+  - 대기열 기능 고도화
+
+---
+# Trouble Shooting
+*모든 과정을 기록할 수는 없었지만, 5주차에 기억나는 나의 트러블 슈팅 과정을 기록하였다.*
+
 
 
 
@@ -67,6 +69,14 @@
 - 테이블도 결국 캡슐화? 의존성을 줄여..
 ## 4주차 인사이트
 - 대기열 구현 시 생각해볼 것들
+## 5주차 인사이트
+- jpa 설계 원칙대로 객체지향을 살리면서 객체로 연관짓는 것과, 유연성을 살리고 강결합을 막으며 pk만 들고 있는 것의 차이
+  - 도메인 어그리게이트? 루트 어그리게이트?
+  - 도메인 어그리게이트를 잘 생각해서 의존성을 분리시키자
+- 결국 서비스는 핵심 기능이 얼마나 잘 돌아가는지가 중요하다.
+  - 핵심 기능이 본인의 역할의 책임을 다 할 수 있도록 도메인 기능을 잘 분리하여 설계하자.
+  - 모든 것을 다 갖춘 설계는 없다. 각 장단점이 있다. 내가 해야 할 것은 어디에 집중할 지 스스로 선택하는 것
+  - 여러 가지를 모두 구현해보며 나만의 기준과 나의 스타일을 찾자.
 
 ---
 ## 기술 스택 결정

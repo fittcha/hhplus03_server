@@ -30,6 +30,6 @@ public class ConcertReader {
     }
 
     public Seat findSeat(Long seatId) {
-        return placeRepository.findSeatById(seatId);
+        return concertRepository.findSeatById(seatId);
     }
 }

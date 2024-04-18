@@ -26,16 +26,18 @@ public class Concert extends BaseDateTimeEntity {
     @Column(nullable = false, length = 50)
     private String name;
 
-    private Long placeId;
+    @OneToOne
+    @JoinColumn(name = "place_id")
+    private Place place;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "concert_id")
     private List<ConcertDate> concertDateList = new ArrayList();
 
     @Builder
-    public Concert(String name, Long placeId, List<ConcertDate> concertDateList) {
+    public Concert(String name, Place place, List<ConcertDate> concertDateList) {
         this.name = name;
-        this.placeId = placeId;
+        this.place = place;
         this.concertDateList = concertDateList;
     }
 

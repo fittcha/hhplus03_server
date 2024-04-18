@@ -8,8 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -28,9 +26,6 @@ public class Place extends BaseDateTimeEntity {
 
     @Column(nullable = false)
     private int seatsCnt = 0;
-
-    @OneToMany(mappedBy = "place", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Seat> seatList = new ArrayList();
 
     @Builder
     public Place(String name, int seatsCnt) {

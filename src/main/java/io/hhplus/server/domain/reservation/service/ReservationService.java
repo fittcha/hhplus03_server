@@ -5,11 +5,12 @@ import io.hhplus.server.controller.reservation.dto.request.CancelRequest;
 import io.hhplus.server.controller.reservation.dto.request.ReserveRequest;
 import io.hhplus.server.controller.reservation.dto.response.ReserveResponse;
 import io.hhplus.server.controller.user.dto.response.GetMyReservationsResponse;
+import io.hhplus.server.domain.concert.entity.Concert;
+import io.hhplus.server.domain.concert.entity.ConcertDate;
+import io.hhplus.server.domain.concert.entity.Seat;
 import io.hhplus.server.domain.concert.service.ConcertReader;
-import io.hhplus.server.domain.payment.entity.Payment;
 import io.hhplus.server.domain.payment.service.PaymentReader;
 import io.hhplus.server.domain.payment.service.PaymentService;
-import io.hhplus.server.domain.payment.service.dto.CancelPaymentResultResDto;
 import io.hhplus.server.domain.reservation.ReservationExceptionEnum;
 import io.hhplus.server.domain.reservation.entity.Reservation;
 import io.hhplus.server.domain.reservation.event.ReservationOccupiedEvent;
@@ -52,12 +53,14 @@ public class ReservationService implements ReservationInterface {
             reservationValidator.checkReserved(request.concertDateId(), request.seatId());
 
             Reservation reservation = reservationRepository.save(request.toEntity(concertReader, userReader));
-            Payment payment = paymentService.create(request.toCreatePayment(reservation));
+            Concert concert = concertReader.findConcert(reservation.getConcertId());
+            ConcertDate concertDate = concertReader.findConcertDate(reservation.getConcertDateId());
+            Seat seat = concertReader.findSeat(reservation.getSeatId());
 
             // 예약 임시 점유 event 발행
             eventPublisher.publishEvent(new ReservationOccupiedEvent(this, reservation.getReservationId()));
 
-            return ReserveResponse.from(reservation, payment);
+            return ReserveResponse.from(reservation, concert, concertDate, seat);
 
         } catch (DataIntegrityViolationException e) {
             // 유니크 제약 조건(concertDateId, seatId) 위반 시
@@ -73,16 +76,12 @@ public class ReservationService implements ReservationInterface {
         // validator
         reservationValidator.isNull(reservation);
 
-        Payment payment = paymentReader.findPaymentByReservation(reservation);
-        CancelPaymentResultResDto cancelPaymentInfo = paymentService.cancel(payment.getPaymentId());
-        if (cancelPaymentInfo.isSuccess()) {
-            reservationRepository.delete(reservation);
-        }
+        reservationRepository.delete(reservation);
     }
 
     @Override
     public List<GetMyReservationsResponse> getMyReservations(Long userId) {
-        List<GetReservationAndPaymentResDto> reservationsAndPayments = reservationRepository.getMyReservations(userId);
-        return reservationsAndPayments.stream().map(GetMyReservationsResponse::from).toList();
+        List<GetReservationAndPaymentResDto> myReservations = reservationRepository.getMyReservations(userId);
+        return myReservations.stream().map(GetMyReservationsResponse::from).toList();
     }
 }

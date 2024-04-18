@@ -2,9 +2,11 @@ package io.hhplus.server.infrastructure.concert;
 
 import io.hhplus.server.domain.concert.entity.Concert;
 import io.hhplus.server.domain.concert.entity.ConcertDate;
+import io.hhplus.server.domain.concert.entity.Seat;
 import io.hhplus.server.domain.concert.repository.ConcertDateJpaRepository;
 import io.hhplus.server.domain.concert.repository.ConcertJpaRepository;
 import io.hhplus.server.domain.concert.repository.ConcertRepository;
+import io.hhplus.server.domain.concert.repository.SeatJpaRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Repository;
 
@@ -15,10 +17,12 @@ public class ConcertRepositoryImpl implements ConcertRepository {
 
     private final ConcertJpaRepository concertJpaRepository;
     private final ConcertDateJpaRepository concertDateJpaRepository;
+    private final SeatJpaRepository seatJpaRepository;
 
-    public ConcertRepositoryImpl(ConcertJpaRepository concertJpaRepository, ConcertDateJpaRepository concertDateJpaRepository, ConcertDateJpaRepository concertDateJpaRepository1) {
+    public ConcertRepositoryImpl(ConcertJpaRepository concertJpaRepository, ConcertDateJpaRepository concertDateJpaRepository, ConcertDateJpaRepository concertDateJpaRepository1, SeatJpaRepository seatJpaRepository) {
         this.concertJpaRepository = concertJpaRepository;
         this.concertDateJpaRepository = concertDateJpaRepository1;
+        this.seatJpaRepository = seatJpaRepository;
     }
 
     @Override
@@ -55,5 +59,25 @@ public class ConcertRepositoryImpl implements ConcertRepository {
     @Override
     public void deleteAllDates() {
         concertDateJpaRepository.deleteAll();
+    }
+
+    @Override
+    public boolean existByConcertDateAndStatus(Long concertDateId, Seat.Status status) {
+        return seatJpaRepository.existsByConcertDate_ConcertDateIdAndStatus(concertDateId, status);
+    }
+
+    @Override
+    public List<Seat> findSeatsByConcertDateIdAndStatus(Long concertDateId, Seat.Status status) {
+        return seatJpaRepository.findAllByConcertDate_concertDateIdAndStatus(concertDateId, status);
+    }
+
+    @Override
+    public Seat findSeatById(Long seatId) {
+        return seatJpaRepository.findById(seatId).orElseThrow(EntityNotFoundException::new);
+    }
+
+    @Override
+    public void addSeats(List<Seat> seats) {
+        seatJpaRepository.saveAll(seats);
     }
 }

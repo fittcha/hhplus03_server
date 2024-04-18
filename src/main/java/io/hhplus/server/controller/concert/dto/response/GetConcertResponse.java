@@ -2,11 +2,8 @@ package io.hhplus.server.controller.concert.dto.response;
 
 import io.hhplus.server.domain.concert.entity.Concert;
 import io.hhplus.server.domain.concert.entity.ConcertDate;
-import io.hhplus.server.domain.concert.entity.Place;
-import io.hhplus.server.domain.concert.entity.Seat;
 import lombok.Builder;
 
-import java.text.DecimalFormat;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
@@ -17,20 +14,18 @@ public record GetConcertResponse(
         String name,
         String place,
         String period,
-        String price,
         ZonedDateTime createdAt
 ) {
     @Builder
     public GetConcertResponse {
     }
 
-    public static GetConcertResponse from(Concert concert, Place place) {
+    public static GetConcertResponse from(Concert concert) {
         return GetConcertResponse.builder()
                 .concertId(concert.getConcertId())
                 .name(concert.getName())
-                .place(place != null ? place.getName() : "-")
+                .place(concert.getPlace() != null ? concert.getPlace().getName() : "-")
                 .period(getConcertDateRange(concert.getConcertDateList()))
-                .price(place != null ? getSeatPriceRange(place.getSeatList()) : "-")
                 .createdAt(concert.getCreatedAt())
                 .build();
     }
@@ -50,22 +45,5 @@ public record GetConcertResponse(
         String latestDate = formatter.format(sortedConcertDateList.get(sortedConcertDateList.size() - 1).getConcertDate());
 
         return earliestDate + "~" + latestDate;
-    }
-
-    private static String getSeatPriceRange(List<Seat> seatList) {
-        // 좌석 가격 범위 문자열로 반환
-        if (seatList.isEmpty()) {
-            return "";
-        }
-
-        DecimalFormat formatter = new DecimalFormat("###,###원");
-
-        List<Seat> sortedSeatList = seatList.stream()
-                .sorted(Comparator.comparing(Seat::getPrice))
-                .toList();
-        String lowestPrice = formatter.format(sortedSeatList.get(0).getPrice());
-        String largestPrice = formatter.format(sortedSeatList.get(sortedSeatList.size() - 1).getPrice());
-
-        return lowestPrice + "~" + largestPrice;
     }
 }

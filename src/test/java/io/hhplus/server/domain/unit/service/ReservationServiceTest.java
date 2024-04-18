@@ -7,13 +7,10 @@ import io.hhplus.server.controller.reservation.dto.response.ReserveResponse;
 import io.hhplus.server.controller.user.dto.response.GetMyReservationsResponse;
 import io.hhplus.server.domain.concert.entity.Concert;
 import io.hhplus.server.domain.concert.entity.ConcertDate;
-import io.hhplus.server.domain.concert.entity.Place;
 import io.hhplus.server.domain.concert.entity.Seat;
 import io.hhplus.server.domain.concert.service.ConcertReader;
-import io.hhplus.server.domain.payment.entity.Payment;
 import io.hhplus.server.domain.payment.service.PaymentReader;
 import io.hhplus.server.domain.payment.service.PaymentService;
-import io.hhplus.server.domain.payment.service.dto.CancelPaymentResultResDto;
 import io.hhplus.server.domain.reservation.ReservationExceptionEnum;
 import io.hhplus.server.domain.reservation.entity.Reservation;
 import io.hhplus.server.domain.reservation.repository.ReservationRepository;
@@ -21,7 +18,6 @@ import io.hhplus.server.domain.reservation.service.ReservationMonitor;
 import io.hhplus.server.domain.reservation.service.ReservationService;
 import io.hhplus.server.domain.reservation.service.ReservationValidator;
 import io.hhplus.server.domain.reservation.service.dto.GetReservationAndPaymentResDto;
-import io.hhplus.server.domain.user.entity.User;
 import io.hhplus.server.domain.user.service.UserReader;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -30,10 +26,6 @@ import org.mockito.Mockito;
 import org.springframework.boot.logging.LogLevel;
 import org.springframework.context.ApplicationEventPublisher;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -55,7 +47,6 @@ class ReservationServiceTest {
     private ApplicationEventPublisher applicationEventPublisher;
 
     private Reservation 예약건;
-    private Payment 결제건;
 
     @BeforeEach
     void setUp() {
@@ -82,28 +73,12 @@ class ReservationServiceTest {
 
         // 예약 정보 세팅
         예약건 = Reservation.builder()
-                .user(new User(1L, BigDecimal.valueOf(100000)))
-                .concert(new Concert(
-                        "임영웅 콘서트",
-                        1L,
-                        List.of(new ConcertDate(1L,
-                                ZonedDateTime.of(
-                                        LocalDateTime.of(2024, 5, 25, 18, 30, 0),
-                                        ZoneId.of("Asia/Seoul"))))))
-                .concertDate(new ConcertDate(1L,
-                        ZonedDateTime.of(
-                                LocalDateTime.of(2024, 5, 25, 18, 30, 0),
-                                ZoneId.of("Asia/Seoul"))))
-                .seat(new Seat(1L, Place.builder().build(), 1, BigDecimal.valueOf(79000)))
+                .userId(1L)
+                .concertId(1L)
+                .concertDateId(1L)
+                .seatId(1L)
                 .status(Reservation.Status.ING)
                 .reservedAt(null)
-                .build();
-
-        // 결제 정보 세팅
-        결제건 = Payment.builder()
-                .reservation(예약건)
-                .status(Payment.Status.READY)
-                .price(BigDecimal.valueOf(79000))
                 .build();
     }
 
@@ -132,7 +107,9 @@ class ReservationServiceTest {
         // when
         when(reservationRepository.findOneByConcertDateIdAndSeatId(request.concertDateId(), request.seatId())).thenReturn(null);
         when(reservationRepository.save(request.toEntity(concertReader, userReader))).thenReturn(예약건);
-        when(paymentService.create(request.toCreatePayment(예약건))).thenReturn(결제건);
+        when(concertReader.findConcert(anyLong())).thenReturn(Concert.builder().build());
+        when(concertReader.findConcertDate(anyLong())).thenReturn(ConcertDate.builder().build());
+        when(concertReader.findSeat(anyLong())).thenReturn(Seat.builder().build());
         ReserveResponse response = reservationService.reserve(request);
 
         // then
@@ -148,8 +125,6 @@ class ReservationServiceTest {
 
         // when
         when(reservationRepository.findByIdAndUserId(reservationId, request.userId())).thenReturn(예약건);
-        when(paymentReader.findPaymentByReservation(예약건)).thenReturn(결제건);
-        when(paymentService.cancel(결제건.getPaymentId())).thenReturn(new CancelPaymentResultResDto(true, 1L, Payment.Status.CANCEL));
         reservationService.cancel(reservationId, request);
     }
 
@@ -160,7 +135,12 @@ class ReservationServiceTest {
         Long userId = 1L;
 
         // when
-        when(reservationRepository.getMyReservations(userId)).thenReturn(List.of(new GetReservationAndPaymentResDto(예약건, 결제건)));
+        when(reservationRepository.getMyReservations(userId)).thenReturn(List.of(new GetReservationAndPaymentResDto(
+                예약건,
+                Concert.builder().name("임영웅 콘서트").build(),
+                ConcertDate.builder().build(),
+                Seat.builder().build()))
+        );
         List<GetMyReservationsResponse> responses = reservationService.getMyReservations(userId);
 
         // then

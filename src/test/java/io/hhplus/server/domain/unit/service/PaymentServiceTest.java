@@ -3,10 +3,6 @@ package io.hhplus.server.domain.unit.service;
 import io.hhplus.server.base.exception.CustomException;
 import io.hhplus.server.controller.payment.dto.request.PayRequest;
 import io.hhplus.server.controller.payment.dto.response.PayResponse;
-import io.hhplus.server.domain.concert.entity.Concert;
-import io.hhplus.server.domain.concert.entity.ConcertDate;
-import io.hhplus.server.domain.concert.entity.Place;
-import io.hhplus.server.domain.concert.entity.Seat;
 import io.hhplus.server.domain.payment.PaymentExceptionEnum;
 import io.hhplus.server.domain.payment.entity.Payment;
 import io.hhplus.server.domain.payment.repository.PaymentRepository;
@@ -24,14 +20,11 @@ import org.mockito.Mockito;
 import org.springframework.boot.logging.LogLevel;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.when;
 import static org.mockito.Mockito.doThrow;
 
@@ -59,19 +52,10 @@ class PaymentServiceTest {
 
         // 예약 정보 세팅
         예약건 = Reservation.builder()
-                .user(new User(1L, BigDecimal.valueOf(100000)))
-                .concert(new Concert(
-                        "임영웅 콘서트",
-                        1L,
-                        List.of(new ConcertDate(1L,
-                                ZonedDateTime.of(
-                                        LocalDateTime.of(2024, 5, 25, 18, 30, 0),
-                                        ZoneId.of("Asia/Seoul"))))))
-                .concertDate(new ConcertDate(1L,
-                        ZonedDateTime.of(
-                                        LocalDateTime.of(2024, 5, 25, 18, 30, 0),
-                                        ZoneId.of("Asia/Seoul"))))
-                .seat(new Seat(1L, Place.builder().build(), 1, BigDecimal.valueOf(79000)))
+                .userId(1L)
+                .concertId(1L)
+                .concertDateId(1L)
+                .seatId(5L)
                 .status(Reservation.Status.ING)
                 .reservedAt(null)
                 .build();
@@ -202,6 +186,7 @@ class PaymentServiceTest {
 
         // when
         when(paymentRepository.findById(paymentId)).thenReturn(결제완료건);
+        when(userReader.findUser(anyLong())).thenReturn(new User(1L, BigDecimal.valueOf(10000)));
         CancelPaymentResultResDto response = paymentService.cancel(paymentId);
 
         // then

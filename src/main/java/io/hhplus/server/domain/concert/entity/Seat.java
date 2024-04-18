@@ -24,8 +24,8 @@ public class Seat extends BaseDateTimeEntity {
     private Long seatId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "place_id", nullable = false)
-    private Place place;
+    @JoinColumn(name = "concert_date_id", nullable = false)
+    private ConcertDate concertDate;
 
     @Column(nullable = false)
     private int seatNum;
@@ -33,12 +33,23 @@ public class Seat extends BaseDateTimeEntity {
     @Column(nullable = false)
     private BigDecimal price = BigDecimal.ZERO;
 
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Status status = Status.AVAILABLE;
+
+
     @Builder
-    public Seat(Long seatId, Place place, int seatNum, BigDecimal price) {
+    public Seat(Long seatId, ConcertDate concertDate, int seatNum, BigDecimal price, Status status) {
         this.seatId = seatId;
-        this.place = place;
+        this.concertDate = concertDate;
         this.seatNum = seatNum;
         this.price = price;
+        this.status = status;
+    }
+
+    public enum Status {
+        AVAILABLE,
+        DISABLE
     }
 
     @Override

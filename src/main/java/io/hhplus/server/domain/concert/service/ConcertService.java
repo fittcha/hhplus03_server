@@ -5,12 +5,12 @@ import io.hhplus.server.controller.concert.dto.response.GetConcertsResponse;
 import io.hhplus.server.controller.concert.dto.response.GetDatesResponse;
 import io.hhplus.server.controller.concert.dto.response.GetSeatsResponse;
 import io.hhplus.server.domain.concert.entity.Concert;
-import io.hhplus.server.domain.concert.entity.Place;
 import io.hhplus.server.domain.concert.entity.Seat;
 import io.hhplus.server.domain.concert.repository.ConcertRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -19,9 +19,6 @@ public class ConcertService implements ConcertInterface {
 
     private final ConcertRepository concertRepository;
     private final ConcertValidator concertValidator;
-    private final ConcertReader concertReader;
-    private final ConcertPlaceManager placeManager;
-    private final ConcertReservationManager reservationManager;
 
     @Override
     public List<GetConcertsResponse> getConcerts() {
@@ -32,8 +29,7 @@ public class ConcertService implements ConcertInterface {
     @Override
     public GetConcertResponse getConcert(Long concertId) {
         Concert concert = concertRepository.findById(concertId);
-        Place place = concertReader.findPlace(concert.getPlaceId());
-        return GetConcertResponse.from(concert, place);
+        return GetConcertResponse.from(concert);
     }
 
     @Override
@@ -42,14 +38,19 @@ public class ConcertService implements ConcertInterface {
         // validator
         concertValidator.dateIsNull(concert.getConcertDateList());
 
-        return GetDatesResponse.from(concert.getConcertDateList());
+        // 콘서트 날짜 예약 가능 여부
+        List<GetDatesResponse.DateInfo> dateInfos = new ArrayList<>();
+        concert.getConcertDateList().forEach(concertDate -> {
+            boolean available = concertRepository.existByConcertDateAndStatus(concertDate.getConcertDateId(), Seat.Status.AVAILABLE);
+            dateInfos.add(GetDatesResponse.DateInfo.from(concertDate, available));
+        });
+
+        return new GetDatesResponse(dateInfos);
     }
 
     @Override
-    public GetSeatsResponse getSeats(Long concertId, Long concertDateId) {
-        List<Seat> allSeats = placeManager.getSeatsByConcertId(concertId);
-        List<Long> reservedSeatIds = reservationManager.getReservedSeatIdsByConcertDate(concertDateId);
-
-        return GetSeatsResponse.from(allSeats, reservedSeatIds);
+    public GetSeatsResponse getAvailableSeats(Long concertDateId) {
+        List<Seat> availableSeats = concertRepository.findSeatsByConcertDateIdAndStatus(concertDateId, Seat.Status.AVAILABLE);
+        return GetSeatsResponse.from(availableSeats);
     }
 }

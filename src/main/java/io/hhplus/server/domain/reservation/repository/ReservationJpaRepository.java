@@ -9,15 +9,17 @@ import java.util.List;
 
 public interface ReservationJpaRepository extends JpaRepository<Reservation, Long> {
 
-    List<Reservation> findAllByConcertDate_ConcertDateId(Long concertDateId);
+    List<Reservation> findAllByConcertDateId(Long concertDateId);
 
-    Reservation findOneByConcertDate_ConcertDateIdAndSeat_SeatId(Long concertDateId, Long seatId);
+    Reservation findOneByConcertDateIdAndSeatId(Long concertDateId, Long seatId);
 
-    Reservation findByReservationIdAndUser_UserId(Long reservationId, Long userId);
+    Reservation findByReservationIdAndUserId(Long reservationId, Long userId);
 
-    @Query("SELECT new io.hhplus.server.domain.reservation.service.dto.GetReservationAndPaymentResDto(r, p)" +
+    @Query("SELECT new io.hhplus.server.domain.reservation.service.dto.GetReservationAndPaymentResDto(r, c, cd, s)" +
             "FROM Reservation r " +
-            "JOIN Payment p on p.reservation.reservationId = r.reservationId " +
-            "WHERE r.user.userId = :userId")
+            "JOIN Concert c on c.concertId = r.concertId " +
+            "JOIN ConcertDate cd on cd.concertDateId = r.concertDateId " +
+            "JOIN Seat s on s.seatId = r.seatId " +
+            "WHERE r.userId = :userId")
     List<GetReservationAndPaymentResDto> getMyReservations(Long userId);
 }
