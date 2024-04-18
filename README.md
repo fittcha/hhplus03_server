@@ -57,7 +57,7 @@
 
 ---
 # 3. Trouble Shooting
-*모든 과정을 기록할 수는 없었지만, 5주차에 기억나는 나의 트러블 슈팅 과정을 기록하였다.*
+*모든 과정을 기록할 수는 없었지만, 5주차 진행 과정에서의 나의 트러블 슈팅 과정을 기록하였다.*
 
 [Trouble Shooting 기록 바로가기](https://iwannabarmus.tistory.com/27)
 
