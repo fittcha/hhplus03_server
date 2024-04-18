@@ -12,6 +12,7 @@
 ![swagger_main.png](image/swagger_main.png)
 
 ### UML 다이어그램
+*변경된 로직이 있어 추후 수정 예정입니다.*
 ![uml.png](image/uml.png)
 ### ERD 명세
 ![ERD.png](image%2FERD.png)
@@ -55,7 +56,7 @@
   - 대기열 기능 고도화
 
 ---
-# Trouble Shooting
+# 3. Trouble Shooting
 *모든 과정을 기록할 수는 없었지만, 5주차에 기억나는 나의 트러블 슈팅 과정을 기록하였다.*
 
 [Trouble Shooting 기록 바로가기](https://iwannabarmus.tistory.com/27)
@@ -63,6 +64,7 @@
 
 
 ---
+# 4. 개발하면서 끄적
 ## 3주차 인사이트
 - 요구사항을 api 명세로 녹여내고, 기능 구현 흐름을 작성해보는 것
 - DB를 적절한 정규화 방식으로 설계하는 것
