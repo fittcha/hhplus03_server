@@ -5,33 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2dba11e2-779e-4013-82d7-fe0971d334cc" name="Changes" comment="feat: 통합테스트 작성">
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/payment/dto/request/CreateRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/payment/dto/response/CreateResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/service/ReservationReader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/payment/PaymentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/payment/PaymentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/reservation/ReservationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/reservation/ReservationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/user/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/user/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/waiting/WaitingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/waiting/WaitingController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/concert/entity/ConcertDate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/concert/entity/ConcertDate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/concert/repository/SeatJpaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/concert/repository/SeatJpaRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/entity/Payment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/entity/Payment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/service/PaymentInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/service/PaymentInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/service/PaymentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/service/PaymentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/service/dto/CreatePaymentReqDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/event/ReservationEventListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/event/ReservationEventListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/service/ReservationMonitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/service/ReservationMonitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/service/ReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/service/ReservationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/infrastructure/concert/ConcertRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/infrastructure/concert/ConcertRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/io/hhplus/server/domain/unit/service/ConcertServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/io/hhplus/server/domain/unit/service/ConcertServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/io/hhplus/server/domain/unit/service/PaymentServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/io/hhplus/server/domain/unit/service/PaymentServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/io/hhplus/server/domain/unit/service/ReservationServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/io/hhplus/server/domain/unit/service/ReservationServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/io/hhplus/server/domain/unit/service/UserServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/io/hhplus/server/domain/unit/service/UserServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/io/hhplus/server/domain/unit/service/WaitingServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/io/hhplus/server/domain/unit/service/WaitingServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/io/hhplus/server/intergration/ReservationIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/io/hhplus/server/intergration/ReservationIntegrationTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/io/hhplus/server/intergration/UserIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/io/hhplus/server/intergration/UserIntegrationTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/io/hhplus/server/intergration/base/TestDataHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/io/hhplus/server/intergration/base/TestDataHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,87 +93,87 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Docker.docker: Compose Deployment.executor": "Run",
-    "Gradle.Build hhplus03_server.executor": "Run",
-    "Gradle.ConcertIntegrationTest.executor": "Run",
-    "Gradle.ConcertIntegrationTest.getConcertTest_EntityNotFoundException.executor": "Run",
-    "Gradle.ConcertIntegrationTest.getConcertTest_fail.executor": "Run",
-    "Gradle.ConcertIntegrationTest.getConcertTest_success.executor": "Run",
-    "Gradle.ConcertIntegrationTest.getConcerts.executor": "Run",
-    "Gradle.ConcertIntegrationTest.getConcertsTest_empty.executor": "Run",
-    "Gradle.ConcertIntegrationTest.getConcertsTest_success.executor": "Run",
-    "Gradle.ConcertIntegrationTest.getDatesTest_empty.executor": "Run",
-    "Gradle.ConcertIntegrationTest.getDatesTest_success.executor": "Run",
-    "Gradle.ConcertIntegrationTest.getSeatsTest_success.executor": "Run",
-    "Gradle.ConcertServiceTest.executor": "Run",
-    "Gradle.ConcertServiceTest.getAvailableSeatsTest_콘서트_회차별_좌석_목록_조회.executor": "Run",
-    "Gradle.ConcertServiceTest.getSeatsTest_콘서트_회차별_좌석_목록_조회.executor": "Run",
-    "Gradle.PaymentIntegrationTest.executor": "Run",
-    "Gradle.PaymentIntegrationTest.payTest_INSUFFICIENT_BALANCE.executor": "Run",
-    "Gradle.PaymentIntegrationTest.payTest_NOT_AVAILABLE_PAY.executor": "Run",
-    "Gradle.PaymentIntegrationTest.payTest_success.executor": "Run",
-    "Gradle.PaymentServiceTest.cancelTest_결제_대기건은_즉시취소.executor": "Run",
-    "Gradle.PaymentServiceTest.cancelTest_결제_완료건은_환불.executor": "Run",
-    "Gradle.PaymentServiceTest.cancelTest_결제_취소_불가능한_상태.executor": "Run",
-    "Gradle.PaymentServiceTest.createTest_결제_생성.executor": "Run",
-    "Gradle.PaymentServiceTest.executor": "Run",
-    "Gradle.PaymentServiceTest.payTest_결제_요청_처리_성공.executor": "Run",
-    "Gradle.PaymentServiceTest.payTest_결제_잔액_부족하여_실패.executor": "Run",
-    "Gradle.PaymentServiceTest.payTest_결제요청_불가능한_상태.executor": "Run",
-    "Gradle.ReservationIntegrationTest.reserveTest_ALREADY_RESERVED_lock.executor": "Run",
-    "Gradle.ReservationIntegrationTest.reserveTest_cancel_after_5min.executor": "Run",
-    "Gradle.ReservationServiceTest.cancelTest_예약_취소.executor": "Run",
-    "Gradle.ReservationServiceTest.executor": "Run",
-    "Gradle.ReservationServiceTest.getMyReservationsTest_예약_내역_조회.executor": "Run",
-    "Gradle.ReservationServiceTest.reserveTest_이미_선택된_좌석입니다.executor": "Run",
-    "Gradle.ReservationServiceTest.reserveTest_좌석_예약_성공.executor": "Run",
-    "Gradle.UserServiceTest.chargeTest_잔액_충전.executor": "Run",
-    "Gradle.UserServiceTest.executor": "Run",
-    "Gradle.UserServiceTest.getBalanceTest_잔액_조회.executor": "Run",
-    "Gradle.WaitingServiceTest.addWaitingQueueTest_대기열_추가_대기유저.executor": "Run",
-    "Gradle.WaitingServiceTest.checkActiveTest_대기열_상태_확인_대기열_정보_없거나_만료됨.executor": "Run",
-    "Gradle.WaitingServiceTest.checkActiveTest_대기열_상태_확인_대기유저.executor": "Run",
-    "Gradle.WaitingServiceTest.checkActiveTest_대기열_상태_확인_활성유저.executor": "Run",
-    "Gradle.WaitingServiceTest.executor": "Run",
-    "Gradle.hhplus03_server [buildDependents].executor": "Run",
-    "Gradle.hhplus03_server [build].executor": "Run",
-    "Gradle.hhplus03_server [clean].executor": "Run",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
-    "Spring Boot.ServerApplication.executor": "Run",
-    "WebServerToolWindowFactoryState": "false",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/cseun/hhplus/hhplus03_server",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.projectsettings.compiler.annotationProcessors",
-    "spring.configuration.checksum": "26837b2678581e8838c5ceceaa0a6bbe",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Docker.docker: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Build hhplus03_server.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ConcertIntegrationTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ConcertIntegrationTest.getConcertTest_EntityNotFoundException.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ConcertIntegrationTest.getConcertTest_fail.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ConcertIntegrationTest.getConcertTest_success.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ConcertIntegrationTest.getConcerts.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ConcertIntegrationTest.getConcertsTest_empty.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ConcertIntegrationTest.getConcertsTest_success.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ConcertIntegrationTest.getDatesTest_empty.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ConcertIntegrationTest.getDatesTest_success.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ConcertIntegrationTest.getSeatsTest_success.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ConcertServiceTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ConcertServiceTest.getAvailableSeatsTest_콘서트_회차별_좌석_목록_조회.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ConcertServiceTest.getSeatsTest_콘서트_회차별_좌석_목록_조회.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PaymentIntegrationTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PaymentIntegrationTest.payTest_INSUFFICIENT_BALANCE.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PaymentIntegrationTest.payTest_NOT_AVAILABLE_PAY.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PaymentIntegrationTest.payTest_success.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PaymentServiceTest.cancelTest_결제_대기건은_즉시취소.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PaymentServiceTest.cancelTest_결제_완료건은_환불.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PaymentServiceTest.cancelTest_결제_취소_불가능한_상태.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PaymentServiceTest.createTest_결제_생성.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PaymentServiceTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PaymentServiceTest.payTest_결제_요청_처리_성공.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PaymentServiceTest.payTest_결제_잔액_부족하여_실패.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PaymentServiceTest.payTest_결제요청_불가능한_상태.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ReservationIntegrationTest.reserveTest_ALREADY_RESERVED_lock.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ReservationIntegrationTest.reserveTest_cancel_after_5min.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ReservationServiceTest.cancelTest_예약_취소.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ReservationServiceTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ReservationServiceTest.getMyReservationsTest_예약_내역_조회.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ReservationServiceTest.reserveTest_이미_선택된_좌석입니다.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ReservationServiceTest.reserveTest_좌석_예약_성공.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.UserServiceTest.chargeTest_잔액_충전.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.UserServiceTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.UserServiceTest.getBalanceTest_잔액_조회.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.WaitingServiceTest.addWaitingQueueTest_대기열_추가_대기유저.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.WaitingServiceTest.checkActiveTest_대기열_상태_확인_대기열_정보_없거나_만료됨.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.WaitingServiceTest.checkActiveTest_대기열_상태_확인_대기유저.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.WaitingServiceTest.checkActiveTest_대기열_상태_확인_활성유저.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.WaitingServiceTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.hhplus03_server [buildDependents].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.hhplus03_server [build].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.hhplus03_server [clean].executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
+    &quot;Spring Boot.ServerApplication.executor&quot;: &quot;Run&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/cseun/hhplus/hhplus03_server&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.annotationProcessors&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;26837b2678581e8838c5ceceaa0a6bbe&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="io.hhplus.server" />
@@ -407,6 +381,7 @@
       <workItem from="1712834941457" duration="10416000" />
       <workItem from="1712845412648" duration="8885000" />
       <workItem from="1713271650346" duration="16051000" />
+      <workItem from="1713512851412" duration="2231000" />
     </task>
     <task id="LOCAL-00001" summary="feat: gradle, mysql 세팅">
       <created>1712065343445</created>
@@ -499,11 +474,30 @@
       <option name="project" value="LOCAL" />
       <updated>1713445519781</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="feat: 통합테스트 작성">
+      <option name="closed" value="true" />
+      <created>1713458243019</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1713458243019</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="feat: gradle, mysql 세팅" />

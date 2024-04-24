@@ -14,14 +14,96 @@
 ### UML 다이어그램
 ![uml.png](image/uml.png)
 ### ERD 명세
-![ERD.png](image%2FERD.png)
+![ERD.png](image/ERD.png)
 ---
 ### Dummy data - postman 호출
 - API: http://localhost:8080/concerts/
   ![postman_getConcerts.PNG](image/postman_getConcerts.PNG)
 
 ---
-## 2. 작업 내용
+## 2. 브랜치 전략과 버전 관리
+### 브랜치 전략
+- Git-flow 기반
+- 환경
+  - dev → staging → prod
+  #### **dev : 개발 환경**
+    - 개발자들이 각자 개발한 내용들을 합친 뒤 테스트 하는 환경
+    - 개발자는 feature/xx (기능 개발, 변경) 브랜치를 따서 local 환경에서 개발하고 자체 테스트를 진행한다.
+    - 개발자들이 pull request를 통해 dev 브랜치로 merge한다.
+    - dev 브랜치로 merge되면 자동적으로 dev 환경에 배포되고, 해당 feature 브랜치는 제거된다.
+  #### **staging: 스테이징 환경**
+    - 다음 버전의 코드로 운영 환경과 거의 동일한 환경을 만들어 릴리즈 전에 테스트하는 환경
+    - release 브랜치가 테스트 됨
+    - 운영 환경으로 이전하기 전에, 여러 가지 비 기능적인 부분 (보안, 성능, 장애 등)을 검증하는 환경
+  #### **prod: 운영 환경**
+    - 실제 서비스를 위한 환경
+    - 릴리즈 계획이 없다면 수정되지 않아야 한다.
+    - release 브랜치로 배포하고, 배포가 정상적으로 이루어졌을 시 master 브랜치로 merge한다.
+  #### 운영 방안
+    - CI Step을 구성하여 통과 시 merge, 배포된다.
+      - checkout → build → test → lint → report
+      - 코드 정적 분석(lint)은 checkstyle tool 사용하여 진행
+    - phase 별로 서로 다른 파이프라인을 가진다.  
+
+
+- 브랜치
+  - 크게 5개의 브랜치로 운영하여 관리한다.
+    - 메인 브랜치: master, develop
+      - master: 실제 제품으로 배포 및 출시되는 브랜치
+      - develop: 다음 출시 버전을 기다리는 브랜치
+    - 보조 브랜치: feature, release, hotfix
+      - feature: 기능을 개발, 수정하는 브랜치. 개발이 완료되어 머지되면 삭제한다.
+      - release: 이번 출시 버전을 준비하는 브랜치
+      - hotfix: 출시 버전에서 발생한 버그를 긴급 수정하는 브랜치. 수정이 완료되면 삭제한다.
+
+![git-flow.png](image/git-flow.png)
+
+### 버전 관리
+- Semantic versioning 을 활용하여 버전 번호를 관리한다.
+  - Major.Minor.Patch
+
+#### Major Version
+
+- 이전 버전과 호환되지 않는 API 변경
+- 양수만 사용 가능
+- 증가할 경우 Minor, Patch 버전은 0으로 초기화
+
+#### Minor Version
+
+- 이전 버전과 호환되는 방식으로 새 기능 추가
+- 일부 기능에 대한 제거 예고
+- 양수만 사용 가능
+- 증가할 경우 Patch 버전은 0으로 초기화
+
+#### Patch Version
+
+- 이전 버전과 호환되는 방식으로 버그 등 수정
+- 양수만 사용 가능
+
+#### Build Version
+
+- 필요 시 사용
+- ‘+’ 기호 뒤에 build 버전 표기.
+- 숫자 및 알파벳 대소문자 사용 가능.
+- 동일 Patch Version보다 높은 우선 순위를 가진다.
+- ex) `1.0.0+1201.0.0+exp.sha.5111.0.0-alpha.1+build120`
+
+#### 배포 환경에서의 버전 관리
+이번 서비스에서의 배포 환경은 dev, staging, prod 로 두었다.  
+각 환경마다 Versioning을 다르게 적용한다고 하였을 때,  
+build_number값을 활용하여 Build Version을 체크한다.  
+(브랜치 이름 활용 시 Semantic Versioning의 명명 규칙에 어긋나는 경우 발생 가능)
+- dev
+  - `1.0.0+dev.{build_numer}`
+- staging
+  - `1.0.0+staging.{build_number}`
+- prod
+  - `1.0.1`
+
+
+
+---
+## 3. 작업 내용
 3주차
 - ~2024.04.02
   - 요구사항 분석
@@ -53,6 +135,10 @@
   - 테이블 재설계: 도메인 어그리게이트 별로 분리하여 재설계
   - 통합테스트 작성
   - 대기열 기능 고도화
+
+6주차
+- 2024.04.24
+  - 브랜치 전략 수립
 
 ---
 # Trouble Shooting
