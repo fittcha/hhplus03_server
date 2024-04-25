@@ -21,8 +21,8 @@ RUN apt-get update && apt-get install -y ca-certificates && update-ca-certificat
 WORKDIR /app
 
 # 빌더 스테이지에서 생성된 JAR 파일 복사
-COPY configs/ app/configs/
 COPY --from=builder /app/build/libs/*.jar app.jar
+COPY configs/ configs/
 
 ENTRYPOINT ["java", "-jar", "/app/app.jar", "--spring.profiles.active=${ACTIVE_PROFILES}"]
 
