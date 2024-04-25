@@ -1,4 +1,4 @@
-name: 'CI-develop'
+name: 'ci-develop'
 on:
   pull_request:
   push:
