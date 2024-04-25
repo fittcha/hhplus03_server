@@ -2,7 +2,7 @@
 # Dev phase
 #
 FROM openjdk:17-alpine as dev
-RUN apt-get update && apt-get install -y ca-certificates && update-ca-certificates
+RUN apk add --no-cache bash
 
 # 프로젝트 디렉토리 생성
 WORKDIR /app
