@@ -6,14 +6,15 @@
 ### 목차
 
 - [1. 요구사항 분석](##one)
-- [2. 브랜치 전략과 버전 관리](##2.-브랜치-전략과-버전-관리)
+- [2. 브랜치 전략과 버전 관리](##two)
 - [3. 작업 내용](##3.-작업-내용)
 - [4. Trouble Shooting](##4.-Trouble-Shooting)
 - [5. 개발하면서 끄적](##5.-개발하면서-끄적)
 - [6. 기술 스택](##6.-기술-스택)
-- 
+
 ---
 <h2 id="one">1. 요구사항 분석</h2>
+
 ### 프로젝트 Milestone & 요구사항 명세서 & API 명세서
 [구글닥스 문서 바로가기](https://docs.google.com/spreadsheets/d/1xUItBPr_C1zbzSHNcl8WOv9zL6cymvzz5DRU_7oKDZM/edit#gid=983380097)
 ### Swagger UI
@@ -32,7 +33,8 @@
   ![postman_getConcerts.PNG](image/postman_getConcerts.PNG)
 
 ---
-## 2. 브랜치 전략과 버전 관리
+<h2 id="two">2. 브랜치 전략과 버전 관리</h2>
+
 ### 브랜치 전략
 - Git-flow 기반
 - 환경
