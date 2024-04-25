@@ -1,0 +1,36 @@
+name: Dev CD Pipeline
+
+on:
+  push:
+    branches: [ develop release-* ]
+
+env:
+  ENVIRONMENT: dev
+  AWS_REGION: ap-northeast-2
+  ECR_REGISTRY: 767398047998.dkr.ecr.ap-northeast-2.amazonaws.com/hhplus-dev
+  ECR_REPOSITORY: hhplus-dev
+
+jobs:
+  build:
+    name: Build Image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-region: ${{ env.AWS_REGION }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build, tag, and push image to Amazon ECR
+        run: |
+          docker build -t hhplus-dev .
+          docker tag hhplus-dev:latest 767398047998.dkr.ecr.ap-northeast-2.amazonaws.com/hhplus-dev:latest
+          docker push 767398047998.dkr.ecr.ap-northeast-2.amazonaws.com/hhplus-dev:latest

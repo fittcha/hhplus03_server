@@ -1,15 +1,53 @@
-FROM openjdk:17-jdk-slim
+#
+# Dev phase
+#
+FROM openjdk:17-alpine as dev
+RUN apk add --no-cache bash
 
-ENV TZ=Asia/Seoul
-
-# 컨테이너 내부에서 애플리케이션 파일을 저장할 디렉토리를 생성
+# 프로젝트 디렉토리 생성
 WORKDIR /app
 
-# 빌드된 JAR 파일을 현재 위치에서 컨테이너의 /app 디렉토리로 복사
-COPY build/libs/my-spring-boot-app-0.0.1-SNAPSHOT.jar /app/my-app.jar
+COPY gradlew .
+COPY gradle gradle
+RUN chmod +x ./gradlew
 
-# 기본값으로 'local' 설정
-ENV ACTIVE_PROFILES=local
+# Gradle 설정 파일 복사
+COPY build.gradle settings.gradle ./
 
-# 애플리케이션을 실행
-ENTRYPOINT ["java", "-jar", "/app/my-app.jar", "--spring.profiles.active=${ACTIVE_PROFILES}"]
+# Gradle 종속성 다운로드
+RUN ./gradlew --version
+RUN ./gradlew dependencies
+
+# 소스 코드 복사
+COPY src src
+
+#
+# Prod-build phase
+#
+FROM dev as build
+
+# 프로덕션 환경 설정
+ENV SPRING_PROFILES_ACTIVE=prod
+
+# 애플리케이션 빌드
+RUN ./gradlew build -x test
+
+# 생성된 JAR 파일을 더 Docker 친화적인 구조로 추출
+RUN mkdir -p build/dependency && (cd build/dependency; jar -xf ../libs/*.jar)
+
+#
+# Prod-deploy phase
+#
+FROM openjdk:17-alpine as prod
+
+WORKDIR /app
+
+# 앱 실행에 필요한 환경 변수 설정
+ENV SPRING_PROFILES_ACTIVE=prod
+
+# build 단계에서 빌드된 애플리케이션 파일 복사
+COPY --from=build /app/build/dependency/BOOT-INF/lib /app/lib
+COPY --from=build /app/build/dependency/META-INF /app/META-INF
+COPY --from=build /app/build/dependency/BOOT-INF/classes /app
+
+ENTRYPOINT ["java", "-jar", "/app/app.jar", "--spring.profiles.active=${ACTIVE_PROFILES}"]
