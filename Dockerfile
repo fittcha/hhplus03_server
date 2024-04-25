@@ -6,10 +6,10 @@ ENV TZ=Asia/Seoul
 WORKDIR /app
 
 # 빌드된 JAR 파일을 현재 위치에서 컨테이너의 /app 디렉토리로 복사
-COPY build/libs/my-spring-boot-app-0.0.1-SNAPSHOT.jar /app/my-app.jar
+COPY build/libs/hhplus03_server-1.0-SNAPSHOT.jar /app/hhplus03_server.jar
 
 # 기본값으로 'local' 설정
 ENV ACTIVE_PROFILES=local
 
 # 애플리케이션을 실행
-ENTRYPOINT ["java", "-jar", "/app/my-app.jar", "--spring.profiles.active=${ACTIVE_PROFILES}"]
+ENTRYPOINT ["java", "-jar", "/app/hhplus03_server.jar", "--spring.profiles.active=${ACTIVE_PROFILES}"]
