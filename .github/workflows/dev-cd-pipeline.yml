@@ -1,10 +1,11 @@
-name: dev Deploy to ECR
+name: Dev CD Pipeline
 
 on:
   push:
-    branches: [ release-* ]
+    branches: [ develop release-* ]
 
 env:
+  ENVIRONMENT: dev
   AWS_REGION: ap-northeast-2
   ECR_REGISTRY: 767398047998.dkr.ecr.ap-northeast-2.amazonaws.com/hhplus-dev
   ECR_REPOSITORY: hhplus-dev

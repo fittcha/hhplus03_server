@@ -59,6 +59,16 @@
 
 ![git-flow.png](image/git-flow.png)
 
+### CI/CD 전략
+- develop, release 브랜치에 push, pull-request 될 경우
+  - CI
+    - test 수행 (Jacoco를 이용한 코드 커버리지 보고서 생성)
+    - lint 수행 (Checkstyle을 통한 코드 스타일 검사)
+    - build 수행
+  - 개발 환경으로의 간단한 이미지 빌드 및 푸시 프로세스
+- main 브랜치에 push 될 경우
+  - 프로덕션 환경으로의 복잡한 배포 프로세스
+
 ### 버전 관리
 - Semantic versioning 을 활용하여 버전 번호를 관리한다.
   - Major.Minor.Patch

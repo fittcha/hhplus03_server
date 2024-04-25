@@ -1,11 +1,12 @@
-name: 'ci-develop'
+name: CI develop
+
 on:
   pull_request:
   push:
-    branches: [develop release-*]
+    branches: [ develop release-* ]
 
 env:
-  PROFILE: develop
+  PROFILE: dev
 
 jobs:
   test:
@@ -30,11 +31,10 @@ jobs:
             ~/.gradle/caches
             ~/.gradle/wrapper
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
+          restore-keys: ${{ runner.os }}-gradle-
 
-      - name: Run tests
-        run: ./gradlew test
+      - name: Run tests and generate Jacoco report
+        run: ./gradlew test jacocoTestReport
 
   lint:
     runs-on: ubuntu-latest
@@ -58,14 +58,14 @@ jobs:
             ~/.gradle/caches
             ~/.gradle/wrapper
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
+          restore-keys: ${{ runner.os }}-gradle-
 
       - name: Run Checkstyle
         run: ./gradlew checkstyleMain checkstyleTest
 
   build:
     runs-on: ubuntu-latest
+    needs: [ test, lint ] # build 작업이 test와 lint 작업이 완료된 후에 실행되도록 설정
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -86,8 +86,7 @@ jobs:
             ~/.gradle/caches
             ~/.gradle/wrapper
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
+          restore-keys: ${{ runner.os }}-gradle-
 
-      - name: Build
-        run: ./gradlew build
+      - name: Build without tests
+        run: ./gradlew build -x test
