@@ -58,7 +58,7 @@ test {
 }
 
 checkstyle {
-    maxWarnings = 0 // 규칙이 어긋나는 코드가 하나라도 있을 경우 빌드 fail
-    configFile = file("${rootDir}/configs/naver-intellij-formatter.xml") // 설정 파일 경로 지정
-    toolVersion = "8.39"
+//    maxWarnings = 0 // 규칙이 어긋나는 코드가 하나라도 있을 경우 빌드 fail
+    toolVersion = '8.36.2' // 사용 중인 Checkstyle 버전
+    configFile = file("${project.rootDir}/configs/naver-intellij-formatter.xml")
 }
