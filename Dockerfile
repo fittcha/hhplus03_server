@@ -1,5 +1,10 @@
 # 빌더 이미지
 FROM gradle:7.2.0-jdk17 AS builder
+
+# 필요한 폴더 생성
+RUN mkdir -p /main
+RUN mkdir -p /configs
+
 WORKDIR /app
 COPY . .
 RUN gradle clean build
