@@ -1,5 +1,19 @@
 spring:
-  profiles:
-    active: local
+  config:
+    activate:
+      on-profile: local
+
   datasource:
     url: "jdbc:mysql://localhost:3306/hhplus_local?serverTimezone=Asia/Seoul&characterEncoding=UTF-8&autoReconnect=true&createDatabaseIfNotExist=true"
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 1234
+
+  jpa:
+    database: mysql
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate:
+        default_batch_fetch_size: 500 # 지연로딩으로 발생해야 하는 쿼리를 IN절로 한번에 모아보내는 기능

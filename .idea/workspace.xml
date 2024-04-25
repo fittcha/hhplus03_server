@@ -5,7 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2dba11e2-779e-4013-82d7-fe0971d334cc" name="Changes" comment="feat: 통합테스트 작성">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/application-test.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-dev.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application-local.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-local.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application-prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-prod.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application-staging.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-sta.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -155,7 +165,7 @@
     &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/cseun/hhplus/hhplus03_server&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/cseun/hhplus/hhplus03_server/src/main/resources&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -165,6 +175,7 @@
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.annotationProcessors&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;26837b2678581e8838c5ceceaa0a6bbe&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
@@ -179,11 +190,11 @@
       <recent name="io.hhplus.server" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\cseun\hhplus\hhplus03_server\src\main\resources" />
       <recent name="C:\Users\cseun\hhplus\hhplus03_server" />
       <recent name="$PROJECT_DIR$/src/main/java/io/hhplus/server" />
       <recent name="$PROJECT_DIR$/src/main/java/io/hhplus/server/concert/domain/seat" />
       <recent name="$PROJECT_DIR$/src/main/java/io/hhplus/server/concert/domain/concert" />
-      <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/image" />
@@ -208,7 +219,7 @@
       <recent name="io.hhplus.server.base.exception" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.PaymentIntegrationTest">
+  <component name="RunManager" selected="Spring Boot.ServerApplication">
     <configuration name="ConcertIntegrationTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -330,7 +341,7 @@
       <method v="2" />
     </configuration>
     <configuration name="ServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <module name="hhplus.architecture.hhplus03_server.main" />
+      <module name="hhplus03_server.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="io.hhplus.server.ServerApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -351,14 +362,6 @@
         <item itemvalue="Gradle.WaitingServiceTest" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
-        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
-      </set>
-    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -382,6 +385,8 @@
       <workItem from="1712845412648" duration="8885000" />
       <workItem from="1713271650346" duration="16051000" />
       <workItem from="1713512851412" duration="2231000" />
+      <workItem from="1714010803173" duration="1220000" />
+      <workItem from="1714025208146" duration="594000" />
     </task>
     <task id="LOCAL-00001" summary="feat: gradle, mysql 세팅">
       <created>1712065343445</created>

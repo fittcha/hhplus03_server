@@ -1,12 +1,11 @@
 spring:
   config:
     activate:
-      on-profile: dev
-
+      on-profile: sta
   datasource:
-    url: "jdbc:mysql://dev-db.example.com:3306/hhplus_dev"
+    url: "jdbc:mysql://sta-db.example.com:3306/hhplus-sta"
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
+    username: root_sta
     password: 1234
 
   jpa:
@@ -17,3 +16,6 @@ spring:
     properties:
       hibernate:
         default_batch_fetch_size: 500 # 지연로딩으로 발생해야 하는 쿼리를 IN절로 한번에 모아보내는 기능
+
+server:
+  port: 8081
