@@ -22,7 +22,7 @@ WORKDIR /app
 
 # 빌더 스테이지에서 생성된 JAR 파일 복사
 COPY --from=builder /app/build/libs/*.jar app.jar
-COPY configs/ configs/
+COPY configs/ app/configs/
 
 ENTRYPOINT ["java", "-jar", "/app/app.jar", "--spring.profiles.active=${ACTIVE_PROFILES}"]
 
