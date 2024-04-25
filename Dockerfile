@@ -1,10 +1,6 @@
 # 빌더 이미지
 FROM gradle:7.2.0-jdk17 AS builder
 
-# 필요한 폴더 생성
-RUN mkdir -p /main
-RUN mkdir -p /configs
-
 WORKDIR /app
 COPY . .
 RUN gradle clean build
@@ -15,6 +11,10 @@ FROM openjdk:17-jdk-slim
 ENV TZ=Asia/Seoul
 # 기본값으로 'local' 설정
 ENV ACTIVE_PROFILES=local
+
+# 필요한 폴더 생성
+RUN mkdir -p /main
+RUN mkdir -p /configs
 
 RUN apt-get update && apt-get install -y ca-certificates && update-ca-certificates
 
