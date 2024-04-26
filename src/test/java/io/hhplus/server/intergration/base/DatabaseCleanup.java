@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +21,9 @@ public class DatabaseCleanup implements InitializingBean {
     @PersistenceContext
     private EntityManager entityManager;
 
+    @Autowired
+    private Environment env;
+
     private List<String> tableNames;
 
     @Override
@@ -32,13 +37,42 @@ public class DatabaseCleanup implements InitializingBean {
     @Transactional
     public void execute() {
         entityManager.flush();
-        entityManager.createNativeQuery("SET FOREIGN_KEY_CHECKS = 0").executeUpdate();
+        boolean testProfile = isTestProfile();
 
-        for (String tableName : tableNames) {
-            entityManager.createNativeQuery("TRUNCATE TABLE " + tableName).executeUpdate();
-            entityManager.createNativeQuery("ALTER TABLE " + tableName + " AUTO_INCREMENT = 1").executeUpdate();
+        if (testProfile) {
+            // H2 데이터베이스용 구문
+            entityManager.createNativeQuery("SET REFERENTIAL_INTEGRITY FALSE").executeUpdate();
+        } else {
+            // 다른 데이터베이스용 구문
+            entityManager.createNativeQuery("SET FOREIGN_KEY_CHECKS = 0").executeUpdate();
         }
 
-        entityManager.createNativeQuery("SET FOREIGN_KEY_CHECKS = 1").executeUpdate();
+        for (String tableName : tableNames) {
+            String formattedTableName = testProfile ? "\"" + tableName + "\"" : tableName;
+            entityManager.createNativeQuery("TRUNCATE TABLE " + formattedTableName).executeUpdate();
+            if (testProfile) {
+                entityManager.createNativeQuery("ALTER TABLE " + formattedTableName + " AUTO_INCREMENT = 1").executeUpdate();
+            }
+        }
+
+        if (isTestProfile()) {
+            entityManager.createNativeQuery("SET REFERENTIAL_INTEGRITY TRUE").executeUpdate();
+        } else {
+            entityManager.createNativeQuery("SET FOREIGN_KEY_CHECKS = 1").executeUpdate();
+        }
+    }
+
+    public boolean isTestProfile() {
+        // 현재 활성화된 프로파일 확인
+        String[] activeProfiles = env.getActiveProfiles();
+        boolean isTestProfileActive = false;
+        for (String profile : activeProfiles) {
+            if ("test".equals(profile)) {
+                isTestProfileActive = true;
+                break;
+            }
+        }
+
+        return isTestProfileActive;
     }
 }
