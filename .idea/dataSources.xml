@@ -8,7 +8,7 @@
       <jdbc-url>jdbc:mysql://localhost:3306</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="hhplus_dev@localhost" uuid="66ab2401-e5b2-4b92-9ddb-247b265152f4">
+    <data-source source="LOCAL" name="hhplus@localhost" uuid="66ab2401-e5b2-4b92-9ddb-247b265152f4">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <imported>true</imported>
