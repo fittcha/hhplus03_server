@@ -5,7 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2dba11e2-779e-4013-82d7-fe0971d334cc" name="Changes" comment="feat: deploy to ecr test">
+    <list default="true" id="2dba11e2-779e-4013-82d7-fe0971d334cc" name="Changes" comment="feat: db 연결 수정">
+      <change afterPath="$PROJECT_DIR$/lombok.config" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
     </list>
@@ -183,13 +186,90 @@
     "show.migrate.to.gradle.popup": "false",
     "spring.configuration.checksum": "26837b2678581e8838c5ceceaa0a6bbe",
     "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Docker.Dockerfile.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Build hhplus03_server.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ConcertIntegrationTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ConcertIntegrationTest.getConcertTest_EntityNotFoundException.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ConcertIntegrationTest.getConcertTest_fail.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ConcertIntegrationTest.getConcertTest_success.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ConcertIntegrationTest.getConcerts.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ConcertIntegrationTest.getConcertsTest_empty.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ConcertIntegrationTest.getConcertsTest_success.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ConcertIntegrationTest.getDatesTest_empty.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ConcertIntegrationTest.getDatesTest_success.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ConcertIntegrationTest.getSeatsTest_success.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ConcertServiceTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ConcertServiceTest.getAvailableSeatsTest_콘서트_회차별_좌석_목록_조회.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ConcertServiceTest.getSeatsTest_콘서트_회차별_좌석_목록_조회.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PaymentIntegrationTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PaymentIntegrationTest.payTest_INSUFFICIENT_BALANCE.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PaymentIntegrationTest.payTest_NOT_AVAILABLE_PAY.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PaymentIntegrationTest.payTest_success.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PaymentServiceTest.cancelTest_결제_대기건은_즉시취소.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PaymentServiceTest.cancelTest_결제_완료건은_환불.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PaymentServiceTest.cancelTest_결제_취소_불가능한_상태.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PaymentServiceTest.createTest_결제_생성.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PaymentServiceTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PaymentServiceTest.payTest_결제_요청_처리_성공.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PaymentServiceTest.payTest_결제_잔액_부족하여_실패.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PaymentServiceTest.payTest_결제요청_불가능한_상태.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ReservationIntegrationTest.reserveTest_ALREADY_RESERVED_lock.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ReservationIntegrationTest.reserveTest_cancel_after_5min.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ReservationServiceTest.cancelTest_예약_취소.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ReservationServiceTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ReservationServiceTest.getMyReservationsTest_예약_내역_조회.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ReservationServiceTest.reserveTest_이미_선택된_좌석입니다.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ReservationServiceTest.reserveTest_좌석_예약_성공.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.UserServiceTest.chargeTest_잔액_충전.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.UserServiceTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.UserServiceTest.getBalanceTest_잔액_조회.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.WaitingServiceTest.addWaitingQueueTest_대기열_추가_대기유저.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.WaitingServiceTest.checkActiveTest_대기열_상태_확인_대기열_정보_없거나_만료됨.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.WaitingServiceTest.checkActiveTest_대기열_상태_확인_대기유저.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.WaitingServiceTest.checkActiveTest_대기열_상태_확인_활성유저.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.WaitingServiceTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.hhplus03_server [bootJar].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.hhplus03_server [buildDependents].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.hhplus03_server [build].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.hhplus03_server [clean].executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
+    &quot;Spring Boot.ServerApplication.executor&quot;: &quot;Run&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/cseun/hhplus/hhplus03_server/src/main/resources&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.annotationProcessors&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;26837b2678581e8838c5ceceaa0a6bbe&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="io.hhplus.server" />
@@ -602,7 +682,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714051326111</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="feat: db 연결 수정">
+      <option name="closed" value="true" />
+      <created>1714112353579</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1714112353579</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -636,7 +724,8 @@
     <MESSAGE value="docs: read.me 브랜치 전략 작성" />
     <MESSAGE value="feat: docker file" />
     <MESSAGE value="feat: deploy to ecr test" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: deploy to ecr test" />
+    <MESSAGE value="feat: db 연결 수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: db 연결 수정" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">

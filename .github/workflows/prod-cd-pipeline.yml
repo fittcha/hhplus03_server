@@ -2,7 +2,7 @@ name: Prod CD Pipeline
 
 on:
   push:
-    branches: [ 'main' ]
+    branches: [ 'master' ]
 
 env:
   ENVIRONMENT: prod

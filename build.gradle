@@ -3,6 +3,7 @@ plugins {
     id 'io.spring.dependency-management' version '1.1.4'
     id 'java'
     id 'checkstyle'
+    id 'jacoco'
 }
 
 group 'hhplus.architecture'
@@ -55,13 +56,63 @@ dependencies {
 
 test {
     useJUnitPlatform()
+    finalizedBy jacocoTestReport
 }
 
 checkstyle {
 //    maxWarnings = 0 // 규칙이 어긋나는 코드가 하나라도 있을 경우 빌드 fail
-    toolVersion = '8.36.2' // 사용 중인 Checkstyle 버전
-    configFile = file("${rootDir}/configs/naver-intellij-formatter.xml")
+    toolVersion = '10.15.0'
+    configFile = file("${rootDir}/config/checkstyle/google_checks.xml")
 }
+
+jacoco {
+    toolVersion = "0.8.8"
+    reportsDirectory = file("${buildDir}/JacocoTestReport")
+}
+
+jacocoTestReport {
+    dependsOn test
+
+    reports {
+        xml.required = true
+        html.required = true
+        csv.required = false
+    }
+
+    finalizedBy 'jacocoTestCoverageVerification'
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            enabled = true
+            element = 'CLASS'
+
+            limit {
+                counter = 'LINE'
+                value = 'COVEREDRATIO'
+                minimum = 0.00
+            }
+
+            limit {
+                counter = 'METHOD'
+                value = 'COVEREDRATIO'
+                minimum = 0.00
+            }
+        }
+    }
+}
+
+task testAndGenerateReport {
+    group 'verification'
+    description 'test w/ jacoco'
+
+    dependsOn ':test', ':jacocoTestReport', ':jacocoTestCoverageVerification'
+
+    tasks.jacocoTestReport.mustRunAfter tasks.test
+    tasks.jacocoTestCoverageVerification.mustRunAfter tasks.jacocoTestReport
+}
+
 
 jar {
     enabled = false
