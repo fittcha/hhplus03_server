@@ -15,7 +15,6 @@ public class ConcertReader {
     /* Concert 관련 정보 단순 조회용 */
 
     private final ConcertRepository concertRepository;
-    private final PlaceRepository placeRepository;
 
     public Concert findConcert(Long concertId) {
         return concertRepository.findById(concertId);
@@ -25,11 +24,7 @@ public class ConcertReader {
         return concertRepository.findConcertDateById(concertDateId);
     }
 
-    public Place findPlace(Long placeId) {
-        return placeRepository.findById(placeId);
-    }
-
-    public Seat findSeat(Long seatId) {
-        return concertRepository.findSeatById(seatId);
+    public Seat findSeat(Long concertDateId, int seatNum) {
+        return concertRepository.findSeatByConcertDateIdAndSeatNum(concertDateId, seatNum);
     }
 }

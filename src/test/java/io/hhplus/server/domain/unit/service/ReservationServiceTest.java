@@ -9,6 +9,7 @@ import io.hhplus.server.domain.concert.entity.Concert;
 import io.hhplus.server.domain.concert.entity.ConcertDate;
 import io.hhplus.server.domain.concert.entity.Seat;
 import io.hhplus.server.domain.concert.service.ConcertReader;
+import io.hhplus.server.domain.concert.service.ConcertService;
 import io.hhplus.server.domain.payment.service.PaymentReader;
 import io.hhplus.server.domain.payment.service.PaymentService;
 import io.hhplus.server.domain.reservation.ReservationExceptionEnum;
@@ -30,6 +31,7 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.when;
 import static org.mockito.Mockito.doThrow;
@@ -41,6 +43,7 @@ class ReservationServiceTest {
     private ReservationValidator reservationValidator;
     private ReservationMonitor reservationMonitor;
     private ConcertReader concertReader;
+    private ConcertService concertService;
     private UserReader userReader;
     private PaymentService paymentService;
     private PaymentReader paymentReader;
@@ -55,6 +58,7 @@ class ReservationServiceTest {
         reservationValidator = Mockito.mock(ReservationValidator.class);
         reservationMonitor = Mockito.mock(ReservationMonitor.class);
         concertReader = Mockito.mock(ConcertReader.class);
+        concertService = Mockito.mock(ConcertService.class);
         userReader = Mockito.mock(UserReader.class);
         paymentService = Mockito.mock(PaymentService.class);
         paymentReader = Mockito.mock(PaymentReader.class);
@@ -65,6 +69,7 @@ class ReservationServiceTest {
                 reservationValidator,
                 reservationMonitor,
                 concertReader,
+                concertService,
                 userReader,
                 paymentService,
                 paymentReader,
@@ -76,7 +81,7 @@ class ReservationServiceTest {
                 .userId(1L)
                 .concertId(1L)
                 .concertDateId(1L)
-                .seatId(1L)
+                .seatNum(1)
                 .status(Reservation.Status.ING)
                 .reservedAt(null)
                 .build();
@@ -86,15 +91,15 @@ class ReservationServiceTest {
     @DisplayName("이미 선택된 좌석입니다 예외처리")
     void reserveTest_already_reserved() {
         // given
-        ReserveRequest request = new ReserveRequest(1L, 1L, 1L, 1L);
+        ReserveRequest request = new ReserveRequest(1L, 1L, 1, 1L);
 
         // when
-        when(reservationRepository.findOneByConcertDateIdAndSeatId(request.concertDateId(), request.seatId())).thenReturn(예약건);
-        doThrow(new CustomException(ReservationExceptionEnum.ALREADY_RESERVED, null, LogLevel.INFO)).when(reservationValidator).checkReserved(anyLong(), anyLong());
+        when(reservationRepository.findOneByConcertDateIdAndSeatNum(request.concertDateId(), request.seatNum())).thenReturn(예약건);
+        doThrow(new CustomException(ReservationExceptionEnum.ALREADY_RESERVED, null, LogLevel.INFO)).when(reservationValidator).checkReserved(anyLong(), anyInt());
 
         // then
         CustomException expected = assertThrows(CustomException.class, () ->
-                reservationValidator.checkReserved(anyLong(), anyLong()));
+                reservationValidator.checkReserved(anyLong(), anyInt()));
         assertThat(expected.getMessage()).isEqualTo("이미 선택된 좌석입니다.");
     }
 
@@ -102,14 +107,14 @@ class ReservationServiceTest {
     @DisplayName("좌석 예약을 성공")
     void reserveTest_success() {
         // given
-        ReserveRequest request = new ReserveRequest(1L, 1L, 1L, 1L);
+        ReserveRequest request = new ReserveRequest(1L, 1L, 1, 1L);
 
         // when
-        when(reservationRepository.findOneByConcertDateIdAndSeatId(request.concertDateId(), request.seatId())).thenReturn(null);
+        when(reservationRepository.findOneByConcertDateIdAndSeatNum(request.concertDateId(), request.seatNum())).thenReturn(null);
         when(reservationRepository.save(request.toEntity(concertReader, userReader))).thenReturn(예약건);
         when(concertReader.findConcert(anyLong())).thenReturn(Concert.builder().build());
         when(concertReader.findConcertDate(anyLong())).thenReturn(ConcertDate.builder().build());
-        when(concertReader.findSeat(anyLong())).thenReturn(Seat.builder().build());
+        when(concertReader.findSeat(anyLong(), anyInt())).thenReturn(Seat.builder().build());
         ReserveResponse response = reservationService.reserve(request);
 
         // then

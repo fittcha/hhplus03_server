@@ -1,6 +1,7 @@
 package io.hhplus.server.domain.reservation.entity;
 
 import io.hhplus.server.base.entity.BaseDateTimeEntity;
+import io.hhplus.server.domain.payment.entity.Payment;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -32,7 +33,7 @@ public class Reservation extends BaseDateTimeEntity {
     private Long concertDateId;
 
     @Column(nullable = false)
-    private Long seatId;
+    private int seatNum;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -40,12 +41,15 @@ public class Reservation extends BaseDateTimeEntity {
 
     private ZonedDateTime reservedAt;
 
+    @OneToOne(mappedBy = "reservation", cascade = CascadeType.REMOVE)
+    private Payment payment;
+
     @Builder
-    public Reservation(Long userId, Long concertId, Long concertDateId, Long seatId, Status status, ZonedDateTime reservedAt) {
+    public Reservation(Long userId, Long concertId, Long concertDateId, int seatNum, Status status, ZonedDateTime reservedAt) {
         this.userId = userId;
         this.concertId = concertId;
         this.concertDateId = concertDateId;
-        this.seatId = seatId;
+        this.seatNum = seatNum;
         this.status = status;
         this.reservedAt = reservedAt;
     }

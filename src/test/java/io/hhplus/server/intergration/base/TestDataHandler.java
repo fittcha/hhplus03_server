@@ -6,6 +6,7 @@ import io.hhplus.server.domain.concert.entity.Place;
 import io.hhplus.server.domain.concert.entity.Seat;
 import io.hhplus.server.domain.concert.repository.ConcertRepository;
 import io.hhplus.server.domain.concert.repository.PlaceRepository;
+import io.hhplus.server.domain.concert.repository.SeatJpaRepository;
 import io.hhplus.server.domain.payment.entity.Payment;
 import io.hhplus.server.domain.payment.repository.PaymentRepository;
 import io.hhplus.server.domain.reservation.entity.Reservation;
@@ -15,6 +16,7 @@ import io.hhplus.server.domain.user.repository.UserRepository;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -34,6 +36,7 @@ public class TestDataHandler {
     private final UserRepository userRepository;
 
     private final EntityManager entityManager;
+    private final SeatJpaRepository seatJpaRepository;
 
     // 콘서트 정보 세팅
     public void settingConcertInfo() {
@@ -74,22 +77,29 @@ public class TestDataHandler {
     }
 
     // 5, 10번 좌석 예약
+    @Transactional
     public void reserveSeats() {
         reservationRepository.save(Reservation.builder()
                 .concertId(1L)
                 .concertDateId(1L)
-                .seatId(5L)
+                .seatNum(5)
                 .userId(1L)
                 .status(Reservation.Status.ING)
                 .reservedAt(ZonedDateTime.now().minusMinutes(3)).build());
+        Seat seat5 = concertRepository.findSeatByConcertDateIdAndSeatNum(1L, 5);
+        seat5.patchStatus(Seat.Status.DISABLE);
 
         reservationRepository.save(Reservation.builder()
                 .concertId(1L)
                 .concertDateId(1L)
-                .seatId(10L)
+                .seatNum(10)
                 .userId(1L)
                 .status(Reservation.Status.RESERVED)
                 .reservedAt(ZonedDateTime.now().minusHours(1)).build());
+        Seat seat10 = concertRepository.findSeatByConcertDateIdAndSeatNum(1L, 10);
+        seat10.patchStatus(Seat.Status.DISABLE);
+
+        entityManager.flush();
     }
 
     // 결제 건 생성
