@@ -9,7 +9,7 @@ import io.hhplus.server.domain.payment.repository.PaymentRepository;
 import io.hhplus.server.domain.payment.service.dto.CancelPaymentResultResDto;
 import io.hhplus.server.domain.reservation.entity.Reservation;
 import io.hhplus.server.domain.reservation.service.ReservationReader;
-import io.hhplus.server.domain.user.entity.User;
+import io.hhplus.server.domain.user.entity.Users;
 import io.hhplus.server.domain.user.service.UserReader;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -34,13 +34,13 @@ public class PaymentService implements PaymentInterface {
         paymentValidator.checkPayStatus(payment.getStatus());
 
         // validator - 사용자 잔액 검증
-        User user = userReader.findUser(request.userId());
-        paymentValidator.checkBalance(payment.getPrice(), user.getBalance());
+        Users users = userReader.findUser(request.userId());
+        paymentValidator.checkBalance(payment.getPrice(), users.getBalance());
 
         boolean isSuccess = false;
         // 1. 사용자 잔액 차감
-        BigDecimal previousBalance = user.getBalance();
-        BigDecimal usedBalance = user.useBalance(payment.getPrice());
+        BigDecimal previousBalance = users.getBalance();
+        BigDecimal usedBalance = users.useBalance(payment.getPrice());
         if (usedBalance.equals(previousBalance.subtract(payment.getPrice()))) {
             // 2-1. 결제 완료 처리
             payment = payment.toPaid();
@@ -48,7 +48,7 @@ public class PaymentService implements PaymentInterface {
             isSuccess = true;
         } else {
             // 2-2. 결제 실패 : 잔액 원복
-            usedBalance = user.getBalance();
+            usedBalance = users.getBalance();
         }
 
         return PayResponse.from(isSuccess, payment, usedBalance);
@@ -85,7 +85,7 @@ public class PaymentService implements PaymentInterface {
     private Payment cancelPayment(Payment payment) {
         Payment updatedPayment = payment;
         Long userId = payment.getReservation().getUserId();
-        User user = userReader.findUser(userId);
+        Users users = userReader.findUser(userId);
 
         if (Payment.Status.READY.equals(payment.getStatus())) {
             // 결제 대기 상태 - 즉시 취소
@@ -93,7 +93,7 @@ public class PaymentService implements PaymentInterface {
         } else if (Payment.Status.COMPLETE.equals(payment.getStatus())) {
             // 결제 완료 상태 - 환불
             updatedPayment = payment.updateStatus(Payment.Status.REFUND);
-            user.refundBalance(payment.getPrice());
+            users.refundBalance(payment.getPrice());
         }
 
         return updatedPayment;
