@@ -9,10 +9,9 @@ WORKDIR /app
 
 COPY gradlew .
 # gradlew 파일의 줄바꿈을 LF로 강제
-RUN dos2unix ./gradlew
-RUN chmod +x ./gradlew
+RUN dos2unix ./gradlew && chmod +x ./gradlew
 COPY gradle gradle
-RUN chmod +x ./gradlew
+COPY config config
 
 # Gradle 설정 파일 복사
 COPY build.gradle settings.gradle ./
