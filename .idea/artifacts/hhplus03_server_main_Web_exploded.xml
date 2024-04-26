@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="hhplus03_server.main:Web exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/hhplus03_server_main_Web_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="hhplus03_server.main/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="hhplus03_server.main" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

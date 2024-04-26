@@ -11,7 +11,7 @@ import io.hhplus.server.domain.payment.entity.Payment;
 import io.hhplus.server.domain.payment.repository.PaymentRepository;
 import io.hhplus.server.domain.reservation.entity.Reservation;
 import io.hhplus.server.domain.reservation.repository.ReservationRepository;
-import io.hhplus.server.domain.user.entity.User;
+import io.hhplus.server.domain.user.entity.Users;
 import io.hhplus.server.domain.user.repository.UserRepository;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
@@ -114,6 +114,6 @@ public class TestDataHandler {
 
     // 유저, 잔액 세팅
     public void settingUser(BigDecimal balance) {
-        userRepository.save(new User(null, balance));
+        userRepository.save(new Users(null, balance));
     }
 }

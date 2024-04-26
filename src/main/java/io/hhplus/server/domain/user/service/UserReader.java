@@ -1,6 +1,6 @@
 package io.hhplus.server.domain.user.service;
 
-import io.hhplus.server.domain.user.entity.User;
+import io.hhplus.server.domain.user.entity.Users;
 import io.hhplus.server.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -12,7 +12,7 @@ public class UserReader {
 
     private final UserRepository userRepository;
 
-    public User findUser(Long userId) {
+    public Users findUser(Long userId) {
         return userRepository.findById(userId);
     }
 }
