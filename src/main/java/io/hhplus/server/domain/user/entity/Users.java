@@ -13,8 +13,8 @@ import java.util.Objects;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @DynamicUpdate
-@Table(name = "user")
-public class User {
+@Table(name = "users")
+public class Users {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +23,7 @@ public class User {
     @Column(nullable = false)
     private BigDecimal balance;
 
-    public User(Long userId, BigDecimal balance) {
+    public Users(Long userId, BigDecimal balance) {
         this.userId = userId;
         this.balance = balance;
     }
@@ -33,7 +33,7 @@ public class User {
         return this.balance;
     }
 
-    public User chargeBalance(BigDecimal amount) {
+    public Users chargeBalance(BigDecimal amount) {
         this.balance = balance.add(amount);
         return this;
     }
@@ -46,8 +46,8 @@ public class User {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(userId, user.userId);
+        Users users = (Users) o;
+        return Objects.equals(userId, users.userId);
     }
 
     @Override

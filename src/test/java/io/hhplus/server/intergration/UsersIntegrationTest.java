@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class UserIntegrationTest extends BaseIntegrationTest {
+class UsersIntegrationTest extends BaseIntegrationTest {
 
     @Autowired
     TestDataHandler testDataHandler;
