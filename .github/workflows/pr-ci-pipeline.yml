@@ -34,7 +34,7 @@ jobs:
           restore-keys: ${{ runner.os }}-gradle-
 
       - name: Run tests and generate Jacoco report
-        run: ./gradlew test jacocoTestReport
+        run: ./gradlew test -Dspring.profiles.active=test jacocoTestReport
 
   lint:
     runs-on: ubuntu-latest
