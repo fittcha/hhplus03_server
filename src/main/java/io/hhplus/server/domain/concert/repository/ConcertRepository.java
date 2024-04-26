@@ -28,7 +28,7 @@ public interface ConcertRepository {
 
     List<Seat> findSeatsByConcertDateIdAndStatus(Long concertDateId, Seat.Status status);
 
-    Seat findSeatById(Long seatId);
+    Seat findSeatByConcertDateIdAndSeatNum(Long concertDateId, int seatNum);
 
     void addSeats(List<Seat> seats);
 }

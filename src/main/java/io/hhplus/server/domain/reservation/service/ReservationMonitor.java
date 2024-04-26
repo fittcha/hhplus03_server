@@ -1,5 +1,7 @@
 package io.hhplus.server.domain.reservation.service;
 
+import io.hhplus.server.domain.concert.entity.Seat;
+import io.hhplus.server.domain.concert.service.ConcertService;
 import io.hhplus.server.domain.payment.entity.Payment;
 import io.hhplus.server.domain.payment.service.PaymentReader;
 import io.hhplus.server.domain.reservation.entity.Reservation;
@@ -20,6 +22,7 @@ public class ReservationMonitor {
     
     private final ReservationRepository reservationRepository;
     private final PaymentReader paymentReader;
+    private final ConcertService concertService;
     
     // 예약 요청을 저장할 큐
     Queue<OccupyTempReservationDto> tempReservationQueue = new ConcurrentLinkedQueue<>();
@@ -43,6 +46,7 @@ public class ReservationMonitor {
                     if ((reservation != null && reservation.getStatus().equals(Reservation.Status.ING)) 
                             && (payment == null)) {
                         // 임시 점유 해제: 완료되지 않은 예약 취소
+                        concertService.patchSeatStatus(reservation.getConcertDateId(), reservation.getSeatNum(), Seat.Status.AVAILABLE);
                         reservationRepository.delete(reservation);
                         log.info("완료되지 않은 예약 취소: {}", occupyDto.reservationId());
                         // 처리된 요청을 큐에서 제거

@@ -9,6 +9,7 @@ import io.hhplus.server.domain.concert.entity.Concert;
 import io.hhplus.server.domain.concert.entity.ConcertDate;
 import io.hhplus.server.domain.concert.entity.Seat;
 import io.hhplus.server.domain.concert.service.ConcertReader;
+import io.hhplus.server.domain.concert.service.ConcertService;
 import io.hhplus.server.domain.payment.entity.Payment;
 import io.hhplus.server.domain.payment.service.PaymentReader;
 import io.hhplus.server.domain.payment.service.PaymentService;
@@ -36,6 +37,7 @@ public class ReservationService implements ReservationInterface {
     private final ReservationValidator reservationValidator;
     private final ReservationMonitor reservationMonitor;
     private final ConcertReader concertReader;
+    private final ConcertService concertService;
     private final UserReader userReader;
     private final PaymentService paymentService;
     private final PaymentReader paymentReader;
@@ -51,12 +53,14 @@ public class ReservationService implements ReservationInterface {
     public ReserveResponse reserve(ReserveRequest request) {
         try {
             // validator
-            reservationValidator.checkReserved(request.concertDateId(), request.seatId());
+            reservationValidator.checkReserved(request.concertDateId(), request.seatNum());
 
             Reservation reservation = reservationRepository.save(request.toEntity(concertReader, userReader));
+            concertService.patchSeatStatus(reservation.getConcertDateId(), reservation.getSeatNum(), Seat.Status.DISABLE);
+
             Concert concert = concertReader.findConcert(reservation.getConcertId());
             ConcertDate concertDate = concertReader.findConcertDate(reservation.getConcertDateId());
-            Seat seat = concertReader.findSeat(reservation.getSeatId());
+            Seat seat = concertReader.findSeat(reservation.getConcertDateId(), reservation.getSeatNum());
 
             // 예약 임시 점유 event 발행
             eventPublisher.publishEvent(new ReservationOccupiedEvent(this, reservation.getReservationId()));

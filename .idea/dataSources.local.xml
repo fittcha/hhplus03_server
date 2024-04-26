@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="dataSourceStorageLocal" created-in="IU-233.14808.21">
+  <component name="dataSourceStorageLocal" created-in="IU-241.14494.240">
     <data-source name="@localhost" uuid="911dc0e6-2f2d-4b76-97a4-bcb925f5fb3e">
       <database-info product="MySQL" version="8.0.36" jdbc-version="4.2" driver-name="MySQL Connector/J" driver-version="mysql-connector-j-8.2.0 (Revision: 06a1f724497fd81c6a659131fda822c9e5085b6c)" dbms="MYSQL" exact-version="8.0.36" exact-driver-version="8.2">
         <extra-name-characters>#@</extra-name-characters>
         <identifier-quote-string>`</identifier-quote-string>
+        <jdbc-catalog-is-schema>true</jdbc-catalog-is-schema>
       </database-info>
       <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed" />
       <secret-storage>master_key</secret-storage>
@@ -13,7 +14,7 @@
         <introspection-scope>
           <node kind="schema">
             <name qname="@" />
-            <name qname="hhplus" />
+            <name qname="hhplus_dev" />
             <name qname="mysql" />
           </node>
         </introspection-scope>
@@ -23,6 +24,7 @@
       <database-info product="MySQL" version="8.0.36" jdbc-version="4.2" driver-name="MySQL Connector/J" driver-version="mysql-connector-j-8.2.0 (Revision: 06a1f724497fd81c6a659131fda822c9e5085b6c)" dbms="MYSQL" exact-version="8.0.36" exact-driver-version="8.2">
         <extra-name-characters>#@</extra-name-characters>
         <identifier-quote-string>`</identifier-quote-string>
+        <jdbc-catalog-is-schema>true</jdbc-catalog-is-schema>
       </database-info>
       <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed" />
       <secret-storage>master_key</secret-storage>
@@ -39,6 +41,21 @@
       </database-info>
       <case-sensitivity plain-identifiers="upper" quoted-identifiers="exact" />
       <user-name>sa</user-name>
+      <schema-mapping />
+    </data-source>
+    <data-source name="hhplus-prod@prod-db.example.com" uuid="77f751be-45d7-49b7-a83b-1d0040667636">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MYSQL" />
+      <user-name>root_prod</user-name>
+      <schema-mapping />
+    </data-source>
+    <data-source name="hhplus-sta@sta-db.example.com" uuid="33d1e146-6298-4a3e-bb1d-7fa0a2592fbc">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MYSQL" />
+      <user-name>root_sta</user-name>
+      <schema-mapping />
+    </data-source>
+    <data-source name="hhplus_dev@dev-db.example.com" uuid="c0bffa34-2dc3-43b1-9564-e6e2e9e6c7f6">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MYSQL" />
+      <user-name>root</user-name>
       <schema-mapping />
     </data-source>
   </component>

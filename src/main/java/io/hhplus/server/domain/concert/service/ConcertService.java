@@ -53,4 +53,10 @@ public class ConcertService implements ConcertInterface {
         List<Seat> availableSeats = concertRepository.findSeatsByConcertDateIdAndStatus(concertDateId, Seat.Status.AVAILABLE);
         return GetSeatsResponse.from(availableSeats);
     }
+
+    @Override
+    public void patchSeatStatus(Long concertDateId, int seatNum, Seat.Status status) {
+        Seat seat = concertRepository.findSeatByConcertDateIdAndSeatNum(concertDateId, seatNum);
+        seat.patchStatus(status);
+    }
 }
