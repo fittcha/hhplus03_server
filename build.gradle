@@ -62,3 +62,7 @@ checkstyle {
     toolVersion = '8.36.2' // 사용 중인 Checkstyle 버전
     configFile = file("${rootDir}/configs/naver-intellij-formatter.xml")
 }
+
+jar {
+    enabled = false
+}
