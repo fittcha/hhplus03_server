@@ -1,8 +1,10 @@
 name: Dev CD Pipeline
 
 on:
+  pull_request:
+    branches: [ develop, release-* ]
   push:
-    branches: [ develop release-* ]
+    branches: [ develop, release-* ]
 
 env:
   ENVIRONMENT: dev
