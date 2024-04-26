@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.logging.LogLevel;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -79,6 +80,13 @@ class ConcertServiceTest {
                 .place(상암_월드컵경기장)
                 .concertDateList(List.of(회차1, 회차2))
                 .build();
+
+        좌석 = List.of(
+                new Seat(1L, 회차1, 1, BigDecimal.valueOf(119000), Seat.Status.AVAILABLE),
+                new Seat(2L, 회차1, 2, BigDecimal.valueOf(119000), Seat.Status.AVAILABLE),
+                new Seat(3L, 회차1, 3, BigDecimal.valueOf(139000), Seat.Status.DISABLE),
+                new Seat(4L, 회차1, 4, BigDecimal.valueOf(139000), Seat.Status.AVAILABLE),
+                new Seat(5L, 회차1, 5, BigDecimal.valueOf(179000), Seat.Status.AVAILABLE));
     }
 
     @Test
