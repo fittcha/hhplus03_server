@@ -2,12 +2,15 @@
 # Dev phase
 #
 FROM openjdk:17-alpine as dev
-RUN apk add --no-cache bash
+RUN apk add --no-cache bash dos2unix
 
 # 프로젝트 디렉토리 생성
 WORKDIR /app
 
 COPY gradlew .
+# gradlew 파일의 줄바꿈을 LF로 강제
+RUN dos2unix ./gradlew
+RUN chmod +x ./gradlew
 COPY gradle gradle
 RUN chmod +x ./gradlew
 
@@ -15,8 +18,8 @@ RUN chmod +x ./gradlew
 COPY build.gradle settings.gradle ./
 
 # Gradle 종속성 다운로드
-RUN ./gradlew --version
-RUN ./gradlew dependencies
+RUN bash ./gradlew --version
+RUN bash ./gradlew dependencies
 
 # 소스 코드 복사
 COPY src src
@@ -30,7 +33,7 @@ FROM dev as build
 ENV SPRING_PROFILES_ACTIVE=prod
 
 # 애플리케이션 빌드
-RUN ./gradlew build -x test
+RUN bash ./gradlew build -x test
 
 # 생성된 JAR 파일을 더 Docker 친화적인 구조로 추출
 RUN mkdir -p build/dependency && (cd build/dependency; jar -xf ../libs/*.jar)

@@ -112,3 +112,8 @@ task testAndGenerateReport {
     tasks.jacocoTestReport.mustRunAfter tasks.test
     tasks.jacocoTestCoverageVerification.mustRunAfter tasks.jacocoTestReport
 }
+
+
+jar {
+    enabled = false
+}
