@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7e126ee8-23ad-4e5b-831d-9c1db2dca314" name="Changes" comment="feat: github token 추가" />
+    <list default="true" id="7e126ee8-23ad-4e5b-831d-9c1db2dca314" name="Changes" comment="feat: GitHub Container Registry 에서 도커 이미지를 pull 받을 때 인증 오류 해결">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/pr-ci-pipeline.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/pr-ci-pipeline.yml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -150,7 +152,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1714185307276</updated>
-      <workItem from="1714185310314" duration="19690000" />
+      <workItem from="1714185310314" duration="20031000" />
     </task>
     <task id="LOCAL-00001" summary="feat: prod cd 파일 태스크 정의에 맞게 수정">
       <option name="closed" value="true" />
@@ -216,7 +218,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714234014931</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="feat: GitHub Container Registry 에서 도커 이미지를 pull 받을 때 인증 오류 해결">
+      <option name="closed" value="true" />
+      <created>1714234272847</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1714234272847</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -240,6 +250,7 @@
     <MESSAGE value="feat: test DB 환경 h2 제거, TestContainer 사용하여 mysql 그대로 사용되도록 설정" />
     <MESSAGE value="feat: 도커 이미지 빌드 시 checkstyle 제외" />
     <MESSAGE value="feat: github token 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: github token 추가" />
+    <MESSAGE value="feat: GitHub Container Registry 에서 도커 이미지를 pull 받을 때 인증 오류 해결" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: GitHub Container Registry 에서 도커 이미지를 pull 받을 때 인증 오류 해결" />
   </component>
 </project>
