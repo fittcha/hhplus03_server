@@ -21,9 +21,6 @@ public class DatabaseCleanup implements InitializingBean {
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Autowired
-    private Environment env;
-
     private List<String> tableNames;
 
     @Override

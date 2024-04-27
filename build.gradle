@@ -113,7 +113,7 @@ jacocoTestCoverageVerification {
     }
 }
 
-task testAndGenerateReport {
+tasks.register('testAndGenerateReport') {
     group 'verification'
     description 'test w/ jacoco'
 

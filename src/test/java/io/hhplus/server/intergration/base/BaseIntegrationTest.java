@@ -30,7 +30,7 @@ public class BaseIntegrationTest {
     protected static final String LOCAL_HOST = "http://localhost:";
 
     @Container
-    public static MySQLContainer<?> mysqlContainer = new MySQLContainer<>("mysql:8.0.26")
+    public static MySQLContainer<?> mysqlContainer = new MySQLContainer<>("mysql:latest")
             .withDatabaseName("test-db")
             .withUsername("test")
             .withPassword("test");
@@ -73,14 +73,6 @@ public class BaseIntegrationTest {
                 .then().log().all().extract();
     }
 
-    public static <T> ExtractableResponse<Response> post(String path) {
-        return RestAssured
-                .given().log().all()
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .when().post(path)
-                .then().log().all().extract();
-    }
-
     public static <T> ExtractableResponse<Response> post(String path, T requestBody) {
         return RestAssured
                 .given().log().all()
@@ -90,44 +82,12 @@ public class BaseIntegrationTest {
                 .then().log().all().extract();
     }
 
-    public static <T> ExtractableResponse<Response> put(String path) {
-        return RestAssured
-                .given().log().all()
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .when().put(path)
-                .then().log().all().extract();
-    }
-
-    public static <T> ExtractableResponse<Response> put(String path, T requestBody) {
-        return RestAssured
-                .given().log().all()
-                .body(requestBody)
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .when().put(path)
-                .then().log().all().extract();
-    }
-
-    public static <T> ExtractableResponse<Response> patch(String path) {
-        return RestAssured
-                .given().log().all()
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .when().patch(path)
-                .then().log().all().extract();
-    }
-
     public static <T> ExtractableResponse<Response> patch(String path, T requestBody) {
         return RestAssured
                 .given().log().all()
                 .body(requestBody)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .when().patch(path)
-                .then().log().all().extract();
-    }
-
-    public static ExtractableResponse<Response> delete(String path) {
-        return RestAssured
-                .given().log().all()
-                .when().delete(path)
                 .then().log().all().extract();
     }
 
