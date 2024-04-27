@@ -52,4 +52,4 @@ COPY --from=build /app/build/dependency/BOOT-INF/lib /app/lib
 COPY --from=build /app/build/dependency/META-INF /app/META-INF
 COPY --from=build /app/build/dependency/BOOT-INF/classes /app
 
-ENTRYPOINT ["java", "-jar", "/app/app.jar", "--spring.profiles.active=${SPRING_PROFILES_ACTIVE}"]
+ENTRYPOINT ["sh", "-c", "java -cp app:app/lib/* io.hhplus.server.ServerApplication --spring.profiles.active=${SPRING_PROFILES_ACTIVE}"]

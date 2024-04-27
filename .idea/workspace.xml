@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7e126ee8-23ad-4e5b-831d-9c1db2dca314" name="Changes" comment="feat: GitHub Container Registry 에서 도커 이미지를 pull 받을 때 인증 오류 해결">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/pr-ci-pipeline.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/pr-ci-pipeline.yml" afterDir="false" />
+    <list default="true" id="7e126ee8-23ad-4e5b-831d-9c1db2dca314" name="Changes" comment="feat: CI 빌드 과정을 빌드된 도커 이미지를 실행하는 과정으로 변경">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,16 +75,41 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "fittcha"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/fittcha/hhplus03_server.git",
+    "accountId": "c87c943a-7733-4f35-8c29-45dcbc68a53c"
+  }
+}]]></component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 6
+}]]></component>
+  <component name="ProjectId" id="2fgvXKCswJWMc8yHwKnbggwAN0n" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Docker.Dockerfile.executor": "Run",
     "Gradle.Build hhplus03_server.executor": "Run",
     "Gradle.hhplus03_server [bootBuildImage].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "feature/csm",
+    "git-widget-placeholder": "#22 on feature/csm",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -100,7 +127,7 @@
       <recent name="$PROJECT_DIR$/docker/db" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.hhplus03_server [bootBuildImage]">
+  <component name="RunManager" selected="Docker.Dockerfile">
     <configuration name="hhplus03_server [bootBuildImage]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -130,8 +157,23 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="sourceFilePath" value="Dockerfile" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="dockerfile" temporary="true">
+      <deployment type="dockerfile">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Docker.Dockerfile" />
         <item itemvalue="Gradle.hhplus03_server [bootBuildImage]" />
       </list>
     </recent_temporary>
@@ -152,7 +194,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1714185307276</updated>
-      <workItem from="1714185310314" duration="20031000" />
+      <workItem from="1714185310314" duration="21063000" />
+      <workItem from="1714235580481" duration="11000" />
     </task>
     <task id="LOCAL-00001" summary="feat: prod cd 파일 태스크 정의에 맞게 수정">
       <option name="closed" value="true" />
@@ -226,7 +269,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714234272847</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="feat: CI 빌드 과정을 빌드된 도커 이미지를 실행하는 과정으로 변경">
+      <option name="closed" value="true" />
+      <created>1714234630448</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1714234630448</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -251,6 +302,7 @@
     <MESSAGE value="feat: 도커 이미지 빌드 시 checkstyle 제외" />
     <MESSAGE value="feat: github token 추가" />
     <MESSAGE value="feat: GitHub Container Registry 에서 도커 이미지를 pull 받을 때 인증 오류 해결" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: GitHub Container Registry 에서 도커 이미지를 pull 받을 때 인증 오류 해결" />
+    <MESSAGE value="feat: CI 빌드 과정을 빌드된 도커 이미지를 실행하는 과정으로 변경" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: CI 빌드 과정을 빌드된 도커 이미지를 실행하는 과정으로 변경" />
   </component>
 </project>
