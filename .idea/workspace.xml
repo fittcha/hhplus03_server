@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7e126ee8-23ad-4e5b-831d-9c1db2dca314" name="Changes" comment="feat: test DB 환경 h2 제거, TestContainer 사용하여 mysql 그대로 사용되도록 설정" />
+    <list default="true" id="7e126ee8-23ad-4e5b-831d-9c1db2dca314" name="Changes" comment="feat: test DB 환경 h2 제거, TestContainer 사용하여 mysql 그대로 사용되도록 설정">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -150,7 +153,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1714185307276</updated>
-      <workItem from="1714185310314" duration="17236000" />
+      <workItem from="1714185310314" duration="18373000" />
     </task>
     <task id="LOCAL-00001" summary="feat: prod cd 파일 태스크 정의에 맞게 수정">
       <option name="closed" value="true" />
@@ -192,7 +195,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714231504285</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="feat: test DB 환경 h2 제거, TestContainer 사용하여 mysql 그대로 사용되도록 설정">
+      <option name="closed" value="true" />
+      <created>1714231515882</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1714231515882</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

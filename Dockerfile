@@ -32,7 +32,7 @@ FROM dev as build
 ENV SPRING_PROFILES_ACTIVE=prod
 
 # 애플리케이션 빌드
-RUN bash ./gradlew build -x test
+RUN bash ./gradlew build -x test -x checkstyleMain -x checkstyleTest
 
 # 생성된 JAR 파일을 더 Docker 친화적인 구조로 추출
 RUN mkdir -p build/dependency && (cd build/dependency; jar -xf ../libs/*.jar)
