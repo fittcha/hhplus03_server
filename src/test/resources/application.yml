@@ -3,21 +3,21 @@ server:
     encoding:
       force-response: true
 spring:
-  jpa:
-    hibernate:
-      ddl-auto: create
-    show-sql: true
-  datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:testdb;MODE=MySQL;DB_CLOSE_DELAY=-1
-    username: sa
-    password:
-  h2:
-    console:
-      enabled: true
+  config:
+    activate:
+      on-profile: test
 
-logging:
-  level:
-    org:
+  datasource:
+    url: "jdbc:mysql://localhost:3306/hhplus_dev?serverTimezone=Asia/Seoul&characterEncoding=UTF-8&autoReconnect=true&createDatabaseIfNotExist=true"
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 1234
+
+  jpa:
+    database: mysql
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
       hibernate:
-        SQL: DEBUG
+        default_batch_fetch_size: 500 # 지연로딩으로 발생해야 하는 쿼리를 IN절로 한번에 모아보내는 기능
