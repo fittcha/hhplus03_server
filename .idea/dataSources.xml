@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="@localhost" uuid="911dc0e6-2f2d-4b76-97a4-bcb925f5fb3e">
-      <driver-ref>mysql.8</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
     <data-source source="LOCAL" name="hhplus@localhost" uuid="66ab2401-e5b2-4b92-9ddb-247b265152f4">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
@@ -38,6 +31,12 @@
       <remarks>$PROJECT_DIR$/src/main/resources/application-prod.yml</remarks>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://prod-db.example.com:3306/hhplus-prod</jdbc-url>
+      <jdbc-additional-properties>
+        <property name="com.intellij.clouds.kubernetes.db.host.port" />
+        <property name="com.intellij.clouds.kubernetes.db.enabled" value="false" />
+        <property name="com.intellij.clouds.kubernetes.db.resource.type" value="Deployment" />
+        <property name="com.intellij.clouds.kubernetes.db.container.port" />
+      </jdbc-additional-properties>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
     <data-source source="LOCAL" name="hhplus-sta@sta-db.example.com" uuid="33d1e146-6298-4a3e-bb1d-7fa0a2592fbc">
@@ -55,13 +54,22 @@
       </jdbc-additional-properties>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="hhplus_dev@dev-db.example.com" uuid="c0bffa34-2dc3-43b1-9564-e6e2e9e6c7f6">
+    <data-source source="LOCAL" name="testdb" uuid="647c1a2c-f92d-4f6c-96bc-9a84d3a7a861">
+      <driver-ref>h2.unified</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>$PROJECT_DIR$/src/main/resources/application-test.yml</remarks>
+      <jdbc-driver>org.h2.Driver</jdbc-driver>
+      <jdbc-url>jdbc:h2:mem:testdb;MODE=MySQL;DB_CLOSE_DELAY=-1</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+    <data-source source="LOCAL" name="hhplus_dev@localhost" uuid="d996738a-b707-41b6-aa48-a4da3fe79e4c">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <imported>true</imported>
       <remarks>$PROJECT_DIR$/src/main/resources/application-dev.yml</remarks>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://dev-db.example.com:3306/hhplus_dev</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:3306/hhplus_dev</jdbc-url>
       <jdbc-additional-properties>
         <property name="com.intellij.clouds.kubernetes.db.host.port" />
         <property name="com.intellij.clouds.kubernetes.db.enabled" value="false" />

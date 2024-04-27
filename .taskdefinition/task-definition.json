@@ -1,4 +1,5 @@
 {
+  "family": "hhplus-prod",
   "taskDefinitionArn": "arn:aws:ecs:us-east-1:767398047998:task-definition/hhplus-prod:2",
   "containerDefinitions": [
     {
@@ -33,7 +34,6 @@
       "systemControls": []
     }
   ],
-  "family": "hhplus-prod",
   "taskRoleArn": "arn:aws:iam::767398047998:role/role-ecs-tasks",
   "executionRoleArn": "arn:aws:iam::767398047998:role/role-ecs-tasks",
   "networkMode": "awsvpc",
