@@ -12,51 +12,24 @@ env:
   JAVA_VERSION: '17'
 
 jobs:
-  test:
+  build-and-test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Set up JDK 17
-        uses: actions/setup-java@v2
-        with:
-          java-version: ${{ env.JAVA_VERSION }}
-          distribution: 'temurin'
+      - name: Build Docker Image
+        run: docker build . -t myapp:latest
 
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
-
-      - name: Cache Gradle
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: ${{ runner.os }}-gradle-
-
-      - name: Build with Gradle
-        run: ./gradlew build
-
-      - name: Run tests
-        run: ./gradlew test
+      - name: Run Tests in Docker Container
+        run: docker run -e PROFILE=test myapp:latest ./gradlew test
 
   prod-cd:
-    needs: test
+    needs: build-and-test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v2
-        with:
-          java-version: ${{ env.JAVA_VERSION }}
-          distribution: 'temurin'
-
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -66,26 +39,19 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Login AWS ECR service
-        id: ecr-login
         uses: aws-actions/amazon-ecr-login@v2
 
-      - name: Build, tag, and push image to Amazon ECR
-        id: build-image
-        env:
-          ECR_REGISTRY: ${{ steps.ecr-login.outputs.registry }}
-          IMAGE_TAG: prod-${{ github.sha }}
+      - name: Build, tag, and push production image to Amazon ECR
         run: |
-          ./gradlew bootBuildImage --imageName=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:$IMAGE_TAG
-          docker push ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:$IMAGE_TAG
-          echo "image=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:$IMAGE_TAG" >> $GITHUB_OUTPUT
+          docker build -t ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:prod-${{ github.sha }} .
+          docker push ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:prod-${{ github.sha }}
 
       - name: Render ECS task-definition
-        id: render-task-definition
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
           task-definition: .taskdefinition/task-definition.json
           container-name: service-prod
-          image: ${{ steps.build-image.outputs.image }}
+          image: ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:prod-${{ github.sha }}
 
       - name: Deploy Amazon ECS task-definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
