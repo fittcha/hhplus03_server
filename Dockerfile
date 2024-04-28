@@ -33,6 +33,7 @@ ENV SPRING_PROFILES_ACTIVE=prod
 
 # 애플리케이션 빌드
 RUN bash ./gradlew build -x test -x checkstyleMain -x checkstyleTest
+RUN cp build/libs/*.jar /app/app.jar
 
 # 생성된 JAR 파일을 더 Docker 친화적인 구조로 추출
 RUN mkdir -p build/dependency && (cd build/dependency; jar -xf ../libs/*.jar)
@@ -43,6 +44,7 @@ RUN mkdir -p build/dependency && (cd build/dependency; jar -xf ../libs/*.jar)
 FROM openjdk:17-alpine as prod
 
 WORKDIR /app
+COPY --from=build /app/app.jar app.jar
 
 # 앱 실행에 필요한 환경 변수 설정
 ENV SPRING_PROFILES_ACTIVE=prod
@@ -52,4 +54,4 @@ COPY --from=build /app/build/dependency/BOOT-INF/lib /app/lib
 COPY --from=build /app/build/dependency/META-INF /app/META-INF
 COPY --from=build /app/build/dependency/BOOT-INF/classes /app
 
-ENTRYPOINT ["sh", "-c", "java -cp app:app/lib/* io.hhplus.server.ServerApplication --spring.profiles.active=${SPRING_PROFILES_ACTIVE}"]
+ENTRYPOINT ["java", "-jar", "app.jar", "--spring.profiles.active=${SPRING_PROFILES_ACTIVE}"]
