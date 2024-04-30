@@ -1,8 +1,8 @@
 name: Prod CD Pipeline
 
-on:
-  push:
-    branches: [ 'master' ]
+#on:
+#  push:
+#    branches: [ 'master' ]
 
 env:
   ENVIRONMENT: prod

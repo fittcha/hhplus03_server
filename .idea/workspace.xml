@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7e126ee8-23ad-4e5b-831d-9c1db2dca314" name="Changes" comment="feat: io.hhplus.server.ServerApplication 도커 이미지 경로 못 찾는 오류 수정">
+    <list default="true" id="7e126ee8-23ad-4e5b-831d-9c1db2dca314" name="Changes" comment="feat: CI 작업 중 test, lint 작업 후 종료 설정">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -193,7 +193,7 @@
       <option name="presentableId" value="Default" />
       <updated>1714185307276</updated>
       <workItem from="1714185310314" duration="21063000" />
-      <workItem from="1714235580481" duration="7459000" />
+      <workItem from="1714235580481" duration="8646000" />
     </task>
     <task id="LOCAL-00001" summary="feat: prod cd 파일 태스크 정의에 맞게 수정">
       <option name="closed" value="true" />
@@ -291,7 +291,23 @@
       <option name="project" value="LOCAL" />
       <updated>1714308074675</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="feat: CI 작업 중 test, lint 작업 후 종료 설정">
+      <option name="closed" value="true" />
+      <created>1714311124316</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1714311124316</updated>
+    </task>
+    <task id="LOCAL-00014" summary="feat: CI 작업 중 test, lint 작업 후 종료 설정">
+      <option name="closed" value="true" />
+      <created>1714311325693</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1714311325693</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -330,6 +346,7 @@
     <MESSAGE value="feat: CI 빌드 과정을 빌드된 도커 이미지를 실행하는 과정으로 변경" />
     <MESSAGE value="feat: dockerfile ENTRYPOINT 쉘 형식으로 변경, 이미지로 빌드 실행을 위해" />
     <MESSAGE value="feat: io.hhplus.server.ServerApplication 도커 이미지 경로 못 찾는 오류 수정" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: io.hhplus.server.ServerApplication 도커 이미지 경로 못 찾는 오류 수정" />
+    <MESSAGE value="feat: CI 작업 중 test, lint 작업 후 종료 설정" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: CI 작업 중 test, lint 작업 후 종료 설정" />
   </component>
 </project>

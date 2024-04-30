@@ -1,8 +1,8 @@
 name: CI develop
 
-on:
-  pull_request:
-    branches: [ develop, release-* ]
+#on:
+#  pull_request:
+#    branches: [ develop, release-* ]
 
 jobs:
   build-and-push-image:
