@@ -28,8 +28,8 @@ public class UserService implements UserInterface {
     @Override
     @Transactional
     public GetBalanceResponse charge(Long userId, ChargeRequest request) {
-        // 비관적 락 적용
-        Users users = userRepository.findByIdWithPessimisticLock(userId);
+        // 낙관적 락 적용
+        Users users = userRepository.findByIdWithOptimisticLock(userId);
         users = users.chargeBalance(BigDecimal.valueOf(request.amount()));
         return GetBalanceResponse.from(users);
     }
@@ -37,12 +37,22 @@ public class UserService implements UserInterface {
     @Override
     @Transactional
     public GetBalanceResponse use(Long userId, UseRequest request) {
-        // 비관적 락 적용
-        Users users = userRepository.findByIdWithPessimisticLock(userId);
+        // 낙관적 락 적용
+        Users users = userRepository.findByIdWithOptimisticLock(userId);
 
         userValidator.insufficientBalance(users.getBalance(), BigDecimal.valueOf(request.amount()));
 
         users = users.useBalance(BigDecimal.valueOf(request.amount()));
         return GetBalanceResponse.from(users);
+    }
+
+    @Override
+    public GetBalanceResponse chargeWithRetry(Long userId, ChargeRequest request) {
+        return null;
+    }
+
+    @Override
+    public GetBalanceResponse useWithRetry(Long userId, UseRequest request) {
+        return null;
     }
 }

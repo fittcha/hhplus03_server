@@ -23,6 +23,9 @@ public class Users {
     @Column(nullable = false)
     private BigDecimal balance;
 
+    @Version
+    private Long version;
+
     public Users(Long userId, BigDecimal balance) {
         this.userId = userId;
         this.balance = balance;

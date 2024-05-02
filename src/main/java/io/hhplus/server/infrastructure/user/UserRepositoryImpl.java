@@ -22,8 +22,8 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public Users findByIdWithPessimisticLock(@Param("userId") Long userId) {
-        return userJpaRepository.findByIdWithPessimisticLock(userId);
+    public Users findByIdWithOptimisticLock(@Param("userId") Long userId) {
+        return userJpaRepository.findByIdWithOptimisticLock(userId);
     }
 
     @Override
