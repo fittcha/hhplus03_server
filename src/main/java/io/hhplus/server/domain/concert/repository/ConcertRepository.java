@@ -3,6 +3,7 @@ package io.hhplus.server.domain.concert.repository;
 import io.hhplus.server.domain.concert.entity.Concert;
 import io.hhplus.server.domain.concert.entity.ConcertDate;
 import io.hhplus.server.domain.concert.entity.Seat;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -28,7 +29,7 @@ public interface ConcertRepository {
 
     List<Seat> findSeatsByConcertDateIdAndStatus(Long concertDateId, Seat.Status status);
 
-    Seat findSeatByConcertDateIdAndSeatNum(Long concertDateId, int seatNum);
+    Seat findSeatByConcertDateIdAndSeatNum(@Param("concertDateId") Long concertDateId, @Param("seatNum") int seatNum);
 
     void addSeats(List<Seat> seats);
 }

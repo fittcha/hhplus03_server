@@ -3,6 +3,7 @@ package io.hhplus.server.domain.payment.service;
 import io.hhplus.server.base.exception.CustomException;
 import io.hhplus.server.domain.payment.PaymentExceptionEnum;
 import io.hhplus.server.domain.payment.entity.Payment;
+import io.hhplus.server.domain.user.UserExceptionEnum;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.logging.LogLevel;
 import org.springframework.stereotype.Component;
@@ -15,7 +16,7 @@ public class PaymentValidator {
 
     public void checkBalance(BigDecimal paymentPrice, BigDecimal balance) {
         if (balance.compareTo(paymentPrice) < 0) {
-            throw new CustomException(PaymentExceptionEnum.INSUFFICIENT_BALANCE, null, LogLevel.INFO);
+            throw new CustomException(UserExceptionEnum.INSUFFICIENT_BALANCE, null, LogLevel.INFO);
         }
     }
 

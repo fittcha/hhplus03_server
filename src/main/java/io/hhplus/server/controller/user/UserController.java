@@ -2,6 +2,7 @@ package io.hhplus.server.controller.user;
 
 import io.hhplus.server.base.exception.ApiResult;
 import io.hhplus.server.controller.user.dto.request.ChargeRequest;
+import io.hhplus.server.controller.user.dto.request.UseRequest;
 import io.hhplus.server.controller.user.dto.response.GetBalanceResponse;
 import io.hhplus.server.domain.user.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -35,5 +36,13 @@ public class UserController {
     public ApiResult<GetBalanceResponse> charge(@PathVariable(value = "userId") @NotNull Long userId,
                                                 @RequestBody @Valid ChargeRequest request) {
         return ApiResult.success(service.charge(userId, request));
+    }
+
+    @Operation(summary = "잔액 사용")
+    @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = GetBalanceResponse.class)))
+    @PatchMapping("/{userId}/use")
+    public ApiResult<GetBalanceResponse> use(@PathVariable(value = "userId") @NotNull Long userId,
+                                             @RequestBody @Valid UseRequest request) {
+        return ApiResult.success(service.use(userId, request));
     }
 }

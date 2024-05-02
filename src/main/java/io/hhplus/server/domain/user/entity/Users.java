@@ -28,9 +28,9 @@ public class Users {
         this.balance = balance;
     }
 
-    public BigDecimal useBalance(BigDecimal price) {
+    public Users useBalance(BigDecimal price) {
         this.balance = balance.subtract(price);
-        return this.balance;
+        return this;
     }
 
     public Users chargeBalance(BigDecimal amount) {

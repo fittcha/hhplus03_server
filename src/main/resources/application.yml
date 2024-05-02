@@ -10,6 +10,9 @@ spring:
       dev: dev
       sta: sta
       prod: prod
+  redis:
+    host: localhost
+    port: 6379
 
 Logging:
   level:
