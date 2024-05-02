@@ -13,6 +13,7 @@ import io.hhplus.server.domain.payment.service.PaymentValidator;
 import io.hhplus.server.domain.payment.service.dto.CancelPaymentResultResDto;
 import io.hhplus.server.domain.reservation.entity.Reservation;
 import io.hhplus.server.domain.reservation.service.ReservationReader;
+import io.hhplus.server.domain.user.UserExceptionEnum;
 import io.hhplus.server.domain.user.entity.Users;
 import io.hhplus.server.domain.user.service.UserReader;
 import org.junit.jupiter.api.BeforeEach;
@@ -103,7 +104,7 @@ class PaymentServiceTest {
         // when
         when(paymentRepository.findById(paymentId)).thenReturn(결제건);
         when(userReader.findUser(request.userId())).thenReturn(사용자);
-        doThrow(new CustomException(PaymentExceptionEnum.INSUFFICIENT_BALANCE, null, LogLevel.INFO)).when(paymentValidator).checkBalance(결제건.getPrice(), 사용자.getBalance());
+        doThrow(new CustomException(UserExceptionEnum.INSUFFICIENT_BALANCE, null, LogLevel.INFO)).when(paymentValidator).checkBalance(결제건.getPrice(), 사용자.getBalance());
 
         // then
         CustomException expected = assertThrows(CustomException.class, () ->

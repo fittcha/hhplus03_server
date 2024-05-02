@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum PaymentExceptionEnum implements MessageCommInterface {
 
-    INSUFFICIENT_BALANCE("PAYMENT.INSUFFICIENT_BALANCE", "잔액이 부족합니다."),
     NOT_AVAILABLE_PAY("PAYMENT.NOT_AVAILABLE_PAY", "결제 가능한 상태가 아닙니다."),
     NOT_AVAILABLE_CANCEL("PAYMENT.NOT_AVAILABLE_CANCEL", "취소 가능한 상태가 아닙니다."),
     ;

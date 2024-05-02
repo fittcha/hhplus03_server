@@ -1,6 +1,7 @@
 package io.hhplus.server.intergration;
 
 import io.hhplus.server.controller.user.dto.request.ChargeRequest;
+import io.hhplus.server.controller.user.dto.request.UseRequest;
 import io.hhplus.server.controller.user.dto.response.GetBalanceResponse;
 import io.hhplus.server.domain.user.repository.UserRepository;
 import io.hhplus.server.intergration.base.BaseIntegrationTest;
@@ -12,6 +13,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -55,5 +60,95 @@ class UsersIntegrationTest extends BaseIntegrationTest {
         assertThat(response.statusCode()).isEqualTo(200);
         GetBalanceResponse data = response.body().jsonPath().getObject("data", GetBalanceResponse.class);
         assertThat(data.balance()).isEqualByComparingTo(BigDecimal.valueOf(62000));
+    }
+
+    // 동시성 테스트
+    @Test
+    @DisplayName("유저 잔액 충전 요청이 따닥 동시에 들어와도 잘 처리된다.")
+    void chargeTest_따닥_lock() {
+        // given
+        testDataHandler.settingUser(BigDecimal.ZERO);
+
+        // when - 동시에 충전 요청
+        AtomicInteger successCount = new AtomicInteger(0);
+        List<CompletableFuture<ExtractableResponse<Response>>> futures = IntStream.range(0, 3)
+                .mapToObj(i -> CompletableFuture.supplyAsync(() -> {
+                    ChargeRequest request = new ChargeRequest(3000);
+                    return patch(LOCAL_HOST + port + PATH + "/1/charge", request);
+                }))
+                .toList();
+        CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
+
+        // then
+        List<ExtractableResponse<Response>> responses = futures.stream()
+                .map(CompletableFuture::join)
+                .toList();
+        responses.forEach(response -> {
+            if (response.body().jsonPath().getObject("success", Boolean.class).equals(true)) {
+                successCount.getAndIncrement();
+            }
+        });
+        assertThat(successCount.get()).isEqualTo(3);
+    }
+
+    @Test
+    @DisplayName("유저 잔액 충전-사용 요청이 따닥 동시에 들어와도 잘 처리된다.")
+    void chargeAndUseTest_lock() {
+        // given
+        testDataHandler.settingUser(BigDecimal.ZERO);
+
+        // when - 동시에 충전-사용 요청
+        AtomicInteger successCount = new AtomicInteger(0);
+        List<CompletableFuture<ExtractableResponse<Response>>> futures = IntStream.range(0, 2)
+                .mapToObj(i -> CompletableFuture.supplyAsync(() -> {
+                    if (i % 2 == 0) {
+                        ChargeRequest request = new ChargeRequest(3000);
+                        return patch(LOCAL_HOST + port + PATH + "/1/charge", request);
+                    } else {
+                        UseRequest request = new UseRequest(2000);
+                        return patch(LOCAL_HOST + port + PATH + "/1/use", request);
+                    }
+                }))
+                .toList();
+        CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
+
+        // then
+        List<ExtractableResponse<Response>> responses = futures.stream()
+                .map(CompletableFuture::join)
+                .toList();
+        responses.forEach(response -> {
+            if (response.body().jsonPath().getObject("success", Boolean.class).equals(true)) {
+                successCount.getAndIncrement();
+            }
+        });
+        assertThat(successCount.get()).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("유저 잔액 사용 요청이 동시에 들어와도 잔액이 잘 차감되며 잔액 부족 시 실패한다.")
+    void useTest_use_before_lack_lock() {
+        // given - 잔액 10000원
+        testDataHandler.settingUser(BigDecimal.valueOf(10000));
+
+        // when - 동시에 사용 요청 3000원 * 5번
+        AtomicInteger successCount = new AtomicInteger(0);
+        List<CompletableFuture<ExtractableResponse<Response>>> futures = IntStream.range(0, 5)
+                .mapToObj(i -> CompletableFuture.supplyAsync(() -> {
+                    UseRequest request = new UseRequest(3000);
+                    return patch(LOCAL_HOST + port + PATH + "/1/use", request);
+                }))
+                .toList();
+        CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
+
+        // then - 3번만 성공
+        List<ExtractableResponse<Response>> responses = futures.stream()
+                .map(CompletableFuture::join)
+                .toList();
+        responses.forEach(response -> {
+            if (response.body().jsonPath().getObject("success", Boolean.class).equals(true)) {
+                successCount.getAndIncrement();
+            }
+        });
+        assertThat(successCount.get()).isEqualTo(3);
     }
 }

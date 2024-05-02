@@ -40,7 +40,7 @@ public class PaymentService implements PaymentInterface {
         boolean isSuccess = false;
         // 1. 사용자 잔액 차감
         BigDecimal previousBalance = users.getBalance();
-        BigDecimal usedBalance = users.useBalance(payment.getPrice());
+        BigDecimal usedBalance = users.useBalance(payment.getPrice()).getBalance();
         if (usedBalance.equals(previousBalance.subtract(payment.getPrice()))) {
             // 2-1. 결제 완료 처리
             payment = payment.toPaid();

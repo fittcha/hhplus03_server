@@ -5,6 +5,7 @@ import io.hhplus.server.controller.payment.dto.request.PayRequest;
 import io.hhplus.server.controller.payment.dto.response.PayResponse;
 import io.hhplus.server.domain.payment.PaymentExceptionEnum;
 import io.hhplus.server.domain.payment.entity.Payment;
+import io.hhplus.server.domain.user.UserExceptionEnum;
 import io.hhplus.server.intergration.base.BaseIntegrationTest;
 import io.hhplus.server.intergration.base.TestDataHandler;
 import io.restassured.response.ExtractableResponse;
@@ -60,7 +61,7 @@ class PaymentIntegrationTest extends BaseIntegrationTest {
 
         // then
         assertThatThrownBy(() -> {
-            throw new CustomException(PaymentExceptionEnum.INSUFFICIENT_BALANCE, null, LogLevel.INFO);
+            throw new CustomException(UserExceptionEnum.INSUFFICIENT_BALANCE, null, LogLevel.INFO);
         })
                 .isInstanceOf(CustomException.class)
                 .hasMessageContaining("잔액이 부족합니다.");

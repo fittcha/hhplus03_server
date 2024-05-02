@@ -5,6 +5,7 @@ import io.hhplus.server.controller.user.dto.response.GetBalanceResponse;
 import io.hhplus.server.domain.user.entity.Users;
 import io.hhplus.server.domain.user.repository.UserRepository;
 import io.hhplus.server.domain.user.service.UserService;
+import io.hhplus.server.domain.user.service.UserValidator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,6 +20,7 @@ class UsersServiceTest {
 
     private UserService userService;
     private UserRepository userRepository;
+    private UserValidator userValidator;
 
     private Users 사용자;
 
@@ -26,9 +28,11 @@ class UsersServiceTest {
     void setUp() {
         // mocking
         userRepository = Mockito.mock(UserRepository.class);
+        userValidator = Mockito.mock(UserValidator.class);
 
         userService = new UserService(
-                userRepository
+                userRepository,
+                userValidator
         );
 
         // 사용자 정보 세팅
