@@ -4,7 +4,6 @@ import io.hhplus.server.base.exception.ApiResult;
 import io.hhplus.server.controller.user.dto.request.ChargeRequest;
 import io.hhplus.server.controller.user.dto.request.UseRequest;
 import io.hhplus.server.controller.user.dto.response.GetBalanceResponse;
-import io.hhplus.server.domain.user.service.UserFacade;
 import io.hhplus.server.domain.user.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -23,7 +22,6 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final UserService service;
-    private final UserFacade userFacade;
 
     @Operation(summary = "잔액 조회")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = GetBalanceResponse.class)))
@@ -46,21 +44,5 @@ public class UserController {
     public ApiResult<GetBalanceResponse> use(@PathVariable(value = "userId") @NotNull Long userId,
                                              @RequestBody @Valid UseRequest request) {
         return ApiResult.success(service.use(userId, request));
-    }
-
-    @Operation(summary = "잔액 충전")
-    @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = GetBalanceResponse.class)))
-    @PatchMapping("/{userId}/charge/retry")
-    public ApiResult<GetBalanceResponse> chargeRetry(@PathVariable(value = "userId") @NotNull Long userId,
-                                                @RequestBody @Valid ChargeRequest request) {
-        return ApiResult.success(userFacade.chargeWithRetry(userId, request));
-    }
-
-    @Operation(summary = "잔액 사용")
-    @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = GetBalanceResponse.class)))
-    @PatchMapping("/{userId}/use/retry")
-    public ApiResult<GetBalanceResponse> useRetry(@PathVariable(value = "userId") @NotNull Long userId,
-                                             @RequestBody @Valid UseRequest request) {
-        return ApiResult.success(userFacade.useWithRetry(userId, request));
     }
 }

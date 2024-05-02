@@ -9,7 +9,7 @@ public interface UserRepository {
 
     Users findById(Long userId);
 
-    Users findByIdWithOptimisticLock(@Param("userId") Long userId);
+    Users findByIdWithPessimisticLock(@Param("userId") Long userId);
 
     void save(Users users);
 }

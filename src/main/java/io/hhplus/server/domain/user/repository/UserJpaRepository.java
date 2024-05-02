@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 
 public interface UserJpaRepository extends JpaRepository<Users, Long> {
 
-    @Lock(LockModeType.OPTIMISTIC)
+    @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("select u from Users u where u.userId = :userId")
-    Users findByIdWithOptimisticLock(@Param("userId") Long userId);
+    Users findByIdWithPessimisticLock(@Param("userId") Long userId);
 }

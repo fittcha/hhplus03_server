@@ -74,7 +74,7 @@ class UsersIntegrationTest extends BaseIntegrationTest {
         List<CompletableFuture<ExtractableResponse<Response>>> futures = IntStream.range(0, 3)
                 .mapToObj(i -> CompletableFuture.supplyAsync(() -> {
                     ChargeRequest request = new ChargeRequest(3000);
-                    return patch(LOCAL_HOST + port + PATH + "/1/charge/retry", request);
+                    return patch(LOCAL_HOST + port + PATH + "/1/charge", request);
                 }))
                 .toList();
         CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
@@ -103,10 +103,10 @@ class UsersIntegrationTest extends BaseIntegrationTest {
                 .mapToObj(i -> CompletableFuture.supplyAsync(() -> {
                     if (i % 2 == 0) {
                         ChargeRequest request = new ChargeRequest(3000);
-                        return patch(LOCAL_HOST + port + PATH + "/1/charge/retry", request);
+                        return patch(LOCAL_HOST + port + PATH + "/1/charge", request);
                     } else {
                         UseRequest request = new UseRequest(2000);
-                        return patch(LOCAL_HOST + port + PATH + "/1/use/retry", request);
+                        return patch(LOCAL_HOST + port + PATH + "/1/use", request);
                     }
                 }))
                 .toList();
@@ -135,7 +135,7 @@ class UsersIntegrationTest extends BaseIntegrationTest {
         List<CompletableFuture<ExtractableResponse<Response>>> futures = IntStream.range(0, 5)
                 .mapToObj(i -> CompletableFuture.supplyAsync(() -> {
                     UseRequest request = new UseRequest(3000);
-                    return patch(LOCAL_HOST + port + PATH + "/1/use/retry", request);
+                    return patch(LOCAL_HOST + port + PATH + "/1/use", request);
                 }))
                 .toList();
         CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();

@@ -14,10 +14,4 @@ public interface UserInterface {
 
     /* 잔액 사용 */
     GetBalanceResponse use(Long userId, UseRequest request);
-
-    /* 잔액 충전 retry */
-    GetBalanceResponse chargeWithRetry(Long userId, ChargeRequest request);
-
-    /* 잔액 사용 retry */
-    GetBalanceResponse useWithRetry(Long userId, UseRequest request);
 }
