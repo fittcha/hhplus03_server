@@ -27,6 +27,7 @@ import org.springframework.boot.logging.LogLevel;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.PessimisticLockingFailureException;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionSystemException;
@@ -57,13 +58,13 @@ public class ReservationService implements ReservationInterface {
     @Transactional
     public ReserveResponse reserve(ReserveRequest request) {
         try {
-            // 동시성 제어 - 비관적 락 적용
-            concertService.patchSeatStatus(request.concertDateId(), request.seatNum(), Seat.Status.DISABLE);
-
             // validator
             reservationValidator.checkReserved(request.concertDateId(), request.seatNum());
 
-            Reservation reservation = addReservation(request);
+            // 동시성 제어 - 낙관적 락 적용
+            concertService.patchSeatStatus(request.concertDateId(), request.seatNum(), Seat.Status.DISABLE);
+
+            Reservation reservation = reservationRepository.save(request.toEntity());
 
             Concert concert = concertReader.findConcert(reservation.getConcertId());
             ConcertDate concertDate = concertReader.findConcertDate(reservation.getConcertDateId());
@@ -74,14 +75,10 @@ public class ReservationService implements ReservationInterface {
 
             return ReserveResponse.from(reservation, concert, concertDate, seat);
 
-        } catch (PessimisticLockException e) {
+        } catch (ObjectOptimisticLockingFailureException e) {
             // 락 획득 실패 시
             throw new CustomException(ReservationExceptionEnum.ALREADY_RESERVED, null, LogLevel.INFO);
         }
-    }
-
-    public Reservation addReservation(ReserveRequest request) {
-        return reservationRepository.save(request.toEntity());
     }
 
     @Override

@@ -1,5 +1,6 @@
 package io.hhplus.server.domain.concert.service;
 
+import io.hhplus.server.base.exception.CustomException;
 import io.hhplus.server.controller.concert.dto.response.GetConcertResponse;
 import io.hhplus.server.controller.concert.dto.response.GetConcertsResponse;
 import io.hhplus.server.controller.concert.dto.response.GetDatesResponse;
@@ -7,12 +8,16 @@ import io.hhplus.server.controller.concert.dto.response.GetSeatsResponse;
 import io.hhplus.server.domain.concert.entity.Concert;
 import io.hhplus.server.domain.concert.entity.Seat;
 import io.hhplus.server.domain.concert.repository.ConcertRepository;
+import io.hhplus.server.domain.reservation.ReservationExceptionEnum;
 import jakarta.persistence.LockTimeoutException;
 import jakarta.persistence.PessimisticLockException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.logging.LogLevel;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +28,8 @@ public class ConcertService implements ConcertInterface {
 
     private final ConcertRepository concertRepository;
     private final ConcertValidator concertValidator;
+
+    private final TransactionTemplate transactionTemplate;
 
     @Override
     public List<GetConcertsResponse> getConcerts() {
