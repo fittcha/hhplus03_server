@@ -20,11 +20,17 @@ import io.hhplus.server.domain.reservation.repository.ReservationRepository;
 import io.hhplus.server.domain.reservation.service.dto.GetReservationAndPaymentResDto;
 import io.hhplus.server.domain.user.service.UserReader;
 import jakarta.annotation.PostConstruct;
+import jakarta.persistence.LockTimeoutException;
+import jakarta.persistence.PessimisticLockException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.logging.LogLevel;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.PessimisticLockingFailureException;
+import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.TransactionSystemException;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -38,7 +44,6 @@ public class ReservationService implements ReservationInterface {
     private final ReservationMonitor reservationMonitor;
     private final ConcertReader concertReader;
     private final ConcertService concertService;
-    private final UserReader userReader;
     private final PaymentService paymentService;
     private final PaymentReader paymentReader;
     private final ApplicationEventPublisher eventPublisher;
@@ -52,11 +57,13 @@ public class ReservationService implements ReservationInterface {
     @Transactional
     public ReserveResponse reserve(ReserveRequest request) {
         try {
+            // 동시성 제어 - 비관적 락 적용
+            concertService.patchSeatStatus(request.concertDateId(), request.seatNum(), Seat.Status.DISABLE);
+
             // validator
             reservationValidator.checkReserved(request.concertDateId(), request.seatNum());
 
-            Reservation reservation = reservationRepository.save(request.toEntity(concertReader, userReader));
-            concertService.patchSeatStatus(reservation.getConcertDateId(), reservation.getSeatNum(), Seat.Status.DISABLE);
+            Reservation reservation = addReservation(request);
 
             Concert concert = concertReader.findConcert(reservation.getConcertId());
             ConcertDate concertDate = concertReader.findConcertDate(reservation.getConcertDateId());
@@ -67,10 +74,14 @@ public class ReservationService implements ReservationInterface {
 
             return ReserveResponse.from(reservation, concert, concertDate, seat);
 
-        } catch (DataIntegrityViolationException e) {
-            // 유니크 제약 조건(concertDateId, seatId) 위반 시
+        } catch (PessimisticLockException e) {
+            // 락 획득 실패 시
             throw new CustomException(ReservationExceptionEnum.ALREADY_RESERVED, null, LogLevel.INFO);
         }
+    }
+
+    public Reservation addReservation(ReserveRequest request) {
+        return reservationRepository.save(request.toEntity());
     }
 
     @Override

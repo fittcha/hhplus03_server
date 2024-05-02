@@ -7,8 +7,12 @@ import io.hhplus.server.controller.concert.dto.response.GetSeatsResponse;
 import io.hhplus.server.domain.concert.entity.Concert;
 import io.hhplus.server.domain.concert.entity.Seat;
 import io.hhplus.server.domain.concert.repository.ConcertRepository;
+import jakarta.persistence.LockTimeoutException;
+import jakarta.persistence.PessimisticLockException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +61,8 @@ public class ConcertService implements ConcertInterface {
     @Override
     public void patchSeatStatus(Long concertDateId, int seatNum, Seat.Status status) {
         Seat seat = concertRepository.findSeatByConcertDateIdAndSeatNum(concertDateId, seatNum);
-        seat.patchStatus(status);
+        if (seat != null) {
+            seat.patchStatus(status);
+        }
     }
 }

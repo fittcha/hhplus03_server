@@ -72,7 +72,7 @@ class ReservationIntegrationTest extends BaseIntegrationTest {
         }
         long concertId = 1L;
         long concertDateId = 1L;
-        long userId = 1L; // 시작 유저 pk
+        long userId = 5L; // 시작 유저 pk
         int seatNum = 19;
 
         // when - 동시에 한 좌석 예약 요청
