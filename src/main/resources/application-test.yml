@@ -15,6 +15,12 @@ spring:
   h2:
     console:
       enabled: true
+  data:
+    redis:
+      host: localhost
+      password:
+      port: 6379
+      database: 0
 
 logging:
   level:
