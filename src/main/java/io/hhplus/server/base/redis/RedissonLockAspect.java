@@ -20,6 +20,7 @@ import java.util.concurrent.TimeUnit;
 public class RedissonLockAspect {
 
     private final RedissonClient redissonClient;
+    private final AopForTransaction aopForTransaction;
 
     @Around("@annotation(io.hhplus.server.base.redis.RedissonLock)")
     public Object lock(ProceedingJoinPoint joinPoint) throws Throwable {
@@ -29,12 +30,12 @@ public class RedissonLockAspect {
 
         RLock lock = redissonClient.getLock(redissonLock.key());
         try {
-            // 락 취득 시도
+            // 락 획득 시도
             boolean available  = lock.tryLock(redissonLock.waitTime(), redissonLock.leaseTime(), redissonLock.timeUnit());
             if (!available) {
                 throw new IllegalStateException("Unable to acquire lock");
             }
-            return joinPoint.proceed();
+            return aopForTransaction.proceed(joinPoint);
         } finally {
             lock.unlock();
         }

@@ -15,7 +15,5 @@ public interface SeatJpaRepository extends JpaRepository<Seat, Long> {
 
     List<Seat> findAllByConcertDate_concertDateIdAndStatus(Long concertDateId, Seat.Status status);
 
-    @Lock(LockModeType.OPTIMISTIC_FORCE_INCREMENT)
-    @Query("select s from Seat s where s.concertDate.concertDateId = :concertDateId and s.seatNum = :seatNum")
     Seat findSeatByConcertDate_concertDateIdAndSeatNum(@Param("concertDateId") Long concertDateId, @Param("seatNum") int seatNum);
 }

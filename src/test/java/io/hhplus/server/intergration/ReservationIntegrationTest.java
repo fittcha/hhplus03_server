@@ -137,7 +137,7 @@ class ReservationIntegrationTest extends BaseIntegrationTest {
 
     @Test
     @DisplayName("예약을 성공해도 5분간 결제 완료되지 않았을 시 자동 취소된다.")
-    void reserveTest_cancel_after_5min() throws InterruptedException {
+    void reserveTest_cancel_after_5min() {
         // 조작된 Clock 설정
         Instant testStart = Instant.now();
         Clock fixedClock = Clock.fixed(testStart, ZoneId.systemDefault());

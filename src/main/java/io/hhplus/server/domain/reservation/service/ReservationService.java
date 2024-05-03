@@ -1,6 +1,6 @@
 package io.hhplus.server.domain.reservation.service;
 
-import io.hhplus.server.base.exception.CustomException;
+import io.hhplus.server.base.redis.RedissonLock;
 import io.hhplus.server.controller.reservation.dto.request.CancelRequest;
 import io.hhplus.server.controller.reservation.dto.request.ReserveRequest;
 import io.hhplus.server.controller.reservation.dto.response.ReserveResponse;
@@ -13,25 +13,14 @@ import io.hhplus.server.domain.concert.service.ConcertService;
 import io.hhplus.server.domain.payment.entity.Payment;
 import io.hhplus.server.domain.payment.service.PaymentReader;
 import io.hhplus.server.domain.payment.service.PaymentService;
-import io.hhplus.server.domain.reservation.ReservationExceptionEnum;
 import io.hhplus.server.domain.reservation.entity.Reservation;
 import io.hhplus.server.domain.reservation.event.ReservationOccupiedEvent;
 import io.hhplus.server.domain.reservation.repository.ReservationRepository;
 import io.hhplus.server.domain.reservation.service.dto.GetReservationAndPaymentResDto;
-import io.hhplus.server.domain.user.service.UserReader;
 import jakarta.annotation.PostConstruct;
-import jakarta.persistence.LockTimeoutException;
-import jakarta.persistence.PessimisticLockException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.logging.LogLevel;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.PessimisticLockingFailureException;
-import org.springframework.orm.ObjectOptimisticLockingFailureException;
-import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.TransactionSystemException;
-import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -56,29 +45,22 @@ public class ReservationService implements ReservationInterface {
 
     @Override
     @Transactional
+    @RedissonLock(key = "userLock")
     public ReserveResponse reserve(ReserveRequest request) {
-        try {
-            // validator
-            reservationValidator.checkReserved(request.concertDateId(), request.seatNum());
+        // validator
+        reservationValidator.checkReserved(request.concertDateId(), request.seatNum());
 
-            // 동시성 제어 - 낙관적 락 적용
-            concertService.patchSeatStatus(request.concertDateId(), request.seatNum(), Seat.Status.DISABLE);
+        concertService.patchSeatStatus(request.concertDateId(), request.seatNum(), Seat.Status.DISABLE);
+        Reservation reservation = reservationRepository.save(request.toEntity());
 
-            Reservation reservation = reservationRepository.save(request.toEntity());
+        Concert concert = concertReader.findConcert(reservation.getConcertId());
+        ConcertDate concertDate = concertReader.findConcertDate(reservation.getConcertDateId());
+        Seat seat = concertReader.findSeat(reservation.getConcertDateId(), reservation.getSeatNum());
 
-            Concert concert = concertReader.findConcert(reservation.getConcertId());
-            ConcertDate concertDate = concertReader.findConcertDate(reservation.getConcertDateId());
-            Seat seat = concertReader.findSeat(reservation.getConcertDateId(), reservation.getSeatNum());
+        // 예약 임시 점유 event 발행
+        eventPublisher.publishEvent(new ReservationOccupiedEvent(this, reservation.getReservationId()));
 
-            // 예약 임시 점유 event 발행
-            eventPublisher.publishEvent(new ReservationOccupiedEvent(this, reservation.getReservationId()));
-
-            return ReserveResponse.from(reservation, concert, concertDate, seat);
-
-        } catch (ObjectOptimisticLockingFailureException e) {
-            // 락 획득 실패 시
-            throw new CustomException(ReservationExceptionEnum.ALREADY_RESERVED, null, LogLevel.INFO);
-        }
+        return ReserveResponse.from(reservation, concert, concertDate, seat);
     }
 
     @Override
@@ -91,7 +73,7 @@ public class ReservationService implements ReservationInterface {
 
         Payment payment = paymentReader.findPaymentByReservation(reservation);
         if (payment != null) {
-            // 결제 내역 존재하면 환불 처리
+            // 결제 내역 존재 시 환불 처리
             paymentService.cancel(payment.getPaymentId());
         }
         reservationRepository.delete(reservation);
