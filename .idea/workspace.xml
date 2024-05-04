@@ -5,13 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7e2ccb01-a990-45a5-a6f7-ad379bc6548e" name="Changes" comment="feat: 유저 포인트 충전 및 사용 - Redisson 적용">
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/base/redis/AopForTransaction.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/base/redis/RedissonLockAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/base/redis/RedissonLockAspect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/concert/repository/SeatJpaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/concert/repository/SeatJpaRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/service/ReservationMonitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/service/ReservationMonitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/service/ReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/service/ReservationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/io/hhplus/server/intergration/ReservationIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/io/hhplus/server/intergration/ReservationIntegrationTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,38 +84,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Docker.redis/docker-compose-redis.yml: Compose Deployment.executor": "Run",
-    "Gradle.Build hhplus03_server.executor": "Run",
-    "Gradle.ReservationIntegrationTest.reserveTest_ALREADY_RESERVED.executor": "Run",
-    "Gradle.ReservationIntegrationTest.reserveTest_ALREADY_RESERVED_lock.executor": "Run",
-    "Gradle.ReservationIntegrationTest.reserveTest_complete_in_5min.executor": "Run",
-    "Gradle.UsersIntegrationTest.chargeAndUseTest_lock.executor": "Run",
-    "Gradle.UsersIntegrationTest.chargeTest_따닥_lock.executor": "Run",
-    "Gradle.UsersIntegrationTest.useTest_use_before_lack_lock.executor": "Run",
-    "Gradle.hhplus03_server [build].executor": "Run",
-    "Gradle.hhplus03_server [clean].executor": "Run",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
-    "Spring Boot.ServerApplication.executor": "Run",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "develop",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Docker.redis/docker-compose-redis.yml: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Build hhplus03_server.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ReservationIntegrationTest.reserveTest_ALREADY_RESERVED.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ReservationIntegrationTest.reserveTest_ALREADY_RESERVED_lock.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ReservationIntegrationTest.reserveTest_complete_in_5min.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.UsersIntegrationTest.chargeAndUseTest_lock.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.UsersIntegrationTest.chargeTest_따닥_lock.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.UsersIntegrationTest.useTest_use_before_lack_lock.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.hhplus03_server [build].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.hhplus03_server [clean].executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
+    &quot;Spring Boot.ServerApplication.executor&quot;: &quot;Run&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="io.hhplus.server.domain.user.service" />
@@ -233,7 +227,7 @@
       <method v="2" />
     </configuration>
     <configuration name="ServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <module name="hhplus03_server.main" />
+      <module name="hhplus.architecture.hhplus03_server.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="io.hhplus.server.ServerApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -330,7 +324,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714713097656</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="feat: 유저 포인트 충전 및 사용 - Redisson 적용">
+      <option name="closed" value="true" />
+      <created>1714795486075</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1714795486075</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
