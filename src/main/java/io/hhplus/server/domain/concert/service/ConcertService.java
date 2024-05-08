@@ -29,8 +29,6 @@ public class ConcertService implements ConcertInterface {
     private final ConcertRepository concertRepository;
     private final ConcertValidator concertValidator;
 
-    private final TransactionTemplate transactionTemplate;
-
     @Override
     public List<GetConcertsResponse> getConcerts() {
         List<Concert> concerts = concertRepository.findAll();

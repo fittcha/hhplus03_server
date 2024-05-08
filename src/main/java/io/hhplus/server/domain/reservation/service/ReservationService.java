@@ -71,7 +71,7 @@ public class ReservationService implements ReservationInterface {
         // validator
         reservationValidator.isNull(reservation);
 
-        Payment payment = paymentReader.findPaymentByReservation(reservation);
+        Payment payment = paymentReader.findPaymentByReservationId(reservation.getReservationId());
         if (payment != null) {
             // 결제 내역 존재 시 환불 처리
             paymentService.cancel(payment.getPaymentId());
