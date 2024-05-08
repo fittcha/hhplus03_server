@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PaymentJpaRepository extends JpaRepository<Payment, Long> {
 
-    Payment findByReservation(Reservation reservation);
+    Payment findByReservation_ReservationId(Long reservationId);
 }

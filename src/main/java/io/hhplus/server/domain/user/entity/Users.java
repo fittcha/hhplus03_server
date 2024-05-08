@@ -1,5 +1,6 @@
 package io.hhplus.server.domain.user.entity;
 
+import io.hhplus.server.base.entity.BaseDateTimeEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -14,7 +15,7 @@ import java.util.Objects;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @DynamicUpdate
 @Table(name = "users")
-public class Users {
+public class Users extends BaseDateTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

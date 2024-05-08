@@ -3,7 +3,6 @@ package io.hhplus.server.infrastructure.payment;
 import io.hhplus.server.domain.payment.entity.Payment;
 import io.hhplus.server.domain.payment.repository.PaymentJpaRepository;
 import io.hhplus.server.domain.payment.repository.PaymentRepository;
-import io.hhplus.server.domain.reservation.entity.Reservation;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Repository;
 
@@ -22,8 +21,8 @@ public class PaymentRepositoryImpl implements PaymentRepository {
     }
 
     @Override
-    public Payment findByReservation(Reservation reservation) {
-        return paymentJpaRepository.findByReservation(reservation);
+    public Payment findByReservationId(Long reservationId) {
+        return paymentJpaRepository.findByReservation_ReservationId(reservationId);
     }
 
     @Override
