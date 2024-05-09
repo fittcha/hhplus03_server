@@ -17,18 +17,31 @@ spring:
     properties:
       hibernate:
         default_batch_fetch_size: 500 # 지연로딩으로 발생해야 하는 쿼리를 IN절로 한번에 모아보내는 기능
-#  jpa:
-#    hibernate:
-#      ddl-auto: create
-#    show-sql: true
-#  datasource:
-#    driver-class-name: org.h2.Driver
-#    url: jdbc:h2:mem:testdb;MODE=MySQL;DB_CLOSE_DELAY=-1
-#    username: sa
-#    password:
-#  h2:
-#    console:
-#      enabled: true
+
+  data:
+    redis:
+      host: localhost
+      password:
+      port: 6379
+      database: 0
+
+  session:
+    redis:
+      namespace: hhplus-waiting-test
+      repository-type: indexed
+
+  #  jpa:
+  #    hibernate:
+  #      ddl-auto: create
+  #    show-sql: true
+  #  datasource:
+  #    driver-class-name: org.h2.Driver
+  #    url: jdbc:h2:mem:testdb;MODE=MySQL;DB_CLOSE_DELAY=-1
+  #    username: sa
+  #    password:
+  #  h2:
+  #    console:
+  #      enabled: true
 
 logging:
   level:

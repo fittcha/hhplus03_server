@@ -18,5 +18,10 @@ spring:
       hibernate:
         default_batch_fetch_size: 500 # 지연로딩으로 발생해야 하는 쿼리를 IN절로 한번에 모아보내는 기능
 
+  session:
+    redis:
+      namespace: hhplus-waiting-prod
+      repository-type: indexed
+
 server:
   port: 80

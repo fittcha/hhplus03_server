@@ -37,10 +37,6 @@ public class Seat extends BaseDateTimeEntity {
     @Enumerated(EnumType.STRING)
     private Status status = Status.AVAILABLE;
 
-    // 낙관적 락 적용
-    @Version
-    private Long version;
-
     @Builder
     public Seat(Long seatId, ConcertDate concertDate, int seatNum, BigDecimal price, Status status) {
         this.seatId = seatId;

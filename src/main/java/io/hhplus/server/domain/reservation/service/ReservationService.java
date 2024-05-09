@@ -45,7 +45,7 @@ public class ReservationService implements ReservationInterface {
 
     @Override
     @Transactional
-    @RedissonLock(key = "reserveLock")
+    @RedissonLock(key = "'reserveLock'.concat(':').concat(#request.concertDateId()).concat('-').concat(#request.seatNum())")
     public ReserveResponse reserve(ReserveRequest request) {
         // validator
         reservationValidator.checkReserved(request.concertDateId(), request.seatNum());

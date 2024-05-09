@@ -30,7 +30,7 @@ public class UserService implements UserInterface {
 
     @Override
     @Transactional
-    @RedissonLock(key = "userLock")
+    @RedissonLock(key = "'userLock'.concat(':').concat(#userId)")
     public GetBalanceResponse charge(Long userId, ChargeRequest request) {
         Users users = userRepository.findByIdWithPessimisticLock(userId);
         users = users.chargeBalance(BigDecimal.valueOf(request.amount()));
@@ -39,7 +39,7 @@ public class UserService implements UserInterface {
 
     @Override
     @Transactional
-    @RedissonLock(key = "userLock")
+    @RedissonLock(key = "'userLock'.concat(':').concat(#userId)")
     public GetBalanceResponse use(Long userId, UseRequest request) {
         Users users = userRepository.findByIdWithPessimisticLock(userId);
 

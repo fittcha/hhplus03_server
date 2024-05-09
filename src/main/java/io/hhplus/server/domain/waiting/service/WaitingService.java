@@ -1,90 +1,58 @@
 package io.hhplus.server.domain.waiting.service;
 
 import io.hhplus.server.base.jwt.JwtService;
-import io.hhplus.server.controller.waiting.dto.response.CheckActiveResponse;
-import io.hhplus.server.controller.waiting.dto.response.IssueTokenResponse;
+import io.hhplus.server.base.redis.dto.RedisZSetReqDto;
+import io.hhplus.server.base.redis.service.RedisZSetService;
+import io.hhplus.server.controller.waiting.dto.response.CheckWaitingResponse;
 import io.hhplus.server.domain.waiting.WaitingConstants;
-import io.hhplus.server.domain.waiting.entity.WaitingQueue;
-import io.hhplus.server.domain.waiting.repository.WaitingQueueRepository;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.Duration;
 
 @Service
 @RequiredArgsConstructor
 public class WaitingService implements WaitingInterface {
 
-    private final WaitingQueueRepository waitingQueueRepository;
+    private final RedisZSetService redisZSetService;
     private final JwtService jwtService;
 
     @Override
-    public IssueTokenResponse issueToken(Long userId) {
-        return new IssueTokenResponse(jwtService.createToken(userId));
+    public String issueToken(Long userId) {
+        return jwtService.createToken(userId);
     }
 
     @Override
     @Transactional
-    public CheckActiveResponse addWaitingQueue(Long userId, String token) {
-        Long waitingNum = null;
-        Long expectedWaitTimeInSeconds = null;
+    public CheckWaitingResponse checkWaiting(Long userId, String reqToken) {
+        Long waitingNum;
+        long waitTimeInSeconds;
+        String token = reqToken;
+        long expiredTimeMillis = System.currentTimeMillis() + WaitingConstants.AUTO_EXPIRED_TIME;
 
-        // 기존 토큰 있으면 만료
-        expiredIfExist(userId);
-
-        // 대기열 활성 유저 수 확인
-        long activeSize = waitingQueueRepository.countByStatusIs(WaitingQueue.Status.ACTIVE);
-        boolean isActive = activeSize < WaitingConstants.ACTIVE_USER_CNT;
-        if (isActive) {
-            // 유저 진입 활성화
-            waitingQueueRepository.save(WaitingQueue.toActiveEntity(userId, token));
-        } else {
-            // 유저 비활성, 대기열 정보 생성
-            waitingNum = waitingQueueRepository.countByStatusIs(WaitingQueue.Status.WAITING);
-            expectedWaitTimeInSeconds = Duration.ofMinutes(waitingNum).toSeconds();
-            waitingQueueRepository.save(WaitingQueue.toWaitingEntity(userId, token));
+        // 기존 토큰이 없으면 새로 발급
+        if (reqToken != null) {
+            token = issueToken(userId);
         }
 
-        return new CheckActiveResponse(
-                isActive,
-                new CheckActiveResponse.WaitingTicketInfo(waitingNum, expectedWaitTimeInSeconds)
+        // 활성 유저 수 확인
+        Long activeTokenCnt = redisZSetService.zSetSize(new RedisZSetReqDto.ZCard(WaitingConstants.ACTIVE_KEY));
+        // 진입 가능 > true 반환
+        if (activeTokenCnt < WaitingConstants.MAX_ACTIVE_USER) {
+            redisZSetService.zSetAdd(new RedisZSetReqDto.ZAdd(WaitingConstants.ACTIVE_KEY, System.currentTimeMillis(), token));
+            return new CheckWaitingResponse(token, true, null);
+        }
+
+        // 진입 불가능 > 대기열 추가
+        redisZSetService.zSetAdd(new RedisZSetReqDto.ZAdd(WaitingConstants.WAIT_KEY, expiredTimeMillis, token));
+        // 대기 순번 조회
+        waitingNum = redisZSetService.zSetRank(new RedisZSetReqDto.ZRank(WaitingConstants.WAIT_KEY, token));
+        // 대기 잔여 시간 계산 (10초당 활성 전환 수)
+        waitTimeInSeconds = (long) Math.ceil((double) (waitingNum - 1) / WaitingConstants.ENTER_10_SECONDS) * 10;
+
+        return new CheckWaitingResponse(
+                token,
+                false,
+                new CheckWaitingResponse.WaitingTicketInfo(waitingNum, waitTimeInSeconds)
         );
     }
-
-    public void expiredIfExist(Long userId) {
-        WaitingQueue existingQueue = waitingQueueRepository.findByUserId(userId);
-        if (existingQueue != null) {
-            existingQueue.expiredToken();
-        }
-    }
-
-    @Override
-    @Transactional
-    public CheckActiveResponse checkActive(Long userId, String token) {
-        Long waitingNum = null;
-        Long expectedWaitTimeInSeconds = null;
-
-        // 내 대기 상태 확인
-        WaitingQueue waitingQueue = waitingQueueRepository.findByUserIdAndToken(userId, token);
-        if (waitingQueue == null || waitingQueue.getStatus().equals(WaitingQueue.Status.EXPIRED)) {
-            throw new EntityNotFoundException("새로고침하여 다시 진입하세요.");
-        }
-
-        // 활성 여부, 대기열 정보 반환
-        boolean isActive = waitingQueue.getStatus().equals(WaitingQueue.Status.ACTIVE);
-        if (!isActive) {
-            // 대기열 정보 생성
-            waitingNum = waitingQueueRepository.countByRequestTimeBeforeAndStatusIs(WaitingQueue.Status.WAITING, waitingQueue.getRequestTime());
-            expectedWaitTimeInSeconds = Duration.ofMinutes(waitingNum).toSeconds();
-        }
-
-        return new CheckActiveResponse(
-                isActive,
-                new CheckActiveResponse.WaitingTicketInfo(waitingNum, expectedWaitTimeInSeconds)
-        );
-    }
-
-
 }
