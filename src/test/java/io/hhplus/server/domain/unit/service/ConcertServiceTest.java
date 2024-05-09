@@ -55,12 +55,10 @@ class ConcertServiceTest {
         // mocking
         concertRepository = Mockito.mock(ConcertRepository.class);
         concertValidator = Mockito.mock(ConcertValidator.class);
-        transactionTemplate = Mockito.mock(TransactionTemplate.class);
 
         concertService = new ConcertService(
                 concertRepository,
-                concertValidator,
-                transactionTemplate
+                concertValidator
         );
 
         // 콘서트 정보 세팅
