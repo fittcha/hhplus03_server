@@ -25,6 +25,11 @@ spring:
       port: 6379
       database: 0
 
+  session:
+    redis:
+      namespace: hhplus-waiting-test
+      repository-type: indexed
+
   #  jpa:
   #    hibernate:
   #      ddl-auto: create

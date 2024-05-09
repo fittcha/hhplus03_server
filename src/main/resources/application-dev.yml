@@ -24,3 +24,8 @@ spring:
       password:
       port: 6379
       database: 0
+
+  session:
+    redis:
+      namespace: hhplus-waiting-dev
+      repository-type: indexed
