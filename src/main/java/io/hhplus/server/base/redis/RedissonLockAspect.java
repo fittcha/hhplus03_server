@@ -8,19 +8,21 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
 import java.util.concurrent.TimeUnit;
 
+@Slf4j
+@Order(Ordered.HIGHEST_PRECEDENCE)
 @Aspect
 @Component
 @RequiredArgsConstructor
-@Slf4j
 public class RedissonLockAspect {
 
     private final RedissonClient redissonClient;
-    private final AopForTransaction aopForTransaction;
 
     @Around("@annotation(io.hhplus.server.base.redis.RedissonLock)")
     public Object lock(ProceedingJoinPoint joinPoint) throws Throwable {
@@ -28,14 +30,15 @@ public class RedissonLockAspect {
         Method method = signature.getMethod();
         RedissonLock redissonLock = method.getAnnotation(RedissonLock.class);
 
-        RLock lock = redissonClient.getLock(redissonLock.key());
+        String REDISSON_KEY_PREFIX = "RLOCK_";
+        RLock lock = redissonClient.getLock(REDISSON_KEY_PREFIX + redissonLock.key());
         try {
             // 락 획득 시도
             boolean available  = lock.tryLock(redissonLock.waitTime(), redissonLock.leaseTime(), redissonLock.timeUnit());
             if (!available) {
                 throw new IllegalStateException("Unable to acquire lock");
             }
-            return aopForTransaction.proceed(joinPoint);
+            return joinPoint.proceed();
         } finally {
             lock.unlock();
         }
