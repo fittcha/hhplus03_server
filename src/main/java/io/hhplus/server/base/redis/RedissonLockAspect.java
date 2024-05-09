@@ -31,7 +31,8 @@ public class RedissonLockAspect {
         RedissonLock redissonLock = method.getAnnotation(RedissonLock.class);
 
         String REDISSON_KEY_PREFIX = "RLOCK_";
-        RLock lock = redissonClient.getLock(REDISSON_KEY_PREFIX + redissonLock.key());
+        String key = REDISSON_KEY_PREFIX + CustomSpringELParser.getDynamicValue(signature.getParameterNames(), joinPoint.getArgs(), redissonLock.key());
+        RLock lock = redissonClient.getLock(key);
         try {
             // 락 획득 시도
             boolean available  = lock.tryLock(redissonLock.waitTime(), redissonLock.leaseTime(), redissonLock.timeUnit());

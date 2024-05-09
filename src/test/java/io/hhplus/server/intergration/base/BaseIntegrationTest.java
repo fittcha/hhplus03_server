@@ -29,12 +29,12 @@ public class BaseIntegrationTest {
     @BeforeEach
     public void setUpByBeforeEach() {
         RestAssured.port = port;
-//        // 데이터 초기화
-//        databaseCleanup.execute();
-//        // 초기 콘서트 정보 세팅
-//        testDataHandler.settingConcertInfo();
-//        // 초기 예약 세팅
-//        testDataHandler.reserveSeats();
+        // 데이터 초기화
+        databaseCleanup.execute();
+        // 초기 콘서트 정보 세팅
+        testDataHandler.settingConcertInfo();
+        // 초기 예약 세팅
+        testDataHandler.reserveSeats();
     }
 
     public static ExtractableResponse<Response> get(String path) {
