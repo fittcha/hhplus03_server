@@ -33,8 +33,13 @@ public class WaitingService implements WaitingInterface {
 
         // 활성 유저 수 확인
         Long activeTokenCnt = redisZSetService.zSetSize(new RedisZSetReqDto.ZCard(WaitingConstants.ACTIVE_KEY));
-        // 진입 가능
-        if (activeTokenCnt < WaitingConstants.MAX_ACTIVE_USER) {
+        // 현재 대기 유저 수 확인
+        Long waitTokenCnt = redisZSetService.zSetSize(new RedisZSetReqDto.ZCard(WaitingConstants.WAIT_KEY));
+
+        // 현재 대기 유저가 없고, 활성 유저 슬롯이 남아 있을 경우
+        long availableCnt = WaitingConstants.MAX_ACTIVE_USER - activeTokenCnt;
+        if (waitTokenCnt == 0 && availableCnt > 0) {
+            // 진입 가능
             return getInActive(token);
         }
 
