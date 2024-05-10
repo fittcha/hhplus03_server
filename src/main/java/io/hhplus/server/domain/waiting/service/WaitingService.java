@@ -67,8 +67,11 @@ public class WaitingService implements WaitingInterface {
     private CheckWaitingResponse getInActive(String token) {
         // 활성 만료 시간
         long expiredTimeMillis = System.currentTimeMillis() + WaitingConstants.AUTO_EXPIRED_TIME;
-
+        // 활성 유저열에 추가
         redisZSetService.zSetAdd(new RedisZSetReqDto.ZAdd(WaitingConstants.ACTIVE_KEY, expiredTimeMillis, token));
+        // 대기열에서 사용자 토큰 삭제
+        redisZSetService.zSetRemove(new RedisZSetReqDto.ZRem(WaitingConstants.WAIT_KEY, token));
+
         return new CheckWaitingResponse(token, true, null);
     }
 }
