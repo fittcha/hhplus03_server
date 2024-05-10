@@ -41,6 +41,10 @@ public class RedisZSetService {
         return zSetOperations.size(this.getRedisNameSpace() + reqDto.getKey());
     }
 
+    public void zSetRemove(RedisZSetReqDto.ZRem reqDto) {
+        zSetOperations.remove(this.getRedisNameSpace() + reqDto.getKey(), reqDto.getMember());
+    }
+
     public String getRedisNameSpace() {
         return springConfig.getActiveProfile() + ":" + RedisConstants.REDIS_NAME_SPACE_WAITING + ":";
     }

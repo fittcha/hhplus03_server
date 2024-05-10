@@ -63,7 +63,7 @@ public class RedisZSetReqDto {
         private String key;
         private String member;
 
-        private ZRem(String key, String member) {
+        public ZRem(String key, String member) {
             this.key = key;
             this.member = member;
         }
