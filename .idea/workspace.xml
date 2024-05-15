@@ -4,36 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7e2ccb01-a990-45a5-a6f7-ad379bc6548e" name="Changes" comment="feat: Redis Lock 구현 수정">
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/base/config/SpringConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/base/redis/RedisConstants.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/base/redis/dto/RedisZSetReqDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/base/redis/service/RedisZSetService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/waiting/service/TokenExpireScheduler.java" afterDir="false" />
+    <list default="true" id="7e2ccb01-a990-45a5-a6f7-ad379bc6548e" name="Changes" comment="feat: 대기열 기능 구현 - Redis">
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/base/config/RetryConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/event/PaymentEventListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/event/ReservationCancelledEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/base/redis/CustomSpringELParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/base/redis/CustomSpringELParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/waiting/WaitingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/waiting/WaitingController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/waiting/dto/request/AddWaitingQueueRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/waiting/dto/request/CheckWaitingRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/waiting/dto/request/CheckActiveRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/waiting/dto/request/IssueTokenRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/waiting/dto/response/CheckActiveResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/waiting/dto/response/CheckWaitingResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/waiting/dto/response/IssueTokenResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/waiting/WaitingConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/waiting/WaitingConstants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/waiting/entity/WaitingQueue.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/waiting/repository/WaitingQueueJpaRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/waiting/repository/WaitingQueueRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/waiting/service/WaitingInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/waiting/service/WaitingInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/waiting/service/WaitingScheduler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/waiting/service/WaitingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/waiting/service/WaitingService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/infrastructure/waiting/WaitingQueueRepositoryImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-dev.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application-local.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-local.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application-prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-prod.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application-sta.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-sta.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application-test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-test.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/io/hhplus/server/domain/unit/service/WaitingServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/io/hhplus/server/domain/unit/service/WaitingServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/ServerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/ServerApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/reservation/dto/response/ReserveResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/controller/reservation/dto/response/ReserveResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/concert/service/ConcertService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/concert/service/ConcertService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/service/PaymentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/service/PaymentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/entity/Reservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/entity/Reservation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/repository/ReservationRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/repository/ReservationRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/service/ReservationMonitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/service/ReservationMonitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/service/ReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/service/ReservationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/user/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/user/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/infrastructure/reservation/ReservationRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/infrastructure/reservation/ReservationRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/io/hhplus/server/domain/unit/service/ReservationServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/io/hhplus/server/domain/unit/service/ReservationServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,41 +103,41 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Docker.redis/docker-compose-redis.yml: Compose Deployment.executor": "Run",
-    "Gradle.Build hhplus03_server.executor": "Run",
-    "Gradle.ConcertIntegrationTest.executor": "Run",
-    "Gradle.ReservationIntegrationTest.executor": "Run",
-    "Gradle.ReservationIntegrationTest.reserveTest_ALREADY_RESERVED.executor": "Run",
-    "Gradle.ReservationIntegrationTest.reserveTest_ALREADY_RESERVED_lock.executor": "Run",
-    "Gradle.ReservationIntegrationTest.reserveTest_complete_in_5min.executor": "Run",
-    "Gradle.UsersIntegrationTest.chargeAndUseTest_lock.executor": "Run",
-    "Gradle.UsersIntegrationTest.chargeTest_따닥_lock.executor": "Run",
-    "Gradle.UsersIntegrationTest.useTest_use_before_lack_lock.executor": "Run",
-    "Gradle.hhplus03_server [build].executor": "Run",
-    "Gradle.hhplus03_server [clean].executor": "Run",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
-    "Spring Boot.ServerApplication.executor": "Run",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "develop",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "editor.preferences.import",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Docker.redis/docker-compose-redis.yml: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Build hhplus03_server.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ConcertIntegrationTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ReservationIntegrationTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ReservationIntegrationTest.reserveTest_ALREADY_RESERVED.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ReservationIntegrationTest.reserveTest_ALREADY_RESERVED_lock.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ReservationIntegrationTest.reserveTest_complete_in_5min.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.UsersIntegrationTest.chargeAndUseTest_lock.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.UsersIntegrationTest.chargeTest_따닥_lock.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.UsersIntegrationTest.useTest_use_before_lack_lock.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.hhplus03_server [build].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.hhplus03_server [clean].executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
+    &quot;Spring Boot.ServerApplication.executor&quot;: &quot;Run&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.import&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
@@ -161,6 +149,7 @@
       <recent name="$PROJECT_DIR$/docker/db" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="io.hhplus.server.domain.payment.event" />
       <recent name="io.hhplus.server.domain.user" />
       <recent name="io.hhplus.server.domain.user.service" />
       <recent name="io.hhplus.server.controller.user.dto.request" />
@@ -368,6 +357,7 @@
       <updated>1714675063313</updated>
       <workItem from="1714675066177" duration="2031000" />
       <workItem from="1714677113755" duration="912000" />
+      <workItem from="1715759468195" duration="10612000" />
     </task>
     <task id="LOCAL-00006" summary="feat: 유저 포인트 충전 및 사용 - Redisson 적용">
       <option name="closed" value="true" />
@@ -425,7 +415,31 @@
       <option name="project" value="LOCAL" />
       <updated>1715260290463</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="feat: 대기열 기능 구현 - Redis">
+      <option name="closed" value="true" />
+      <created>1715270304642</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1715270304642</updated>
+    </task>
+    <task id="LOCAL-00014" summary="feat: 대기열 기능 구현 - Redis">
+      <option name="closed" value="true" />
+      <created>1715270411214</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1715270411214</updated>
+    </task>
+    <task id="LOCAL-00015" summary="feat: 대기열 기능 구현 - Redis">
+      <option name="closed" value="true" />
+      <created>1715270640555</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1715270640555</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -443,7 +457,8 @@
     <MESSAGE value="feat: 인덱스 사용과 성능 비교" />
     <MESSAGE value="feat: Redis Lock AOP 순서 적용 변경, 락 키 구분자 추가" />
     <MESSAGE value="feat: Redis Lock 구현 수정" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: Redis Lock 구현 수정" />
+    <MESSAGE value="feat: 대기열 기능 구현 - Redis" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: 대기열 기능 구현 - Redis" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

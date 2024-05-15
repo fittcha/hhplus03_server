@@ -15,8 +15,6 @@ public interface ReservationRepository {
 
     Reservation findByIdAndUserId(Long reservationId, Long userId);
 
-    void delete(Reservation reservation);
-
     Reservation findById(Long reservationId);
 
     List<GetReservationAndPaymentResDto> getMyReservations(Long userId);

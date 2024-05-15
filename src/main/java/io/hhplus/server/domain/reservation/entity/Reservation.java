@@ -57,6 +57,10 @@ public class Reservation extends BaseDateTimeEntity {
         this.status = Status.RESERVED;
     }
 
+    public void toCancel() {
+        this.status = Status.CANCEL;
+    }
+
     public enum Status {
         ING,
         RESERVED,

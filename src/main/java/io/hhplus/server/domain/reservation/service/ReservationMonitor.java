@@ -72,7 +72,7 @@ public class ReservationMonitor {
         if ((reservation != null && reservation.getStatus().equals(Reservation.Status.ING)) && (payment == null)) {
             // 임시 점유 해제: 완료되지 않은 예약 취소
             concertService.patchSeatStatus(reservation.getConcertDateId(), reservation.getSeatNum(), Seat.Status.AVAILABLE);
-            reservationRepository.delete(reservation);
+            reservation.toCancel();
             log.info("완료되지 않은 예약 취소: {}", occupyDto.reservationId());
         }
     }

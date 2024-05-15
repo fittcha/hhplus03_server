@@ -2,7 +2,6 @@ package io.hhplus.server.controller.reservation.dto.response;
 
 import io.hhplus.server.domain.concert.entity.Concert;
 import io.hhplus.server.domain.concert.entity.ConcertDate;
-import io.hhplus.server.domain.concert.entity.Seat;
 import io.hhplus.server.domain.reservation.entity.Reservation;
 import lombok.Builder;
 
@@ -18,7 +17,7 @@ public record ReserveResponse(
     public ReserveResponse {
     }
 
-    public static ReserveResponse from(Reservation reservation, Concert concert, ConcertDate concertDate, Seat seat) {
+    public static ReserveResponse from(Reservation reservation, Concert concert, ConcertDate concertDate) {
         return ReserveResponse.builder()
                 .reservationId(reservation.getReservationId())
                 .status(reservation.getStatus())
@@ -27,8 +26,7 @@ public record ReserveResponse(
                         .concertDateId(concertDate.getConcertDateId())
                         .name(concert.getName())
                         .date(concertDate.getConcertDate())
-                        .seatId(seat.getSeatId())
-                        .seatNum(seat.getSeatNum())
+                        .seatNum(reservation.getSeatNum())
                         .build())
                 .build();
     }
