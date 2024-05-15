@@ -59,6 +59,9 @@ dependencies {
 
     // guava
     implementation 'com.google.guava:guava:33.0.0-jre'
+
+    // retry
+    implementation 'org.springframework.retry:spring-retry'
 }
 
 test {

@@ -34,11 +34,6 @@ public class ReservationRepositoryImpl implements ReservationRepository {
     }
 
     @Override
-    public void delete(Reservation reservation) {
-        reservationJpaRepository.delete(reservation);
-    }
-
-    @Override
     public Reservation findById(Long reservationId) {
         return reservationJpaRepository.findById(reservationId).orElseThrow(EntityNotFoundException::new);
     }

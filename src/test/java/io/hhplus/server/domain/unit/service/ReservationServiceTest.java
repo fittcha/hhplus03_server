@@ -19,7 +19,6 @@ import io.hhplus.server.domain.reservation.service.ReservationMonitor;
 import io.hhplus.server.domain.reservation.service.ReservationService;
 import io.hhplus.server.domain.reservation.service.ReservationValidator;
 import io.hhplus.server.domain.reservation.service.dto.GetReservationAndPaymentResDto;
-import io.hhplus.server.domain.user.service.UserReader;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -44,7 +43,6 @@ class ReservationServiceTest {
     private ReservationMonitor reservationMonitor;
     private ConcertReader concertReader;
     private ConcertService concertService;
-    private UserReader userReader;
     private PaymentService paymentService;
     private PaymentReader paymentReader;
     private ApplicationEventPublisher applicationEventPublisher;
@@ -59,7 +57,6 @@ class ReservationServiceTest {
         reservationMonitor = Mockito.mock(ReservationMonitor.class);
         concertReader = Mockito.mock(ConcertReader.class);
         concertService = Mockito.mock(ConcertService.class);
-        userReader = Mockito.mock(UserReader.class);
         paymentService = Mockito.mock(PaymentService.class);
         paymentReader = Mockito.mock(PaymentReader.class);
         applicationEventPublisher = Mockito.mock(ApplicationEventPublisher.class);
@@ -113,7 +110,6 @@ class ReservationServiceTest {
         when(reservationRepository.save(request.toEntity())).thenReturn(예약건);
         when(concertReader.findConcert(anyLong())).thenReturn(Concert.builder().build());
         when(concertReader.findConcertDate(anyLong())).thenReturn(ConcertDate.builder().build());
-        when(concertReader.findSeat(anyLong(), anyInt())).thenReturn(Seat.builder().build());
         ReserveResponse response = reservationService.reserve(request);
 
         // then

@@ -10,10 +10,10 @@ import io.hhplus.server.domain.concert.entity.ConcertDate;
 import io.hhplus.server.domain.concert.entity.Seat;
 import io.hhplus.server.domain.concert.service.ConcertReader;
 import io.hhplus.server.domain.concert.service.ConcertService;
-import io.hhplus.server.domain.payment.entity.Payment;
 import io.hhplus.server.domain.payment.service.PaymentReader;
 import io.hhplus.server.domain.payment.service.PaymentService;
 import io.hhplus.server.domain.reservation.entity.Reservation;
+import io.hhplus.server.domain.reservation.event.ReservationCancelledEvent;
 import io.hhplus.server.domain.reservation.event.ReservationOccupiedEvent;
 import io.hhplus.server.domain.reservation.repository.ReservationRepository;
 import io.hhplus.server.domain.reservation.service.dto.GetReservationAndPaymentResDto;
@@ -55,12 +55,11 @@ public class ReservationService implements ReservationInterface {
 
         Concert concert = concertReader.findConcert(reservation.getConcertId());
         ConcertDate concertDate = concertReader.findConcertDate(reservation.getConcertDateId());
-        Seat seat = concertReader.findSeat(reservation.getConcertDateId(), reservation.getSeatNum());
 
         // 예약 임시 점유 event 발행
         eventPublisher.publishEvent(new ReservationOccupiedEvent(this, reservation.getReservationId()));
 
-        return ReserveResponse.from(reservation, concert, concertDate, seat);
+        return ReserveResponse.from(reservation, concert, concertDate);
     }
 
     @Override
@@ -71,12 +70,10 @@ public class ReservationService implements ReservationInterface {
         // validator
         reservationValidator.isNull(reservation);
 
-        Payment payment = paymentReader.findPaymentByReservationId(reservation.getReservationId());
-        if (payment != null) {
-            // 결제 내역 존재 시 환불 처리
-            paymentService.cancel(payment.getPaymentId());
-        }
-        reservationRepository.delete(reservation);
+        reservation.toCancel();
+
+        // 결제 내역 환불 처리 event
+        eventPublisher.publishEvent(new ReservationCancelledEvent(this, reservationId));
     }
 
     @Override

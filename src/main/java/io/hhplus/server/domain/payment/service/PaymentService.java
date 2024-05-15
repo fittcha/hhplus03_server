@@ -12,6 +12,11 @@ import io.hhplus.server.domain.reservation.service.ReservationReader;
 import io.hhplus.server.domain.user.entity.Users;
 import io.hhplus.server.domain.user.service.UserReader;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Recover;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +26,7 @@ import java.math.BigDecimal;
 @RequiredArgsConstructor
 public class PaymentService implements PaymentInterface {
 
+    private static final Logger log = LoggerFactory.getLogger(PaymentService.class);
     private final PaymentRepository paymentRepository;
     private final PaymentValidator paymentValidator;
     private final UserReader userReader;
@@ -84,8 +90,6 @@ public class PaymentService implements PaymentInterface {
 
     private Payment cancelPayment(Payment payment) {
         Payment updatedPayment = payment;
-        Long userId = payment.getReservation().getUserId();
-        Users users = userReader.findUser(userId);
 
         if (Payment.Status.READY.equals(payment.getStatus())) {
             // 결제 대기 상태 - 즉시 취소
@@ -93,9 +97,27 @@ public class PaymentService implements PaymentInterface {
         } else if (Payment.Status.COMPLETE.equals(payment.getStatus())) {
             // 결제 완료 상태 - 환불
             updatedPayment = payment.updateStatus(Payment.Status.REFUND);
+            Long userId = payment.getReservation().getUserId();
+            Users users = userReader.findUser(userId);
             users.refundBalance(payment.getPrice());
         }
 
         return updatedPayment;
+    }
+
+    @Transactional
+    @Retryable(value = RuntimeException.class, maxAttempts = 3, backoff = @Backoff(delay = 2000))
+    public void refundReservationCancelled(Long reservationId) {
+        Payment payment = paymentRepository.findByReservationId(reservationId);
+        if (payment == null) {
+            return;
+        }
+        // 결제 내역 존재 시 환불 처리
+        cancel(payment.getPaymentId());
+    }
+
+    @Recover
+    public void refundRecover(RuntimeException e, Long reservationId) {
+        log.error("All the retries failed. reservationId: {}, error: {}", reservationId, e.getMessage());
     }
 }
