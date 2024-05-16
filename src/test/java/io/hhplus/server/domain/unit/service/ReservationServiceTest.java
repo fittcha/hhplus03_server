@@ -10,8 +10,6 @@ import io.hhplus.server.domain.concert.entity.ConcertDate;
 import io.hhplus.server.domain.concert.entity.Seat;
 import io.hhplus.server.domain.concert.service.ConcertReader;
 import io.hhplus.server.domain.concert.service.ConcertService;
-import io.hhplus.server.domain.payment.service.PaymentReader;
-import io.hhplus.server.domain.payment.service.PaymentService;
 import io.hhplus.server.domain.reservation.ReservationExceptionEnum;
 import io.hhplus.server.domain.reservation.entity.Reservation;
 import io.hhplus.server.domain.reservation.repository.ReservationRepository;
@@ -19,6 +17,7 @@ import io.hhplus.server.domain.reservation.service.ReservationMonitor;
 import io.hhplus.server.domain.reservation.service.ReservationService;
 import io.hhplus.server.domain.reservation.service.ReservationValidator;
 import io.hhplus.server.domain.reservation.service.dto.GetReservationAndPaymentResDto;
+import io.hhplus.server.domain.send.service.SendService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -43,8 +42,7 @@ class ReservationServiceTest {
     private ReservationMonitor reservationMonitor;
     private ConcertReader concertReader;
     private ConcertService concertService;
-    private PaymentService paymentService;
-    private PaymentReader paymentReader;
+    private SendService sendService;
     private ApplicationEventPublisher applicationEventPublisher;
 
     private Reservation 예약건;
@@ -57,8 +55,7 @@ class ReservationServiceTest {
         reservationMonitor = Mockito.mock(ReservationMonitor.class);
         concertReader = Mockito.mock(ConcertReader.class);
         concertService = Mockito.mock(ConcertService.class);
-        paymentService = Mockito.mock(PaymentService.class);
-        paymentReader = Mockito.mock(PaymentReader.class);
+        sendService = Mockito.mock(SendService.class);
         applicationEventPublisher = Mockito.mock(ApplicationEventPublisher.class);
 
         reservationService = new ReservationService(
@@ -67,8 +64,7 @@ class ReservationServiceTest {
                 reservationMonitor,
                 concertReader,
                 concertService,
-                paymentService,
-                paymentReader,
+                sendService,
                 applicationEventPublisher
         );
 
