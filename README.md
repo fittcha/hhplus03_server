@@ -180,7 +180,7 @@ build_number값을 활용하여 Build Version을 체크한다.
 - 분당 처리할 수 있는 동시접속자 수 = 2,000명
   - 10초마다 200명씩 유효한 토큰으로 전환
   - 전환되는 인원수로 대기열 순번 계산
-
+ 
 ---
 ## 6. Transaction 범위와 책임 분리 방안 설계
 [Transaction 범위와 책임 분리 방안 설계](https://iwannabarmus.tistory.com/38)
