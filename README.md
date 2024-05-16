@@ -10,6 +10,8 @@
 - [3. 동시성 제어 처리 로직 비교 구현]()
 - [4. DB Index 사용과 비교]()
 - [5. 대기열 설계 및 구현]()
+- [6. Transaction 범위와 책임 분리 방안 설계](https://iwannabarmus.tistory.com/38)
+- [7. 좌석 예약 정보를 데이터 플랫폼으로 전송 로직 구현](https://iwannabarmus.tistory.com/39)
 - [Trouble Shooting](##4.-Trouble-Shooting)
 - [개발하면서 끄적](##5.-개발하면서-끄적)
 - [기술 스택](##6.-기술-스택)
@@ -178,6 +180,14 @@ build_number값을 활용하여 Build Version을 체크한다.
 - 분당 처리할 수 있는 동시접속자 수 = 2,000명
   - 10초마다 200명씩 유효한 토큰으로 전환
   - 전환되는 인원수로 대기열 순번 계산
+
+---
+## 6. Transaction 범위와 책임 분리 방안 설계
+[Transaction 범위와 책임 분리 방안 설계](https://iwannabarmus.tistory.com/38)
+
+---
+## 7. 좌석 예약 정보를 데이터 플랫폼으로 전송 로직 구현
+[콘서트 좌석 예약 정보를 데이터 플랫폼으로 전달한다면?](https://iwannabarmus.tistory.com/39)
 
 ---
 ## 작업 내용
