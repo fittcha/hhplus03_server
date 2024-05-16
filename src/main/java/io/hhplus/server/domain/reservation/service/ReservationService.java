@@ -77,6 +77,7 @@ public class ReservationService implements ReservationInterface {
         reservationValidator.isNull(reservation);
 
         reservation.toCancel();
+        concertService.patchSeatStatus(reservation.getConcertDateId(), reservation.getSeatNum(), Seat.Status.AVAILABLE);
 
         // 결제 내역 환불 처리 event
         eventPublisher.publishEvent(new ReservationCancelledEvent(this, reservationId));

@@ -29,7 +29,8 @@ public class Send extends BaseDateTimeEntity {
     private String jsonData;
 
     @Builder
-    public Send(Type type, Status status, String jsonData) {
+    public Send(Long sendId, Type type, Status status, String jsonData) {
+        this.sendId = sendId;
         this.type = type;
         this.status = status;
         this.jsonData = jsonData;

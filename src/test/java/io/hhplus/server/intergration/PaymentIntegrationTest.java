@@ -64,7 +64,7 @@ class PaymentIntegrationTest extends BaseIntegrationTest {
             throw new CustomException(UserExceptionEnum.INSUFFICIENT_BALANCE, null, LogLevel.INFO);
         })
                 .isInstanceOf(CustomException.class)
-                .hasMessageContaining("잔액이 부족합니다.");
+                .hasMessageContaining("잔액이 부족하여 사용 불가합니다.");
     }
 
     @Test
