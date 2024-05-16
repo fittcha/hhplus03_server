@@ -11,6 +11,8 @@ import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -32,6 +34,10 @@ public class SendService {
 
     public void updateStatus(Send send, Send.Status status) {
         send.updateStatus(status);
+    }
+
+    public List<Send> findAllByStatus(Send.Status status) {
+        return sendRepository.findAllByStatus(status);
     }
 
     @Transactional

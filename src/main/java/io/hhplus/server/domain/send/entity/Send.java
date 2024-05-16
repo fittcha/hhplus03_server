@@ -28,6 +28,8 @@ public class Send extends BaseDateTimeEntity {
 
     private String jsonData;
 
+    private int retryCount = 0;
+
     @Builder
     public Send(Long sendId, Type type, Status status, String jsonData) {
         this.sendId = sendId;
@@ -48,14 +50,20 @@ public class Send extends BaseDateTimeEntity {
         this.status = status;
     }
 
+    public void plusRetryCount() {
+        this.retryCount++;
+    }
+
     public enum Type {
         RESERVATION
     }
 
     public enum Status {
         READY,
-        ING,
-        DONE
+        PUBLISHED,
+        RETRY,
+        SUCCESS,
+        FAIL
     }
 
     @Override

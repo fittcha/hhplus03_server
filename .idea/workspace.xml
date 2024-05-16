@@ -4,13 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7e2ccb01-a990-45a5-a6f7-ad379bc6548e" name="Changes" comment="feat: Kafka Test 환경 설정 추가">
+    <list default="true" id="7e2ccb01-a990-45a5-a6f7-ad379bc6548e" name="Changes" comment="feat: Kafka 메시지 발행 &gt; 비동기 이벤트로 kafka 메시지 발행하도록 비동기 이벤트 처리 추가">
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/base/kafka/service/KafkaProducerListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/base/kafka/service/KafkaRetryScheduler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/base/kafka/KafkaConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/base/kafka/KafkaConstants.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/base/kafka/service/KafkaConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/base/kafka/service/KafkaConsumer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/service/PaymentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/service/PaymentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/service/ReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/service/ReservationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/send/event/SendEventListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/send/event/SendEventListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/send/entity/Send.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/send/entity/Send.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/send/repository/SendJpaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/send/repository/SendJpaRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/send/repository/SendRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/send/repository/SendRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/send/service/SendService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/send/service/SendService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/infrastructure/send/SendRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/infrastructure/send/SendRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-dev.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application-local.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-local.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application-prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-prod.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application-sta.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-sta.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -162,7 +170,7 @@
       <recent name="io.hhplus.server.domain.user" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.PaymentServiceTest">
+  <component name="RunManager" selected="Spring Boot.ServerApplication">
     <configuration name="PaymentIntegrationTest.payTest_INSUFFICIENT_BALANCE" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -298,8 +306,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.PaymentServiceTest" />
         <item itemvalue="Gradle.ReservationIntegrationTest" />
+        <item itemvalue="Gradle.PaymentServiceTest" />
         <item itemvalue="Gradle.ReservationServiceTest.reserveTest_success" />
         <item itemvalue="Gradle.UsersIntegrationTest" />
         <item itemvalue="Gradle.PaymentIntegrationTest.payTest_INSUFFICIENT_BALANCE" />
@@ -364,7 +372,7 @@
       <updated>1714675063313</updated>
       <workItem from="1714675066177" duration="2031000" />
       <workItem from="1714677113755" duration="912000" />
-      <workItem from="1715759468195" duration="39088000" />
+      <workItem from="1715759468195" duration="43091000" />
     </task>
     <task id="LOCAL-00006" summary="feat: 유저 포인트 충전 및 사용 - Redisson 적용">
       <option name="closed" value="true" />
@@ -534,7 +542,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715877758594</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="feat: Kafka 메시지 발행 &gt; 비동기 이벤트로 kafka 메시지 발행하도록 비동기 이벤트 처리 추가">
+      <option name="closed" value="true" />
+      <created>1715879522917</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1715879522917</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -575,7 +591,8 @@
     <MESSAGE value="feat: dev CI 파일에 zookeeper, kafka 연결 정보 추가" />
     <MESSAGE value="feat: Kafka Producer, Consumer 개발 &gt; 기존 데이터 플랫폼 전송 이벤트 Kafka 메시지 발행으로 변경, Outbox Table 업데이트 로직 개발" />
     <MESSAGE value="feat: Kafka Test 환경 설정 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: Kafka Test 환경 설정 추가" />
+    <MESSAGE value="feat: Kafka 메시지 발행 &gt; 비동기 이벤트로 kafka 메시지 발행하도록 비동기 이벤트 처리 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: Kafka 메시지 발행 &gt; 비동기 이벤트로 kafka 메시지 발행하도록 비동기 이벤트 처리 추가" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
