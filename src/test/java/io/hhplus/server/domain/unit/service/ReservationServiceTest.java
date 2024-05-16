@@ -1,6 +1,7 @@
 package io.hhplus.server.domain.unit.service;
 
 import io.hhplus.server.base.exception.CustomException;
+import io.hhplus.server.base.kafka.service.KafkaProducer;
 import io.hhplus.server.controller.reservation.dto.request.CancelRequest;
 import io.hhplus.server.controller.reservation.dto.request.ReserveRequest;
 import io.hhplus.server.controller.reservation.dto.response.ReserveResponse;
@@ -12,6 +13,7 @@ import io.hhplus.server.domain.concert.service.ConcertReader;
 import io.hhplus.server.domain.concert.service.ConcertService;
 import io.hhplus.server.domain.reservation.ReservationExceptionEnum;
 import io.hhplus.server.domain.reservation.entity.Reservation;
+import io.hhplus.server.domain.reservation.event.ReservationEventPublisher;
 import io.hhplus.server.domain.reservation.repository.ReservationRepository;
 import io.hhplus.server.domain.reservation.service.ReservationMonitor;
 import io.hhplus.server.domain.reservation.service.ReservationService;
@@ -24,7 +26,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.logging.LogLevel;
-import org.springframework.context.ApplicationEventPublisher;
 
 import java.util.List;
 
@@ -43,7 +44,8 @@ class ReservationServiceTest {
     private ConcertReader concertReader;
     private ConcertService concertService;
     private SendService sendService;
-    private ApplicationEventPublisher applicationEventPublisher;
+    private ReservationEventPublisher reservationEventPublisher;
+    private KafkaProducer kafkaProducer;
 
     private Reservation 예약건;
 
@@ -56,7 +58,8 @@ class ReservationServiceTest {
         concertReader = Mockito.mock(ConcertReader.class);
         concertService = Mockito.mock(ConcertService.class);
         sendService = Mockito.mock(SendService.class);
-        applicationEventPublisher = Mockito.mock(ApplicationEventPublisher.class);
+        reservationEventPublisher = Mockito.mock(ReservationEventPublisher.class);
+        kafkaProducer = Mockito.mock(KafkaProducer.class);
 
         reservationService = new ReservationService(
                 reservationRepository,
@@ -65,7 +68,8 @@ class ReservationServiceTest {
                 concertReader,
                 concertService,
                 sendService,
-                applicationEventPublisher
+                reservationEventPublisher,
+                kafkaProducer
         );
 
         // 예약 정보 세팅

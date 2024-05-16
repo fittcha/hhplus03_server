@@ -1,6 +1,7 @@
 package io.hhplus.server.domain.unit.service;
 
 import io.hhplus.server.base.exception.CustomException;
+import io.hhplus.server.base.kafka.service.KafkaProducer;
 import io.hhplus.server.controller.payment.dto.request.CreateRequest;
 import io.hhplus.server.controller.payment.dto.request.PayRequest;
 import io.hhplus.server.controller.payment.dto.response.CreateResponse;
@@ -23,13 +24,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.logging.LogLevel;
-import org.springframework.context.ApplicationEventPublisher;
 
 import java.math.BigDecimal;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.when;
 import static org.mockito.Mockito.doThrow;
 
@@ -41,7 +42,7 @@ class PaymentServiceTest {
     private UserReader userReader;
     private ReservationReader reservationReader;
     private SendService sendService;
-    private ApplicationEventPublisher eventPublisher;
+    private KafkaProducer kafkaProducer;
 
     private Reservation 예약건;
 
@@ -53,7 +54,7 @@ class PaymentServiceTest {
         userReader = Mockito.mock(UserReader.class);
         reservationReader = Mockito.mock(ReservationReader.class);
         sendService = Mockito.mock(SendService.class);
-        eventPublisher = Mockito.mock(ApplicationEventPublisher.class);
+        kafkaProducer = Mockito.mock(KafkaProducer.class);
 
         paymentService = new PaymentService(
                 paymentRepository,
@@ -61,7 +62,7 @@ class PaymentServiceTest {
                 userReader,
                 reservationReader,
                 sendService,
-                eventPublisher
+                kafkaProducer
         );
 
         // 예약 정보 세팅

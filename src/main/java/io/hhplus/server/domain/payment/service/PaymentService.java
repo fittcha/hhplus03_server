@@ -1,6 +1,8 @@
 package io.hhplus.server.domain.payment.service;
 
 import com.google.gson.Gson;
+import io.hhplus.server.base.kafka.KafkaConstants;
+import io.hhplus.server.base.kafka.service.KafkaProducer;
 import io.hhplus.server.controller.payment.dto.request.CreateRequest;
 import io.hhplus.server.controller.payment.dto.request.PayRequest;
 import io.hhplus.server.controller.payment.dto.response.CreateResponse;
@@ -11,16 +13,13 @@ import io.hhplus.server.domain.payment.service.dto.CancelPaymentResultResDto;
 import io.hhplus.server.domain.reservation.entity.Reservation;
 import io.hhplus.server.domain.reservation.service.ReservationReader;
 import io.hhplus.server.domain.reservation.service.dto.SendReservationInfoDto;
-import io.hhplus.server.domain.send.dto.SendCommReqDto;
 import io.hhplus.server.domain.send.entity.Send;
-import io.hhplus.server.domain.send.event.SendEvent;
 import io.hhplus.server.domain.send.service.SendService;
 import io.hhplus.server.domain.user.entity.Users;
 import io.hhplus.server.domain.user.service.UserReader;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Recover;
 import org.springframework.retry.annotation.Retryable;
@@ -39,7 +38,7 @@ public class PaymentService implements PaymentInterface {
     private final UserReader userReader;
     private final ReservationReader reservationReader;
     private final SendService sendService;
-    private final ApplicationEventPublisher eventPublisher;
+    private final KafkaProducer kafkaProducer;
 
     @Override
     @Transactional
@@ -78,8 +77,8 @@ public class PaymentService implements PaymentInterface {
         String jsonData = gson.toJson(new SendReservationInfoDto(reservationId, status));
         Send send = sendService.save(Send.toEntity(Send.Type.RESERVATION, Send.Status.READY, jsonData));
 
-        // 예약 정보 전송 event 발행
-        eventPublisher.publishEvent(new SendEvent(this, new SendCommReqDto(send.getSendId(), jsonData)));
+        // 예약 정보 전송 kafka 메시지 발행
+        kafkaProducer.send(KafkaConstants.RESERVATION_TOPIC, String.valueOf(send.getSendId()), jsonData);
     }
 
     @Override

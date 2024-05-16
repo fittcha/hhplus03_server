@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import static io.hhplus.server.domain.send.entity.Send.Status.DONE;
-import static io.hhplus.server.domain.send.entity.Send.Status.ING;
 
 @Slf4j
 @Service
@@ -25,20 +24,26 @@ public class SendService {
         return sendRepository.save(send);
     }
 
+    public Send findById(Long sendId) {
+        Send send = sendRepository.findById(sendId);
+        if (send == null) {
+            throw new RuntimeException("Not found send. sendId: " + sendId);
+        }
+        return send;
+    }
+
+    public void updateStatus(Send send, Send.Status status) {
+        send.updateStatus(status);
+    }
+
     @Transactional
     @Retryable(value = RuntimeException.class, maxAttempts = 3, backoff = @Backoff(delay = 2000))
     public void send(SendCommReqDto sendReqDto) {
-        Send send = sendRepository.findById(sendReqDto.getSendId());
-        if (send == null) {
-            throw new RuntimeException("Not found send. sendId: " + sendReqDto.getSendId());
-        }
-        // Outbox table update : {ING}
-        send.updateStatus(ING);
-
         // dummy result :: 외부 데이터 플랫폼에 정보 전송 로직()
         boolean isSuccess = true;
         if (isSuccess) {
             // Outbox table update : {DONE}
+            Send send = findById(sendReqDto.getSendId());
             send.updateStatus(DONE);
         }
     }
