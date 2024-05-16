@@ -139,7 +139,7 @@ public class PaymentService implements PaymentInterface {
     }
 
     @Recover
-    public void refundRecover(RuntimeException e, Long reservationId) {
-        log.error("All the retries failed. reservationId: {}, error: {}", reservationId, e.getMessage());
+    public void recoverRefund(RuntimeException e, Long reservationId) {
+        log.error("All the reservationCancelledEvent retries failed. reservationId: {}, error: {}", reservationId, e.getMessage());
     }
 }
