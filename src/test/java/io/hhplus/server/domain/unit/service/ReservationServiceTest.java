@@ -1,7 +1,6 @@
 package io.hhplus.server.domain.unit.service;
 
 import io.hhplus.server.base.exception.CustomException;
-import io.hhplus.server.base.kafka.service.KafkaProducer;
 import io.hhplus.server.controller.reservation.dto.request.CancelRequest;
 import io.hhplus.server.controller.reservation.dto.request.ReserveRequest;
 import io.hhplus.server.controller.reservation.dto.response.ReserveResponse;
@@ -20,6 +19,7 @@ import io.hhplus.server.domain.reservation.service.ReservationService;
 import io.hhplus.server.domain.reservation.service.ReservationValidator;
 import io.hhplus.server.domain.reservation.service.dto.GetReservationAndPaymentResDto;
 import io.hhplus.server.domain.send.entity.Send;
+import io.hhplus.server.domain.send.event.SendEventPublisher;
 import io.hhplus.server.domain.send.service.SendService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -45,7 +45,7 @@ class ReservationServiceTest {
     private ConcertService concertService;
     private SendService sendService;
     private ReservationEventPublisher reservationEventPublisher;
-    private KafkaProducer kafkaProducer;
+    private SendEventPublisher sendEventPublisher;
 
     private Reservation 예약건;
 
@@ -59,7 +59,7 @@ class ReservationServiceTest {
         concertService = Mockito.mock(ConcertService.class);
         sendService = Mockito.mock(SendService.class);
         reservationEventPublisher = Mockito.mock(ReservationEventPublisher.class);
-        kafkaProducer = Mockito.mock(KafkaProducer.class);
+        sendEventPublisher = Mockito.mock(SendEventPublisher.class);
 
         reservationService = new ReservationService(
                 reservationRepository,
@@ -69,7 +69,7 @@ class ReservationServiceTest {
                 concertService,
                 sendService,
                 reservationEventPublisher,
-                kafkaProducer
+                sendEventPublisher
         );
 
         // 예약 정보 세팅

@@ -1,7 +1,6 @@
 package io.hhplus.server.domain.unit.service;
 
 import io.hhplus.server.base.exception.CustomException;
-import io.hhplus.server.base.kafka.service.KafkaProducer;
 import io.hhplus.server.controller.payment.dto.request.CreateRequest;
 import io.hhplus.server.controller.payment.dto.request.PayRequest;
 import io.hhplus.server.controller.payment.dto.response.CreateResponse;
@@ -15,6 +14,7 @@ import io.hhplus.server.domain.payment.service.dto.CancelPaymentResultResDto;
 import io.hhplus.server.domain.reservation.entity.Reservation;
 import io.hhplus.server.domain.reservation.service.ReservationReader;
 import io.hhplus.server.domain.send.entity.Send;
+import io.hhplus.server.domain.send.event.SendEventPublisher;
 import io.hhplus.server.domain.send.service.SendService;
 import io.hhplus.server.domain.user.UserExceptionEnum;
 import io.hhplus.server.domain.user.entity.Users;
@@ -42,7 +42,7 @@ class PaymentServiceTest {
     private UserReader userReader;
     private ReservationReader reservationReader;
     private SendService sendService;
-    private KafkaProducer kafkaProducer;
+    private SendEventPublisher sendEventPublisher;
 
     private Reservation 예약건;
 
@@ -54,7 +54,7 @@ class PaymentServiceTest {
         userReader = Mockito.mock(UserReader.class);
         reservationReader = Mockito.mock(ReservationReader.class);
         sendService = Mockito.mock(SendService.class);
-        kafkaProducer = Mockito.mock(KafkaProducer.class);
+        sendEventPublisher = Mockito.mock(SendEventPublisher.class);
 
         paymentService = new PaymentService(
                 paymentRepository,
@@ -62,7 +62,7 @@ class PaymentServiceTest {
                 userReader,
                 reservationReader,
                 sendService,
-                kafkaProducer
+                sendEventPublisher
         );
 
         // 예약 정보 세팅

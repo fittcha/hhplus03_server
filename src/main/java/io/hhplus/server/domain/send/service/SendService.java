@@ -11,8 +11,6 @@ import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import static io.hhplus.server.domain.send.entity.Send.Status.DONE;
-
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -38,14 +36,9 @@ public class SendService {
 
     @Transactional
     @Retryable(value = RuntimeException.class, maxAttempts = 3, backoff = @Backoff(delay = 2000))
-    public void send(SendCommReqDto sendReqDto) {
+    public boolean send(SendCommReqDto sendReqDto) {
         // dummy result :: 외부 데이터 플랫폼에 정보 전송 로직()
-        boolean isSuccess = true;
-        if (isSuccess) {
-            // Outbox table update : {DONE}
-            Send send = findById(sendReqDto.getSendId());
-            send.updateStatus(DONE);
-        }
+        return true;
     }
 
     @Recover

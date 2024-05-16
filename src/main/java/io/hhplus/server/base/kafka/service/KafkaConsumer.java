@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
+import static io.hhplus.server.domain.send.entity.Send.Status.DONE;
+
 @Slf4j
 @Component
 @RequiredArgsConstructor
@@ -27,9 +29,13 @@ public class KafkaConsumer {
 
             // send to DataPlatform
             SendCommReqDto sendCommReqDto = new SendCommReqDto(Long.valueOf(sendId), message);
-            sendService.send(sendCommReqDto);
+            boolean isSuccess = sendService.send(sendCommReqDto);
 
-            log.info("Message processed successfully");
+            if (isSuccess) {
+                // Outbox table update : {DONE}
+                send.updateStatus(DONE);
+                log.info("Message processed successfully");
+            }
         } catch (Exception e) {
             log.error("Failed to process message: {}", e.getMessage());
         }

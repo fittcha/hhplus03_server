@@ -1,8 +1,6 @@
 package io.hhplus.server.domain.reservation.service;
 
 import com.google.gson.Gson;
-import io.hhplus.server.base.kafka.KafkaConstants;
-import io.hhplus.server.base.kafka.service.KafkaProducer;
 import io.hhplus.server.base.redis.RedissonLock;
 import io.hhplus.server.controller.reservation.dto.request.CancelRequest;
 import io.hhplus.server.controller.reservation.dto.request.ReserveRequest;
@@ -20,7 +18,10 @@ import io.hhplus.server.domain.reservation.event.ReservationOccupiedEvent;
 import io.hhplus.server.domain.reservation.repository.ReservationRepository;
 import io.hhplus.server.domain.reservation.service.dto.GetReservationAndPaymentResDto;
 import io.hhplus.server.domain.reservation.service.dto.SendReservationInfoDto;
+import io.hhplus.server.domain.send.dto.SendCommReqDto;
 import io.hhplus.server.domain.send.entity.Send;
+import io.hhplus.server.domain.send.event.SendEvent;
+import io.hhplus.server.domain.send.event.SendEventPublisher;
 import io.hhplus.server.domain.send.service.SendService;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
@@ -40,7 +41,7 @@ public class ReservationService implements ReservationInterface {
     private final ConcertService concertService;
     private final SendService sendService;
     private final ReservationEventPublisher reservationEventPublisher;
-    private final KafkaProducer kafkaProducer;
+    private final SendEventPublisher sendEventPublisher;
 
     @PostConstruct
     public void init() {
@@ -99,7 +100,7 @@ public class ReservationService implements ReservationInterface {
         String jsonData = gson.toJson(new SendReservationInfoDto(reservationId, status));
         Send send = sendService.save(Send.toEntity(Send.Type.RESERVATION, Send.Status.READY, jsonData));
 
-        // 예약 정보 전송 kafka 메시지 발행
-        kafkaProducer.send(KafkaConstants.RESERVATION_TOPIC, String.valueOf(send.getSendId()), jsonData);
+        // 예약 정보 전송 event 발행
+        sendEventPublisher.send(new SendEvent(this, new SendCommReqDto(send.getSendId(), jsonData)));
     }
 }
