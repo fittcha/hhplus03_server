@@ -13,6 +13,7 @@ import io.hhplus.server.domain.payment.service.PaymentValidator;
 import io.hhplus.server.domain.payment.service.dto.CancelPaymentResultResDto;
 import io.hhplus.server.domain.reservation.entity.Reservation;
 import io.hhplus.server.domain.reservation.service.ReservationReader;
+import io.hhplus.server.domain.send.service.SendService;
 import io.hhplus.server.domain.user.UserExceptionEnum;
 import io.hhplus.server.domain.user.entity.Users;
 import io.hhplus.server.domain.user.service.UserReader;
@@ -21,6 +22,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.logging.LogLevel;
+import org.springframework.context.ApplicationEventPublisher;
 
 import java.math.BigDecimal;
 
@@ -38,6 +40,8 @@ class PaymentServiceTest {
     private PaymentValidator paymentValidator;
     private UserReader userReader;
     private ReservationReader reservationReader;
+    private SendService sendService;
+    private ApplicationEventPublisher eventPublisher;
 
     private Reservation 예약건;
 
@@ -48,12 +52,16 @@ class PaymentServiceTest {
         paymentValidator = Mockito.mock(PaymentValidator.class);
         userReader = Mockito.mock(UserReader.class);
         reservationReader = Mockito.mock(ReservationReader.class);
+        sendService = Mockito.mock(SendService.class);
+        eventPublisher = Mockito.mock(ApplicationEventPublisher.class);
 
         paymentService = new PaymentService(
                 paymentRepository,
                 paymentValidator,
                 userReader,
-                reservationReader
+                reservationReader,
+                sendService,
+                eventPublisher
         );
 
         // 예약 정보 세팅

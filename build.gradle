@@ -62,6 +62,9 @@ dependencies {
 
     // retry
     implementation 'org.springframework.retry:spring-retry'
+
+    // gson
+    implementation 'com.google.code.gson:gson:2.9.0'
 }
 
 test {
