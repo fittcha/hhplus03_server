@@ -13,6 +13,7 @@ import io.hhplus.server.domain.concert.service.ConcertReader;
 import io.hhplus.server.domain.concert.service.ConcertService;
 import io.hhplus.server.domain.reservation.entity.Reservation;
 import io.hhplus.server.domain.reservation.event.ReservationCancelledEvent;
+import io.hhplus.server.domain.reservation.event.ReservationEventPublisher;
 import io.hhplus.server.domain.reservation.event.ReservationOccupiedEvent;
 import io.hhplus.server.domain.reservation.repository.ReservationRepository;
 import io.hhplus.server.domain.reservation.service.dto.GetReservationAndPaymentResDto;
@@ -20,10 +21,10 @@ import io.hhplus.server.domain.reservation.service.dto.SendReservationInfoDto;
 import io.hhplus.server.domain.send.dto.SendCommReqDto;
 import io.hhplus.server.domain.send.entity.Send;
 import io.hhplus.server.domain.send.event.SendEvent;
+import io.hhplus.server.domain.send.event.SendEventPublisher;
 import io.hhplus.server.domain.send.service.SendService;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,7 +40,8 @@ public class ReservationService implements ReservationInterface {
     private final ConcertReader concertReader;
     private final ConcertService concertService;
     private final SendService sendService;
-    private final ApplicationEventPublisher eventPublisher;
+    private final ReservationEventPublisher reservationEventPublisher;
+    private final SendEventPublisher sendEventPublisher;
 
     @PostConstruct
     public void init() {
@@ -60,7 +62,7 @@ public class ReservationService implements ReservationInterface {
         ConcertDate concertDate = concertReader.findConcertDate(reservation.getConcertDateId());
 
         // 예약 임시 점유 event 발행
-        eventPublisher.publishEvent(new ReservationOccupiedEvent(this, reservation.getReservationId()));
+        reservationEventPublisher.reservationOccupy(new ReservationOccupiedEvent(this, reservation.getReservationId()));
 
         // 예약 정보를 데이터 플랫폼에 전송
         sendToDataPlatform(reservation.getReservationId(), Reservation.Status.ING);
@@ -80,7 +82,7 @@ public class ReservationService implements ReservationInterface {
         concertService.patchSeatStatus(reservation.getConcertDateId(), reservation.getSeatNum(), Seat.Status.AVAILABLE);
 
         // 결제 내역 환불 처리 event
-        eventPublisher.publishEvent(new ReservationCancelledEvent(this, reservationId));
+        reservationEventPublisher.reservationCancel(new ReservationCancelledEvent(this, reservationId));
 
         // 예약 정보를 데이터 플랫폼에 전송
         sendToDataPlatform(reservation.getReservationId(), Reservation.Status.CANCEL);
@@ -99,6 +101,6 @@ public class ReservationService implements ReservationInterface {
         Send send = sendService.save(Send.toEntity(Send.Type.RESERVATION, Send.Status.READY, jsonData));
 
         // 예약 정보 전송 event 발행
-        eventPublisher.publishEvent(new SendEvent(this, new SendCommReqDto(send.getSendId(), jsonData)));
+        sendEventPublisher.send(new SendEvent(this, new SendCommReqDto(send.getSendId(), jsonData)));
     }
 }

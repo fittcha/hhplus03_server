@@ -4,15 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7e2ccb01-a990-45a5-a6f7-ad379bc6548e" name="Changes" comment="feat: CI 파일에 Redis 서비스 추가">
+    <list default="true" id="7e2ccb01-a990-45a5-a6f7-ad379bc6548e" name="Changes" comment="feat: spring-kafka 설정 추가">
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/event/ReservationEventPublisher.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/send/event/SendEventPublisher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-dev.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application-local.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-local.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application-prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-prod.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application-sta.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-sta.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application-test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-test.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/service/ReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/service/ReservationService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -157,11 +153,11 @@
       <recent name="$PROJECT_DIR$/docker/db" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="io.hhplus.server.domain.send.event" />
       <recent name="io.hhplus.server.infrastructure.send" />
       <recent name="io.hhplus.server.domain.send.repository" />
       <recent name="io.hhplus.server.domain.payment.event" />
       <recent name="io.hhplus.server.domain.user" />
-      <recent name="io.hhplus.server.domain.user.service" />
     </key>
   </component>
   <component name="RunManager" selected="Gradle.ReservationServiceTest.reserveTest_success">
@@ -366,7 +362,7 @@
       <updated>1714675063313</updated>
       <workItem from="1714675066177" duration="2031000" />
       <workItem from="1714677113755" duration="912000" />
-      <workItem from="1715759468195" duration="31282000" />
+      <workItem from="1715759468195" duration="32470000" />
     </task>
     <task id="LOCAL-00006" summary="feat: 유저 포인트 충전 및 사용 - Redisson 적용">
       <option name="closed" value="true" />
@@ -496,7 +492,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715868081823</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="feat: spring-kafka 설정 추가">
+      <option name="closed" value="true" />
+      <created>1715871276050</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1715871276050</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -532,7 +536,8 @@
     <MESSAGE value="docs: UPDATE README.md" />
     <MESSAGE value="docs: test 정리" />
     <MESSAGE value="feat: CI 파일에 Redis 서비스 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: CI 파일에 Redis 서비스 추가" />
+    <MESSAGE value="feat: spring-kafka 설정 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: spring-kafka 설정 추가" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
