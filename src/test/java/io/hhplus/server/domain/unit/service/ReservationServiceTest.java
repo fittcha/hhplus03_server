@@ -17,6 +17,7 @@ import io.hhplus.server.domain.reservation.service.ReservationMonitor;
 import io.hhplus.server.domain.reservation.service.ReservationService;
 import io.hhplus.server.domain.reservation.service.ReservationValidator;
 import io.hhplus.server.domain.reservation.service.dto.GetReservationAndPaymentResDto;
+import io.hhplus.server.domain.send.entity.Send;
 import io.hhplus.server.domain.send.service.SendService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -29,8 +30,7 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.when;
 import static org.mockito.Mockito.doThrow;
 
@@ -100,12 +100,14 @@ class ReservationServiceTest {
     void reserveTest_success() {
         // given
         ReserveRequest request = new ReserveRequest(1L, 1L, 1, 1L);
+        Send send = new Send(1L, Send.Type.RESERVATION, Send.Status.READY, "{}");
 
         // when
         when(reservationRepository.findOneByConcertDateIdAndSeatNum(request.concertDateId(), request.seatNum())).thenReturn(null);
         when(reservationRepository.save(request.toEntity())).thenReturn(예약건);
         when(concertReader.findConcert(anyLong())).thenReturn(Concert.builder().build());
         when(concertReader.findConcertDate(anyLong())).thenReturn(ConcertDate.builder().build());
+        when(sendService.save(any(Send.class))).thenReturn(send);
         ReserveResponse response = reservationService.reserve(request);
 
         // then
@@ -118,9 +120,11 @@ class ReservationServiceTest {
         // given
         Long reservationId = 1L;
         CancelRequest request = new CancelRequest(1L);
+        Send send = new Send(1L, Send.Type.RESERVATION, Send.Status.READY, "{}");
 
         // when
         when(reservationRepository.findByIdAndUserId(reservationId, request.userId())).thenReturn(예약건);
+        when(sendService.save(any(Send.class))).thenReturn(send);
         reservationService.cancel(reservationId, request);
     }
 

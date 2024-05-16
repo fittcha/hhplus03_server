@@ -4,9 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7e2ccb01-a990-45a5-a6f7-ad379bc6548e" name="Changes" comment="docs: UPDATE READ.me">
+    <list default="true" id="7e2ccb01-a990-45a5-a6f7-ad379bc6548e" name="Changes" comment="docs: UPDATE README.md">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/service/ReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/service/ReservationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/send/entity/Send.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/send/entity/Send.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application-test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-test.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/io/hhplus/server/domain/unit/service/ConcertServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/io/hhplus/server/domain/unit/service/ConcertServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/io/hhplus/server/domain/unit/service/PaymentServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/io/hhplus/server/domain/unit/service/PaymentServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/io/hhplus/server/domain/unit/service/ReservationServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/io/hhplus/server/domain/unit/service/ReservationServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/io/hhplus/server/intergration/PaymentIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/io/hhplus/server/intergration/PaymentIntegrationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,41 +96,50 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Docker.redis/docker-compose-redis.yml: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Build hhplus03_server.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.ConcertIntegrationTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.ReservationIntegrationTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.ReservationIntegrationTest.reserveTest_ALREADY_RESERVED.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.ReservationIntegrationTest.reserveTest_ALREADY_RESERVED_lock.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.ReservationIntegrationTest.reserveTest_complete_in_5min.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.UsersIntegrationTest.chargeAndUseTest_lock.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.UsersIntegrationTest.chargeTest_따닥_lock.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.UsersIntegrationTest.useTest_use_before_lack_lock.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.hhplus03_server [build].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.hhplus03_server [clean].executor&quot;: &quot;Run&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
-    &quot;Spring Boot.ServerApplication.executor&quot;: &quot;Run&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.import&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Docker.redis/docker-compose-redis.yml: Compose Deployment.executor": "Run",
+    "Gradle.Build hhplus03_server.executor": "Run",
+    "Gradle.ConcertIntegrationTest.executor": "Run",
+    "Gradle.ConcertServiceTest.executor": "Run",
+    "Gradle.PaymentIntegrationTest.executor": "Run",
+    "Gradle.PaymentIntegrationTest.payTest_INSUFFICIENT_BALANCE.executor": "Run",
+    "Gradle.PaymentServiceTest.executor": "Run",
+    "Gradle.PaymentServiceTest.payTest_lack_balance.executor": "Run",
+    "Gradle.PaymentServiceTest.payTest_success.executor": "Run",
+    "Gradle.ReservationIntegrationTest.executor": "Run",
+    "Gradle.ReservationIntegrationTest.reserveTest_ALREADY_RESERVED.executor": "Run",
+    "Gradle.ReservationIntegrationTest.reserveTest_ALREADY_RESERVED_lock.executor": "Run",
+    "Gradle.ReservationIntegrationTest.reserveTest_complete_in_5min.executor": "Run",
+    "Gradle.ReservationServiceTest.executor": "Run",
+    "Gradle.UsersIntegrationTest.chargeAndUseTest_lock.executor": "Run",
+    "Gradle.UsersIntegrationTest.chargeTest_따닥_lock.executor": "Run",
+    "Gradle.UsersIntegrationTest.useTest_use_before_lack_lock.executor": "Run",
+    "Gradle.UsersServiceTest.executor": "Run",
+    "Gradle.WaitingServiceTest.executor": "Run",
+    "Gradle.hhplus03_server [build].executor": "Run",
+    "Gradle.hhplus03_server [clean].executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
+    "Spring Boot.ServerApplication.executor": "Run",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "develop",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "editor.preferences.import",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
@@ -142,7 +158,7 @@
       <recent name="io.hhplus.server.domain.user.service" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.ServerApplication">
+  <component name="RunManager" selected="Gradle.UsersIntegrationTest">
     <configuration name="ConcertIntegrationTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -157,6 +173,54 @@
             <option value=":test" />
             <option value="--tests" />
             <option value="&quot;io.hhplus.server.intergration.ConcertIntegrationTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="PaymentIntegrationTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;io.hhplus.server.intergration.PaymentIntegrationTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="PaymentIntegrationTest.payTest_INSUFFICIENT_BALANCE" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;io.hhplus.server.intergration.PaymentIntegrationTest.payTest_INSUFFICIENT_BALANCE&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -191,7 +255,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="ReservationIntegrationTest.reserveTest_ALREADY_RESERVED" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="UsersIntegrationTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -204,55 +268,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;io.hhplus.server.intergration.ReservationIntegrationTest.reserveTest_ALREADY_RESERVED&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="ReservationIntegrationTest.reserveTest_ALREADY_RESERVED_lock" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;io.hhplus.server.intergration.ReservationIntegrationTest.reserveTest_ALREADY_RESERVED_lock&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="ReservationIntegrationTest.reserveTest_complete_in_5min" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;io.hhplus.server.intergration.ReservationIntegrationTest.reserveTest_complete_in_5min&quot;" />
+            <option value="&quot;io.hhplus.server.intergration.UsersIntegrationTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -278,11 +294,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.ReservationIntegrationTest.reserveTest_ALREADY_RESERVED_lock" />
+        <item itemvalue="Gradle.UsersIntegrationTest" />
         <item itemvalue="Gradle.ReservationIntegrationTest" />
+        <item itemvalue="Gradle.PaymentIntegrationTest.payTest_INSUFFICIENT_BALANCE" />
+        <item itemvalue="Gradle.PaymentIntegrationTest" />
         <item itemvalue="Gradle.ConcertIntegrationTest" />
-        <item itemvalue="Gradle.ReservationIntegrationTest.reserveTest_complete_in_5min" />
-        <item itemvalue="Gradle.ReservationIntegrationTest.reserveTest_ALREADY_RESERVED" />
       </list>
     </recent_temporary>
   </component>
@@ -344,7 +360,7 @@
       <updated>1714675063313</updated>
       <workItem from="1714675066177" duration="2031000" />
       <workItem from="1714677113755" duration="912000" />
-      <workItem from="1715759468195" duration="23555000" />
+      <workItem from="1715759468195" duration="27286000" />
     </task>
     <task id="LOCAL-00006" summary="feat: 유저 포인트 충전 및 사용 - Redisson 적용">
       <option name="closed" value="true" />
@@ -442,7 +458,23 @@
       <option name="project" value="LOCAL" />
       <updated>1715862325788</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="docs: UPDATE READ.me">
+      <option name="closed" value="true" />
+      <created>1715863205822</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1715863205822</updated>
+    </task>
+    <task id="LOCAL-00019" summary="docs: UPDATE README.md">
+      <option name="closed" value="true" />
+      <created>1715863221296</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1715863221296</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -475,7 +507,8 @@
     <MESSAGE value="feat: 예약 취소 시 결제내역 처리 로직 event로 분리 - 트랜잭션 범위 조절과 책임 분리" />
     <MESSAGE value="feat: 좌석 예약 정보를 데이터 플랫폼으로 전달 로직 - event 개발" />
     <MESSAGE value="docs: UPDATE READ.me" />
-    <option name="LAST_COMMIT_MESSAGE" value="docs: UPDATE READ.me" />
+    <MESSAGE value="docs: UPDATE README.md" />
+    <option name="LAST_COMMIT_MESSAGE" value="docs: UPDATE README.md" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -1,9 +1,11 @@
 package io.hhplus.server;
 
+import lombok.Getter;
 import org.springframework.stereotype.Service;
 
 import java.time.Clock;
 
+@Getter
 @Service
 public class TimeService {
 
@@ -11,9 +13,5 @@ public class TimeService {
 
     public void setClock(Clock clock) {
         this.clock = clock;
-    }
-
-    public Clock getClock() {
-        return clock;
     }
 }
