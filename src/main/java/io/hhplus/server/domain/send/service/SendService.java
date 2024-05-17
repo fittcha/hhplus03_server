@@ -48,7 +48,7 @@ public class SendService {
     }
 
     @Recover
-    public void sendRecover(RuntimeException e, Long reservationId) {
-        log.error("All the retries failed. sendId: {}, error: {}", reservationId, e.getMessage());
+    public void recoverSend(RuntimeException e, Long reservationId) {
+        log.error("All the sendEvent retries failed. sendId: {}, error: {}", reservationId, e.getMessage());
     }
 }

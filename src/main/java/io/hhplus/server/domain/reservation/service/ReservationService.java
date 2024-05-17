@@ -9,6 +9,7 @@ import io.hhplus.server.controller.user.dto.response.GetMyReservationsResponse;
 import io.hhplus.server.domain.concert.entity.Concert;
 import io.hhplus.server.domain.concert.entity.ConcertDate;
 import io.hhplus.server.domain.concert.entity.Seat;
+import io.hhplus.server.domain.concert.event.SeatStatusEvent;
 import io.hhplus.server.domain.concert.service.ConcertReader;
 import io.hhplus.server.domain.concert.service.ConcertService;
 import io.hhplus.server.domain.reservation.entity.Reservation;
@@ -79,10 +80,11 @@ public class ReservationService implements ReservationInterface {
         reservationValidator.isNull(reservation);
 
         reservation.toCancel();
-        concertService.patchSeatStatus(reservation.getConcertDateId(), reservation.getSeatNum(), Seat.Status.AVAILABLE);
 
         // 결제 내역 환불 처리 event
         reservationEventPublisher.reservationCancel(new ReservationCancelledEvent(this, reservationId));
+        // 좌석 상태 변경 event
+        reservationEventPublisher.updateSeatStatus(new SeatStatusEvent(this, reservation.getConcertDateId(), reservation.getSeatNum(), Seat.Status.AVAILABLE));
 
         // 예약 정보를 데이터 플랫폼에 전송
         sendToDataPlatform(reservation.getReservationId(), Reservation.Status.CANCEL);
