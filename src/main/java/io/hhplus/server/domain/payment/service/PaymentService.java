@@ -1,29 +1,25 @@
 package io.hhplus.server.domain.payment.service;
 
 import com.google.gson.Gson;
+import io.hhplus.server.base.kafka.KafkaConstants;
+import io.hhplus.server.base.kafka.service.KafkaProducer;
 import io.hhplus.server.controller.payment.dto.request.CreateRequest;
 import io.hhplus.server.controller.payment.dto.request.PayRequest;
 import io.hhplus.server.controller.payment.dto.response.CreateResponse;
 import io.hhplus.server.controller.payment.dto.response.PayResponse;
+import io.hhplus.server.domain.outbox.entity.Outbox;
+import io.hhplus.server.domain.outbox.service.OutboxService;
 import io.hhplus.server.domain.payment.entity.Payment;
 import io.hhplus.server.domain.payment.repository.PaymentRepository;
 import io.hhplus.server.domain.payment.service.dto.CancelPaymentResultResDto;
 import io.hhplus.server.domain.reservation.entity.Reservation;
 import io.hhplus.server.domain.reservation.service.ReservationReader;
 import io.hhplus.server.domain.reservation.service.dto.SendReservationInfoDto;
-import io.hhplus.server.domain.send.dto.SendCommReqDto;
-import io.hhplus.server.domain.send.entity.Send;
-import io.hhplus.server.domain.send.event.SendEvent;
-import io.hhplus.server.domain.send.event.SendEventPublisher;
-import io.hhplus.server.domain.send.service.SendService;
 import io.hhplus.server.domain.user.entity.Users;
 import io.hhplus.server.domain.user.service.UserReader;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.retry.annotation.Backoff;
-import org.springframework.retry.annotation.Recover;
-import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,8 +34,8 @@ public class PaymentService implements PaymentInterface {
     private final PaymentValidator paymentValidator;
     private final UserReader userReader;
     private final ReservationReader reservationReader;
-    private final SendService sendService;
-    private final SendEventPublisher sendEventPublisher;
+    private final OutboxService outboxService;
+    private final KafkaProducer kafkaProducer;
 
     @Override
     @Transactional
@@ -76,10 +72,10 @@ public class PaymentService implements PaymentInterface {
         // Outbox 데이터 등록
         Gson gson = new Gson();
         String jsonData = gson.toJson(new SendReservationInfoDto(reservationId, status));
-        Send send = sendService.save(Send.toEntity(Send.Type.RESERVATION, Send.Status.READY, jsonData));
+        Outbox outbox = outboxService.save(Outbox.toEntity(Outbox.Type.SEND, Outbox.Status.READY, jsonData));
 
-        // 예약 정보 전송 event 발행
-        sendEventPublisher.send(new SendEvent(this, new SendCommReqDto(send.getSendId(), jsonData)));
+        // kafka 메시지 발행 - 예약 정보 전송
+        kafkaProducer.publish(KafkaConstants.SEND_TOPIC, outbox.getOutboxId(), jsonData);
     }
 
     @Override
@@ -96,6 +92,10 @@ public class PaymentService implements PaymentInterface {
     @Override
     @Transactional
     public CancelPaymentResultResDto cancel(Long paymentId) {
+        if (paymentId == null) {
+            return new CancelPaymentResultResDto(true, null, null);
+        }
+
         Payment payment = paymentRepository.findById(paymentId);
 
         // validator
@@ -125,21 +125,5 @@ public class PaymentService implements PaymentInterface {
         }
 
         return updatedPayment;
-    }
-
-    @Transactional
-    @Retryable(value = RuntimeException.class, maxAttempts = 3, backoff = @Backoff(delay = 2000))
-    public void refundReservationCancelled(Long reservationId) {
-        Payment payment = paymentRepository.findByReservationId(reservationId);
-        if (payment == null) {
-            return;
-        }
-        // 결제 내역 존재 시 환불 처리
-        cancel(payment.getPaymentId());
-    }
-
-    @Recover
-    public void recoverRefund(RuntimeException e, Long reservationId) {
-        log.error("All the reservationCancelledEvent retries failed. reservationId: {}, error: {}", reservationId, e.getMessage());
     }
 }

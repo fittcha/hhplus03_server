@@ -12,8 +12,8 @@ public class KafkaProducer {
 
     private final KafkaTemplate<String, String> kafkaTemplate;
 
-    public void send(String topic, String sendId, String message) {
-        log.info("sending message={} to topic={}, at sendId={}", message, topic, sendId);
-        kafkaTemplate.send(topic, sendId, message);
+    public void publish(String topic, Long outboxId, String jsonData) {
+        log.info("sending jsonData={} to topic={}, at outboxId={}", jsonData, topic, outboxId);
+        kafkaTemplate.send(topic, String.valueOf(outboxId), jsonData);
     }
 }

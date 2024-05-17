@@ -1,16 +1,19 @@
 package io.hhplus.server.domain.send.event;
 
-import io.hhplus.server.domain.send.dto.SendCommReqDto;
 import lombok.Getter;
-import org.springframework.context.ApplicationEvent;
+import lombok.Setter;
+import lombok.ToString;
 
 @Getter
-public class SendEvent extends ApplicationEvent {
+@Setter
+@ToString
+public class SendEvent {
 
-    private final SendCommReqDto sendReqDto;
+    private Long outboxId;
+    private String jsonData;
 
-    public SendEvent(Object source, SendCommReqDto sendReqDto) {
-        super(source);
-        this.sendReqDto = sendReqDto;
+    public SendEvent(Long outboxId, String jsonData) {
+        this.outboxId = outboxId;
+        this.jsonData = jsonData;
     }
 }

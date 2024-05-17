@@ -1,6 +1,7 @@
 package io.hhplus.server.domain.unit.service;
 
 import io.hhplus.server.base.exception.CustomException;
+import io.hhplus.server.base.kafka.service.KafkaProducer;
 import io.hhplus.server.controller.reservation.dto.request.CancelRequest;
 import io.hhplus.server.controller.reservation.dto.request.ReserveRequest;
 import io.hhplus.server.controller.reservation.dto.response.ReserveResponse;
@@ -18,9 +19,8 @@ import io.hhplus.server.domain.reservation.service.ReservationMonitor;
 import io.hhplus.server.domain.reservation.service.ReservationService;
 import io.hhplus.server.domain.reservation.service.ReservationValidator;
 import io.hhplus.server.domain.reservation.service.dto.GetReservationAndPaymentResDto;
-import io.hhplus.server.domain.send.entity.Send;
-import io.hhplus.server.domain.send.event.SendEventPublisher;
-import io.hhplus.server.domain.send.service.SendService;
+import io.hhplus.server.domain.outbox.entity.Outbox;
+import io.hhplus.server.domain.outbox.service.OutboxService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -43,9 +43,9 @@ class ReservationServiceTest {
     private ReservationMonitor reservationMonitor;
     private ConcertReader concertReader;
     private ConcertService concertService;
-    private SendService sendService;
+    private OutboxService outboxService;
     private ReservationEventPublisher reservationEventPublisher;
-    private SendEventPublisher sendEventPublisher;
+    private KafkaProducer kafkaProducer;
 
     private Reservation 예약건;
 
@@ -57,9 +57,9 @@ class ReservationServiceTest {
         reservationMonitor = Mockito.mock(ReservationMonitor.class);
         concertReader = Mockito.mock(ConcertReader.class);
         concertService = Mockito.mock(ConcertService.class);
-        sendService = Mockito.mock(SendService.class);
+        outboxService = Mockito.mock(OutboxService.class);
         reservationEventPublisher = Mockito.mock(ReservationEventPublisher.class);
-        sendEventPublisher = Mockito.mock(SendEventPublisher.class);
+        kafkaProducer = Mockito.mock(KafkaProducer.class);
 
         reservationService = new ReservationService(
                 reservationRepository,
@@ -67,9 +67,9 @@ class ReservationServiceTest {
                 reservationMonitor,
                 concertReader,
                 concertService,
-                sendService,
+                outboxService,
                 reservationEventPublisher,
-                sendEventPublisher
+                kafkaProducer
         );
 
         // 예약 정보 세팅
@@ -104,14 +104,14 @@ class ReservationServiceTest {
     void reserveTest_success() {
         // given
         ReserveRequest request = new ReserveRequest(1L, 1L, 1, 1L);
-        Send send = new Send(1L, Send.Type.RESERVATION, Send.Status.READY, "{}");
+        Outbox outbox = new Outbox(1L, Outbox.Type.RESERVATION, Outbox.Status.READY, "{}");
 
         // when
         when(reservationRepository.findOneByConcertDateIdAndSeatNum(request.concertDateId(), request.seatNum())).thenReturn(null);
         when(reservationRepository.save(request.toEntity())).thenReturn(예약건);
         when(concertReader.findConcert(anyLong())).thenReturn(Concert.builder().build());
         when(concertReader.findConcertDate(anyLong())).thenReturn(ConcertDate.builder().build());
-        when(sendService.save(any(Send.class))).thenReturn(send);
+        when(outboxService.save(any(Outbox.class))).thenReturn(outbox);
         ReserveResponse response = reservationService.reserve(request);
 
         // then
@@ -124,11 +124,11 @@ class ReservationServiceTest {
         // given
         Long reservationId = 1L;
         CancelRequest request = new CancelRequest(1L);
-        Send send = new Send(1L, Send.Type.RESERVATION, Send.Status.READY, "{}");
+        Outbox outbox = new Outbox(1L, Outbox.Type.RESERVATION, Outbox.Status.READY, "{}");
 
         // when
         when(reservationRepository.findByIdAndUserId(reservationId, request.userId())).thenReturn(예약건);
-        when(sendService.save(any(Send.class))).thenReturn(send);
+        when(outboxService.save(any(Outbox.class))).thenReturn(outbox);
         reservationService.cancel(reservationId, request);
     }
 

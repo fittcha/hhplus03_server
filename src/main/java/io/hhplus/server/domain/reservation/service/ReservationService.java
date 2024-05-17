@@ -1,7 +1,9 @@
 package io.hhplus.server.domain.reservation.service;
 
-import com.google.gson.Gson;
+import io.hhplus.server.base.kafka.KafkaConstants;
+import io.hhplus.server.base.kafka.service.KafkaProducer;
 import io.hhplus.server.base.redis.RedissonLock;
+import io.hhplus.server.base.util.JsonUtil;
 import io.hhplus.server.controller.reservation.dto.request.CancelRequest;
 import io.hhplus.server.controller.reservation.dto.request.ReserveRequest;
 import io.hhplus.server.controller.reservation.dto.response.ReserveResponse;
@@ -12,18 +14,15 @@ import io.hhplus.server.domain.concert.entity.Seat;
 import io.hhplus.server.domain.concert.event.SeatStatusEvent;
 import io.hhplus.server.domain.concert.service.ConcertReader;
 import io.hhplus.server.domain.concert.service.ConcertService;
+import io.hhplus.server.domain.outbox.entity.Outbox;
+import io.hhplus.server.domain.outbox.service.OutboxService;
+import io.hhplus.server.domain.payment.event.RefundPaymentEvent;
 import io.hhplus.server.domain.reservation.entity.Reservation;
-import io.hhplus.server.domain.reservation.event.ReservationCancelledEvent;
 import io.hhplus.server.domain.reservation.event.ReservationEventPublisher;
 import io.hhplus.server.domain.reservation.event.ReservationOccupiedEvent;
 import io.hhplus.server.domain.reservation.repository.ReservationRepository;
 import io.hhplus.server.domain.reservation.service.dto.GetReservationAndPaymentResDto;
 import io.hhplus.server.domain.reservation.service.dto.SendReservationInfoDto;
-import io.hhplus.server.domain.send.dto.SendCommReqDto;
-import io.hhplus.server.domain.send.entity.Send;
-import io.hhplus.server.domain.send.event.SendEvent;
-import io.hhplus.server.domain.send.event.SendEventPublisher;
-import io.hhplus.server.domain.send.service.SendService;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -40,9 +39,9 @@ public class ReservationService implements ReservationInterface {
     private final ReservationMonitor reservationMonitor;
     private final ConcertReader concertReader;
     private final ConcertService concertService;
-    private final SendService sendService;
+    private final OutboxService outboxService;
     private final ReservationEventPublisher reservationEventPublisher;
-    private final SendEventPublisher sendEventPublisher;
+    private final KafkaProducer kafkaProducer;
 
     @PostConstruct
     public void init() {
@@ -81,10 +80,17 @@ public class ReservationService implements ReservationInterface {
 
         reservation.toCancel();
 
-        // 결제 내역 환불 처리 event
-        reservationEventPublisher.reservationCancel(new ReservationCancelledEvent(this, reservationId));
-        // 좌석 상태 변경 event
-        reservationEventPublisher.updateSeatStatus(new SeatStatusEvent(this, reservation.getConcertDateId(), reservation.getSeatNum(), Seat.Status.AVAILABLE));
+        // kafka 메시지 발행 - 결제 내역 환불 처리
+        Long paymentId = reservation.getPayment() == null ? null : reservation.getPayment().getPaymentId();
+        String refundPaymentEventJson = JsonUtil.toJson(new RefundPaymentEvent(paymentId));
+        Outbox outboxRefund = outboxService.save(Outbox.toEntity(Outbox.Type.PAYMENT_REFUND, Outbox.Status.READY, refundPaymentEventJson));
+        kafkaProducer.publish(KafkaConstants.PAYMENT_REFUND_TOPIC, outboxRefund.getOutboxId(), refundPaymentEventJson);
+
+        // kafka 메시지 발행 - 좌석 상태 변경
+        SeatStatusEvent seatStatusEvent = new SeatStatusEvent(reservation.getConcertDateId(), reservation.getSeatNum(), Seat.Status.AVAILABLE);
+        String seatStatusEventJson = JsonUtil.toJson(seatStatusEvent);
+        Outbox outboxSeat = outboxService.save(Outbox.toEntity(Outbox.Type.SEAT_STATUS, Outbox.Status.READY, seatStatusEventJson));
+        kafkaProducer.publish(KafkaConstants.SEAT_STATUS_TOPIC, outboxSeat.getOutboxId(), seatStatusEventJson);
 
         // 예약 정보를 데이터 플랫폼에 전송
         sendToDataPlatform(reservation.getReservationId(), Reservation.Status.CANCEL);
@@ -98,11 +104,10 @@ public class ReservationService implements ReservationInterface {
 
     private void sendToDataPlatform(Long reservationId, Reservation.Status status) {
         // Outbox 데이터 등록
-        Gson gson = new Gson();
-        String jsonData = gson.toJson(new SendReservationInfoDto(reservationId, status));
-        Send send = sendService.save(Send.toEntity(Send.Type.RESERVATION, Send.Status.READY, jsonData));
+        String jsonData = JsonUtil.toJson(new SendReservationInfoDto(reservationId, status));
+        Outbox outbox = outboxService.save(Outbox.toEntity(Outbox.Type.SEND, Outbox.Status.READY, jsonData));
 
-        // 예약 정보 전송 event 발행
-        sendEventPublisher.send(new SendEvent(this, new SendCommReqDto(send.getSendId(), jsonData)));
+        // kafka 메시지 발행 - 예약 정보 전송
+        kafkaProducer.publish(KafkaConstants.SEND_TOPIC, outbox.getOutboxId(), jsonData);
     }
 }

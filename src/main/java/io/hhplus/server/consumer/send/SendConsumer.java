@@ -1,8 +1,9 @@
-package io.hhplus.server.base.kafka.service;
+package io.hhplus.server.consumer.send;
 
 import io.hhplus.server.base.kafka.KafkaConstants;
-import io.hhplus.server.domain.send.dto.SendCommReqDto;
-import io.hhplus.server.domain.send.entity.Send;
+import io.hhplus.server.domain.send.event.SendEvent;
+import io.hhplus.server.domain.outbox.entity.Outbox;
+import io.hhplus.server.domain.outbox.service.OutboxService;
 import io.hhplus.server.domain.send.service.SendService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,26 +13,27 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class KafkaConsumer {
+public class SendConsumer {
 
     private final SendService sendService;
+    private final OutboxService outboxService;
 
-    @KafkaListener(topics = KafkaConstants.RESERVATION_TOPIC, groupId = "hhplus-reservation")
-    public void listen(String sendId, String message) {
+    @KafkaListener(topics = KafkaConstants.SEND_TOPIC, groupId = "hhplus-01")
+    public void send(String outboxId, String message) {
         try {
             log.info("Received Message: {}", message);
 
-            Send send = sendService.findById(Long.valueOf(sendId));
+            Outbox outbox = outboxService.findById(Long.valueOf(outboxId));
             // Outbox update :: PUBLISHED
-            sendService.updateStatus(send, Send.Status.PUBLISHED);
+            outboxService.updateStatus(outbox, Outbox.Status.PUBLISHED);
 
             // send to DataPlatform
-            SendCommReqDto sendCommReqDto = new SendCommReqDto(Long.valueOf(sendId), message);
-            boolean isSuccess = sendService.send(sendCommReqDto);
+            SendEvent sendEvent = new SendEvent(Long.valueOf(outboxId), message);
+            boolean isSuccess = sendService.send(sendEvent);
 
             if (isSuccess) {
                 // Outbox table update : SUCCESS
-                send.updateStatus(Send.Status.SUCCESS);
+                outbox.updateStatus(Outbox.Status.SUCCESS);
                 log.info("Message processed successfully");
             }
         } catch (Exception e) {
