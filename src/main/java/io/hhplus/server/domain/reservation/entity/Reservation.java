@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
 
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -40,8 +42,8 @@ public class Reservation extends BaseDateTimeEntity {
 
     private ZonedDateTime reservedAt;
 
-    @OneToOne(mappedBy = "reservation", cascade = CascadeType.REMOVE)
-    private Payment payment;
+    @OneToMany(mappedBy = "reservation", cascade = CascadeType.REMOVE)
+    private List<Payment> paymentList = new ArrayList<>();
 
     @Builder
     public Reservation(Long userId, Long concertId, Long concertDateId, int seatNum, Status status, ZonedDateTime reservedAt) {
