@@ -9,11 +9,15 @@ import lombok.ToString;
 @ToString
 public class SendCommReqDto {
 
-    private Long sendId;
+    private DataType type;
     private String jsonData;
 
-    public SendCommReqDto(Long sendId, String jsonData) {
-        this.sendId = sendId;
+    public SendCommReqDto(DataType type, String jsonData) {
+        this.type = type;
         this.jsonData = jsonData;
+    }
+
+    public enum DataType {
+        RESERVATION
     }
 }
