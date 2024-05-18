@@ -11,16 +11,15 @@ import io.hhplus.server.domain.concert.entity.ConcertDate;
 import io.hhplus.server.domain.concert.entity.Seat;
 import io.hhplus.server.domain.concert.service.ConcertReader;
 import io.hhplus.server.domain.concert.service.ConcertService;
+import io.hhplus.server.domain.outbox.entity.Outbox;
+import io.hhplus.server.domain.outbox.service.OutboxService;
 import io.hhplus.server.domain.reservation.ReservationExceptionEnum;
 import io.hhplus.server.domain.reservation.entity.Reservation;
-import io.hhplus.server.domain.reservation.event.ReservationEventPublisher;
 import io.hhplus.server.domain.reservation.repository.ReservationRepository;
 import io.hhplus.server.domain.reservation.service.ReservationMonitor;
 import io.hhplus.server.domain.reservation.service.ReservationService;
 import io.hhplus.server.domain.reservation.service.ReservationValidator;
 import io.hhplus.server.domain.reservation.service.dto.GetReservationAndPaymentResDto;
-import io.hhplus.server.domain.outbox.entity.Outbox;
-import io.hhplus.server.domain.outbox.service.OutboxService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -44,7 +43,6 @@ class ReservationServiceTest {
     private ConcertReader concertReader;
     private ConcertService concertService;
     private OutboxService outboxService;
-    private ReservationEventPublisher reservationEventPublisher;
     private KafkaProducer kafkaProducer;
 
     private Reservation 예약건;
@@ -58,7 +56,6 @@ class ReservationServiceTest {
         concertReader = Mockito.mock(ConcertReader.class);
         concertService = Mockito.mock(ConcertService.class);
         outboxService = Mockito.mock(OutboxService.class);
-        reservationEventPublisher = Mockito.mock(ReservationEventPublisher.class);
         kafkaProducer = Mockito.mock(KafkaProducer.class);
 
         reservationService = new ReservationService(
@@ -68,7 +65,6 @@ class ReservationServiceTest {
                 concertReader,
                 concertService,
                 outboxService,
-                reservationEventPublisher,
                 kafkaProducer
         );
 
@@ -104,7 +100,7 @@ class ReservationServiceTest {
     void reserveTest_success() {
         // given
         ReserveRequest request = new ReserveRequest(1L, 1L, 1, 1L);
-        Outbox outbox = new Outbox(1L, Outbox.Type.RESERVATION, Outbox.Status.READY, "{}");
+        Outbox outbox = new Outbox(1L, Outbox.Type.RESERVE, Outbox.Status.INIT, "{}");
 
         // when
         when(reservationRepository.findOneByConcertDateIdAndSeatNum(request.concertDateId(), request.seatNum())).thenReturn(null);
@@ -124,7 +120,7 @@ class ReservationServiceTest {
         // given
         Long reservationId = 1L;
         CancelRequest request = new CancelRequest(1L);
-        Outbox outbox = new Outbox(1L, Outbox.Type.RESERVATION, Outbox.Status.READY, "{}");
+        Outbox outbox = new Outbox(1L, Outbox.Type.CANCEL, Outbox.Status.INIT, "{}");
 
         // when
         when(reservationRepository.findByIdAndUserId(reservationId, request.userId())).thenReturn(예약건);

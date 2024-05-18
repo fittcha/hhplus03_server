@@ -35,4 +35,14 @@ public class OutboxService {
         return outboxRepository.findAllByStatus(status);
     }
 
+    public void toPublished(Long outboxId) {
+        Outbox outbox = findById(outboxId);
+        outbox.updateStatus(Outbox.Status.DONE);
+    }
+
+    public void toRetry(Long outboxId) {
+        Outbox outbox = findById(outboxId);
+        outbox.updateStatus(Outbox.Status.RETRY);
+    }
 }
+

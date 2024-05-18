@@ -36,9 +36,8 @@ public class OutboxRetryScheduler {
                 // 재시도 로직, KafkaProducer 메시지 재발행
                 String topic = null;
                 switch (outbox.getType()) {
-                    case SEND -> topic = KafkaConstants.SEND_TOPIC;
-                    case PAYMENT_REFUND -> topic = KafkaConstants.PAYMENT_REFUND_TOPIC;
-                    case SEAT_STATUS -> topic = KafkaConstants.SEAT_STATUS_TOPIC;
+                    case RESERVE -> topic = KafkaConstants.RESERVATION_TOPIC;
+                    case CANCEL -> topic = KafkaConstants.CANCEL_TOPIC;
                 }
 
                 kafkaProducer.publish(topic, outbox.getOutboxId(), outbox.getJsonData());

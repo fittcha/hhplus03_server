@@ -55,17 +55,14 @@ public class Outbox extends BaseDateTimeEntity {
     }
 
     public enum Type {
-        RESERVATION,
-        PAYMENT_REFUND,
-        SEAT_STATUS,
-        SEND
+        RESERVE,
+        CANCEL
     }
 
     public enum Status {
-        READY,
-        PUBLISHED,
+        INIT,
+        DONE,
         RETRY,
-        SUCCESS,
         FAIL
     }
 

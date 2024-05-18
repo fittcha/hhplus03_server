@@ -1,7 +1,6 @@
 package io.hhplus.server.domain.unit.service;
 
 import io.hhplus.server.base.exception.CustomException;
-import io.hhplus.server.base.kafka.service.KafkaProducer;
 import io.hhplus.server.controller.payment.dto.request.CreateRequest;
 import io.hhplus.server.controller.payment.dto.request.PayRequest;
 import io.hhplus.server.controller.payment.dto.response.CreateResponse;
@@ -14,8 +13,6 @@ import io.hhplus.server.domain.payment.service.PaymentValidator;
 import io.hhplus.server.domain.payment.service.dto.CancelPaymentResultResDto;
 import io.hhplus.server.domain.reservation.entity.Reservation;
 import io.hhplus.server.domain.reservation.service.ReservationReader;
-import io.hhplus.server.domain.outbox.entity.Outbox;
-import io.hhplus.server.domain.outbox.service.OutboxService;
 import io.hhplus.server.domain.user.UserExceptionEnum;
 import io.hhplus.server.domain.user.entity.Users;
 import io.hhplus.server.domain.user.service.UserReader;
@@ -41,9 +38,6 @@ class PaymentServiceTest {
     private PaymentValidator paymentValidator;
     private UserReader userReader;
     private ReservationReader reservationReader;
-    private OutboxService outboxService;
-    private KafkaProducer kafkaProducer;
-
     private Reservation 예약건;
 
     @BeforeEach
@@ -53,16 +47,12 @@ class PaymentServiceTest {
         paymentValidator = Mockito.mock(PaymentValidator.class);
         userReader = Mockito.mock(UserReader.class);
         reservationReader = Mockito.mock(ReservationReader.class);
-        outboxService = Mockito.mock(OutboxService.class);
-        kafkaProducer = Mockito.mock(KafkaProducer.class);
 
         paymentService = new PaymentService(
                 paymentRepository,
                 paymentValidator,
                 userReader,
-                reservationReader,
-                outboxService,
-                kafkaProducer
+                reservationReader
         );
 
         // 예약 정보 세팅
@@ -133,12 +123,10 @@ class PaymentServiceTest {
                 .price(BigDecimal.valueOf(79000))
                 .build();
         Users 사용자 = new Users(1L, BigDecimal.valueOf(100000));
-        Outbox outbox = new Outbox(1L, Outbox.Type.RESERVATION, Outbox.Status.READY, "{}");
 
         // when
         when(paymentRepository.findById(paymentId)).thenReturn(결제건);
         when(userReader.findUser(request.userId())).thenReturn(사용자);
-        when(outboxService.save(any(Outbox.class))).thenReturn(outbox);
         PayResponse response = paymentService.pay(paymentId, request);
 
         // then

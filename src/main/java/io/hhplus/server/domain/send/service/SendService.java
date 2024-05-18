@@ -1,8 +1,13 @@
 package io.hhplus.server.domain.send.service;
 
-import io.hhplus.server.domain.send.event.SendEvent;
+import io.hhplus.server.domain.outbox.entity.Outbox;
+import io.hhplus.server.domain.outbox.repository.OutboxRepository;
+import io.hhplus.server.domain.send.dto.SendCommReqDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Recover;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,9 +16,21 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class SendService {
 
+    private final OutboxRepository outboxRepository;
+
+    public Outbox save(Outbox outbox) {
+        return outboxRepository.save(outbox);
+    }
+
     @Transactional
-    public boolean send(SendEvent sendEvent) {
+    @Retryable(value = RuntimeException.class, maxAttempts = 3, backoff = @Backoff(delay = 2000))
+    public void send(SendCommReqDto sendReqDto) {
         // dummy result :: 외부 데이터 플랫폼에 정보 전송 로직()
-        return true;
+        // externalApiService.send(sendReqDto);
+    }
+
+    @Recover
+    public void recoverSend(RuntimeException e, Long reservationId) {
+        log.error("All the sendEvent retries failed. sendId: {}, error: {}", reservationId, e.getMessage());
     }
 }

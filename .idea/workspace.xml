@@ -4,46 +4,35 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7e2ccb01-a990-45a5-a6f7-ad379bc6548e" name="Changes" comment="feat: Kafka 도커 설치 파일 추가 (local 환경)">
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/base/util/JsonUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/consumer/concert/ConcertConsumer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/consumer/payment/PaymentConsumer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/outbox/repository/OutboxJpaRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/outbox/service/OutboxService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/event/RefundPaymentEvent.java" afterDir="false" />
+    <list default="true" id="7e2ccb01-a990-45a5-a6f7-ad379bc6548e" name="Changes" comment="feat: 서비스 -&gt; event 호출 시 관심사 분리&#10;&#10;(cherry picked from commit 04eef314c12da445cf6cb86ef16682369f6099e4)">
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/base/adapter/ZonedDateTimeAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/consumer/CancelConsumer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/consumer/ReserveConsumer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/event/CancelEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/event/ReserveEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/send/dto/SendCommReqDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/base/kafka/KafkaConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/base/kafka/KafkaConstants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/base/kafka/service/KafkaConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/consumer/send/SendConsumer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/base/kafka/service/KafkaProducer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/base/kafka/service/KafkaProducer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/base/kafka/service/KafkaProducerListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/base/kafka/service/KafkaRetryScheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/base/kafka/service/OutboxRetryScheduler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/concert/event/ConcertEventListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/base/kafka/service/OutboxRetryScheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/base/kafka/service/OutboxRetryScheduler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/base/util/JsonUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/base/util/JsonUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/consumer/concert/ConcertConsumer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/consumer/payment/PaymentConsumer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/consumer/send/SendConsumer.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/concert/event/SeatStatusEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/concert/event/SeatStatusEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/concert/service/ConcertService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/concert/service/ConcertService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/event/PaymentEventListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/outbox/entity/Outbox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/outbox/entity/Outbox.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/outbox/service/OutboxService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/outbox/service/OutboxService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/service/PaymentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/service/PaymentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/event/ReservationCancelledEvent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/event/ReservationEventPublisher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/event/ReservationEventPublisher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/event/ReservationEventListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/event/ReservationEventListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/event/ReservationEventPublisher.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/event/ReservationOccupiedEvent.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/service/ReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/service/ReservationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/send/dto/SendCommReqDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/send/entity/Send.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/outbox/entity/Outbox.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/send/event/SendEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/send/event/SendEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/send/event/SendEventListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/send/event/SendEventPublisher.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/send/repository/SendJpaRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/send/repository/SendRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/outbox/repository/OutboxRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/send/service/SendService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/send/service/SendService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/infrastructure/send/SendRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/infrastructure/outbox/OutboxRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-dev.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application-local.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-local.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application-prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-prod.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application-sta.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-sta.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application-test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-test.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/io/hhplus/server/domain/unit/service/ConcertServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/io/hhplus/server/domain/unit/service/ConcertServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/io/hhplus/server/domain/unit/service/PaymentServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/io/hhplus/server/domain/unit/service/PaymentServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/io/hhplus/server/domain/unit/service/ReservationServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/io/hhplus/server/domain/unit/service/ReservationServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/io/hhplus/server/intergration/UsersIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/io/hhplus/server/intergration/UsersIntegrationTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,11 +88,6 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="develop" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -133,7 +117,6 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Docker.kafka/docker-compose-kafka.yml: Compose Deployment.executor": "Run",
     "Docker.redis/docker-compose-redis.yml: Compose Deployment.executor": "Run",
     "Gradle.Build hhplus03_server.executor": "Run",
     "Gradle.ConcertIntegrationTest.executor": "Run",
@@ -143,12 +126,13 @@
     "Gradle.PaymentServiceTest.executor": "Run",
     "Gradle.PaymentServiceTest.payTest_lack_balance.executor": "Run",
     "Gradle.PaymentServiceTest.payTest_success.executor": "Run",
+    "Gradle.ReservationIntegrationTest.cancelTest_pay_cancel.executor": "Run",
     "Gradle.ReservationIntegrationTest.executor": "Run",
     "Gradle.ReservationIntegrationTest.reserveTest_ALREADY_RESERVED.executor": "Run",
     "Gradle.ReservationIntegrationTest.reserveTest_ALREADY_RESERVED_lock.executor": "Run",
     "Gradle.ReservationIntegrationTest.reserveTest_complete_in_5min.executor": "Run",
     "Gradle.ReservationServiceTest.executor": "Run",
-    "Gradle.ReservationServiceTest.reserveTest_success.executor": "Run",
+    "Gradle.Tests in 'hhplus03_server.test'.executor": "Run",
     "Gradle.UsersIntegrationTest.chargeAndUseTest_lock.executor": "Run",
     "Gradle.UsersIntegrationTest.chargeTest_따닥_lock.executor": "Run",
     "Gradle.UsersIntegrationTest.executor": "Run",
@@ -189,15 +173,15 @@
       <recent name="$PROJECT_DIR$/docker/db" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="io.hhplus.server.base.kafka.service" />
-      <recent name="io.hhplus.server.domain.concert.event" />
-      <recent name="io.hhplus.server.domain.payment.event" />
-      <recent name="io.hhplus.server.domain.send.event" />
+      <recent name="io.hhplus.server.consumer" />
+      <recent name="io.hhplus.server.domain.reservation.event" />
       <recent name="io.hhplus.server.infrastructure.send" />
+      <recent name="io.hhplus.server.domain.send.repository" />
+      <recent name="io.hhplus.server.domain.payment.event" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.ReservationIntegrationTest">
-    <configuration name="PaymentServiceTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="Gradle.Tests in 'hhplus03_server.test'">
+    <configuration name="ReservationIntegrationTest.cancelTest_pay_cancel" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -210,7 +194,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;io.hhplus.server.domain.unit.service.PaymentServiceTest&quot;" />
+            <option value="&quot;io.hhplus.server.intergration.ReservationIntegrationTest.cancelTest_pay_cancel&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -221,7 +205,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="ReservationIntegrationTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="ReservationServiceTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -234,7 +218,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;io.hhplus.server.intergration.ReservationIntegrationTest&quot;" />
+            <option value="&quot;io.hhplus.server.domain.unit.service.ReservationServiceTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -245,7 +229,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="ReservationServiceTest.reserveTest_success" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="Tests in 'hhplus03_server.test'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -257,8 +241,6 @@
         <option name="taskNames">
           <list>
             <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;io.hhplus.server.domain.unit.service.ReservationServiceTest.reserveTest_success&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -269,28 +251,48 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="UsersIntegrationTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="hhplus03_server [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
+        <option name="scriptParameters" />
         <option name="taskDescriptions">
           <list />
         </option>
         <option name="taskNames">
           <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;io.hhplus.server.intergration.UsersIntegrationTest&quot;" />
+            <option value="build" />
           </list>
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="hhplus03_server [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="clean" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
     <configuration name="ServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
@@ -306,21 +308,13 @@
       </deployment>
       <method v="2" />
     </configuration>
-    <configuration name="kafka/docker-compose-kafka.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="sourceFilePath" value="docker/kafka/docker-compose-kafka.yml" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.ReservationIntegrationTest" />
-        <item itemvalue="Docker.kafka/docker-compose-kafka.yml: Compose Deployment" />
-        <item itemvalue="Gradle.PaymentServiceTest" />
-        <item itemvalue="Gradle.ReservationServiceTest.reserveTest_success" />
-        <item itemvalue="Gradle.UsersIntegrationTest" />
+        <item itemvalue="Gradle.Tests in 'hhplus03_server.test'" />
+        <item itemvalue="Gradle.ReservationIntegrationTest.cancelTest_pay_cancel" />
+        <item itemvalue="Gradle.ReservationServiceTest" />
+        <item itemvalue="Gradle.hhplus03_server [build]" />
+        <item itemvalue="Gradle.hhplus03_server [clean]" />
       </list>
     </recent_temporary>
   </component>
@@ -382,8 +376,8 @@
       <updated>1714675063313</updated>
       <workItem from="1714675066177" duration="2031000" />
       <workItem from="1714677113755" duration="912000" />
-      <workItem from="1715759468195" duration="43969000" />
-      <workItem from="1715938826416" duration="6394000" />
+      <workItem from="1715759468195" duration="28124000" />
+      <workItem from="1715989611896" duration="3892000" />
     </task>
     <task id="LOCAL-00006" summary="feat: 유저 포인트 충전 및 사용 - Redisson 적용">
       <option name="closed" value="true" />
@@ -505,79 +499,7 @@
       <option name="project" value="LOCAL" />
       <updated>1715867432462</updated>
     </task>
-    <task id="LOCAL-00021" summary="feat: CI 파일에 Redis 서비스 추가">
-      <option name="closed" value="true" />
-      <created>1715868081823</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1715868081823</updated>
-    </task>
-    <task id="LOCAL-00022" summary="feat: spring-kafka 설정 추가">
-      <option name="closed" value="true" />
-      <created>1715871276050</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1715871276050</updated>
-    </task>
-    <task id="LOCAL-00023" summary="feat: event publisher 클래스 추가">
-      <option name="closed" value="true" />
-      <created>1715872408689</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1715872408689</updated>
-    </task>
-    <task id="LOCAL-00024" summary="feat: dev CI 파일에 zookeeper, kafka 연결 정보 추가">
-      <option name="closed" value="true" />
-      <created>1715877001797</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1715877001797</updated>
-    </task>
-    <task id="LOCAL-00025" summary="feat: Kafka Producer, Consumer 개발 &gt; 기존 데이터 플랫폼 전송 이벤트 Kafka 메시지 발행으로 변경, Outbox Table 업데이트 로직 개발">
-      <option name="closed" value="true" />
-      <created>1715877739513</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1715877739513</updated>
-    </task>
-    <task id="LOCAL-00026" summary="feat: Kafka Test 환경 설정 추가">
-      <option name="closed" value="true" />
-      <created>1715877758594</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1715877758594</updated>
-    </task>
-    <task id="LOCAL-00027" summary="feat: Kafka 메시지 발행 &gt; 비동기 이벤트로 kafka 메시지 발행하도록 비동기 이벤트 처리 추가">
-      <option name="closed" value="true" />
-      <created>1715879522917</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1715879522917</updated>
-    </task>
-    <task id="LOCAL-00028" summary="feat: Kafka 발행 결과 확인 로직 추가, 발행 실패 시 재시도 로직(스케쥴러) 추가">
-      <option name="closed" value="true" />
-      <created>1715883963934</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1715883963934</updated>
-    </task>
-    <task id="LOCAL-00029" summary="feat: Kafka 도커 설치 파일 추가 (local 환경)">
-      <option name="closed" value="true" />
-      <created>1715884013889</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1715884013889</updated>
-    </task>
-    <option name="localTasksCounter" value="30" />
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -595,6 +517,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="feat: test bean 생성 에러" />
     <MESSAGE value="feat: 비관적 락 사용 테스트" />
     <MESSAGE value="feat: 낙관적 락 사용 테스트" />
     <MESSAGE value="feat: 유저 포인트 충전 및 사용 - 비관적 락 테스트" />
@@ -611,16 +534,7 @@
     <MESSAGE value="docs: UPDATE READ.me" />
     <MESSAGE value="docs: UPDATE README.md" />
     <MESSAGE value="docs: test 정리" />
-    <MESSAGE value="feat: CI 파일에 Redis 서비스 추가" />
-    <MESSAGE value="feat: spring-kafka 설정 추가" />
-    <MESSAGE value="feat: event publisher 클래스 추가" />
-    <MESSAGE value="feat: dev CI 파일에 zookeeper, kafka 연결 정보 추가" />
-    <MESSAGE value="feat: Kafka Producer, Consumer 개발 &gt; 기존 데이터 플랫폼 전송 이벤트 Kafka 메시지 발행으로 변경, Outbox Table 업데이트 로직 개발" />
-    <MESSAGE value="feat: Kafka Test 환경 설정 추가" />
-    <MESSAGE value="feat: Kafka 메시지 발행 &gt; 비동기 이벤트로 kafka 메시지 발행하도록 비동기 이벤트 처리 추가" />
-    <MESSAGE value="feat: Kafka 발행 결과 확인 로직 추가, 발행 실패 시 재시도 로직(스케쥴러) 추가" />
-    <MESSAGE value="feat: Kafka 도커 설치 파일 추가 (local 환경)" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: Kafka 도커 설치 파일 추가 (local 환경)" />
+    <option name="LAST_COMMIT_MESSAGE" value="docs: test 정리" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -629,6 +543,11 @@
           <properties class="org.springframework.data.mapping.PropertyReferenceException" package="org.springframework.data.mapping" />
           <option name="timeStamp" value="8" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/io/hhplus/server/base/util/JsonUtil.java</url>
+          <line>11</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

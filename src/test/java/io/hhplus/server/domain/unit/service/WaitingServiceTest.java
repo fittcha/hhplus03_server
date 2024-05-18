@@ -2,7 +2,6 @@ package io.hhplus.server.domain.unit.service;
 
 import io.hhplus.server.base.jwt.JwtService;
 import io.hhplus.server.base.redis.service.RedisZSetService;
-import io.hhplus.server.domain.waiting.service.WaitingService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -12,7 +11,6 @@ import org.mockito.Mockito;
 @Slf4j
 class WaitingServiceTest {
 
-    private WaitingService waitingService;
     private RedisZSetService redisZSetService;
     private JwtService jwtService;
 
@@ -23,8 +21,6 @@ class WaitingServiceTest {
         // mocking
         redisZSetService = Mockito.mock(RedisZSetService.class);
         jwtService = Mockito.mock(JwtService.class);
-
-        waitingService = new WaitingService(redisZSetService, jwtService);
 
         // 세팅
         토큰 = "023ADO=fASDF234ji%fAKF=";
