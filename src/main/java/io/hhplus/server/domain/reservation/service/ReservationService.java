@@ -1,7 +1,7 @@
 package io.hhplus.server.domain.reservation.service;
 
-import com.google.gson.Gson;
 import io.hhplus.server.base.redis.RedissonLock;
+import io.hhplus.server.base.util.JsonUtil;
 import io.hhplus.server.controller.reservation.dto.request.CancelRequest;
 import io.hhplus.server.controller.reservation.dto.request.ReserveRequest;
 import io.hhplus.server.controller.reservation.dto.response.ReserveResponse;
@@ -9,23 +9,18 @@ import io.hhplus.server.controller.user.dto.response.GetMyReservationsResponse;
 import io.hhplus.server.domain.concert.entity.Concert;
 import io.hhplus.server.domain.concert.entity.ConcertDate;
 import io.hhplus.server.domain.concert.entity.Seat;
-import io.hhplus.server.domain.concert.event.SeatStatusEvent;
 import io.hhplus.server.domain.concert.service.ConcertReader;
 import io.hhplus.server.domain.concert.service.ConcertService;
+import io.hhplus.server.domain.outbox.entity.Outbox;
+import io.hhplus.server.domain.outbox.service.OutboxService;
 import io.hhplus.server.domain.reservation.entity.Reservation;
-import io.hhplus.server.domain.reservation.event.ReservationCancelledEvent;
-import io.hhplus.server.domain.reservation.event.ReservationEventPublisher;
-import io.hhplus.server.domain.reservation.event.ReservationOccupiedEvent;
+import io.hhplus.server.domain.reservation.event.CancelEvent;
+import io.hhplus.server.domain.reservation.event.ReserveEvent;
 import io.hhplus.server.domain.reservation.repository.ReservationRepository;
 import io.hhplus.server.domain.reservation.service.dto.GetReservationAndPaymentResDto;
-import io.hhplus.server.domain.reservation.service.dto.SendReservationInfoDto;
-import io.hhplus.server.domain.send.dto.SendCommReqDto;
-import io.hhplus.server.domain.send.entity.Send;
-import io.hhplus.server.domain.send.event.SendEvent;
-import io.hhplus.server.domain.send.event.SendEventPublisher;
-import io.hhplus.server.domain.send.service.SendService;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,9 +35,8 @@ public class ReservationService implements ReservationInterface {
     private final ReservationMonitor reservationMonitor;
     private final ConcertReader concertReader;
     private final ConcertService concertService;
-    private final SendService sendService;
-    private final ReservationEventPublisher reservationEventPublisher;
-    private final SendEventPublisher sendEventPublisher;
+    private final OutboxService outboxService;
+    private final ApplicationEventPublisher applicationEventPublisher;
 
     @PostConstruct
     public void init() {
@@ -62,11 +56,9 @@ public class ReservationService implements ReservationInterface {
         Concert concert = concertReader.findConcert(reservation.getConcertId());
         ConcertDate concertDate = concertReader.findConcertDate(reservation.getConcertDateId());
 
-        // 예약 임시 점유 event 발행
-        reservationEventPublisher.reservationOccupy(new ReservationOccupiedEvent(this, reservation.getReservationId()));
-
-        // 예약 정보를 데이터 플랫폼에 전송
-        sendToDataPlatform(reservation.getReservationId(), Reservation.Status.ING);
+        // Outbox 데이터 등록, 예약 완료 event 발행
+        Outbox outbox = outboxService.save(Outbox.toEntity(Outbox.Type.RESERVE, Outbox.Status.INIT, JsonUtil.toJson(reservation)));
+        applicationEventPublisher.publishEvent(new ReserveEvent(this, outbox.getOutboxId(), reservation));
 
         return ReserveResponse.from(reservation, concert, concertDate);
     }
@@ -81,28 +73,14 @@ public class ReservationService implements ReservationInterface {
 
         reservation.toCancel();
 
-        // 결제 내역 환불 처리 event
-        reservationEventPublisher.reservationCancel(new ReservationCancelledEvent(this, reservationId));
-        // 좌석 상태 변경 event
-        reservationEventPublisher.updateSeatStatus(new SeatStatusEvent(this, reservation.getConcertDateId(), reservation.getSeatNum(), Seat.Status.AVAILABLE));
-
-        // 예약 정보를 데이터 플랫폼에 전송
-        sendToDataPlatform(reservation.getReservationId(), Reservation.Status.CANCEL);
+        // Outbox 데이터 등록, 예약 취소 event 발행
+        Outbox outbox = outboxService.save(Outbox.toEntity(Outbox.Type.CANCEL, Outbox.Status.INIT, JsonUtil.toJson(reservation)));
+        applicationEventPublisher.publishEvent(new CancelEvent(this, outbox.getOutboxId(), reservation));
     }
 
     @Override
     public List<GetMyReservationsResponse> getMyReservations(Long userId) {
         List<GetReservationAndPaymentResDto> myReservations = reservationRepository.getMyReservations(userId);
         return myReservations.stream().map(GetMyReservationsResponse::from).toList();
-    }
-
-    private void sendToDataPlatform(Long reservationId, Reservation.Status status) {
-        // Outbox 데이터 등록
-        Gson gson = new Gson();
-        String jsonData = gson.toJson(new SendReservationInfoDto(reservationId, status));
-        Send send = sendService.save(Send.toEntity(Send.Type.RESERVATION, Send.Status.READY, jsonData));
-
-        // 예약 정보 전송 event 발행
-        sendEventPublisher.send(new SendEvent(this, new SendCommReqDto(send.getSendId(), jsonData)));
     }
 }

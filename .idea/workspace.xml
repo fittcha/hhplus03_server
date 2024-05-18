@@ -5,7 +5,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7e2ccb01-a990-45a5-a6f7-ad379bc6548e" name="Changes" comment="docs: test 정리">
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/base/adapter/ZonedDateTimeAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/base/util/JsonUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/outbox/service/OutboxService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/event/CancelEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/event/ReserveEvent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/concert/event/ConcertEventListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/concert/event/SeatStatusEvent.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/event/PaymentEventListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/service/PaymentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/payment/service/PaymentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/event/ReservationCancelledEvent.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/event/ReservationEventListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/event/ReservationEventListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/event/ReservationEventPublisher.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/event/ReservationOccupiedEvent.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/service/ReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/service/ReservationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/send/dto/SendCommReqDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/send/dto/SendCommReqDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/send/entity/Send.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/outbox/entity/Outbox.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/send/event/SendEvent.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/send/event/SendEventListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/send/event/SendEventPublisher.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/send/repository/SendJpaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/outbox/repository/OutboxJpaRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/send/repository/SendRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/outbox/repository/OutboxRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/send/service/SendService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/send/service/SendService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/infrastructure/send/SendRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/infrastructure/outbox/OutboxRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/io/hhplus/server/domain/unit/service/PaymentServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/io/hhplus/server/domain/unit/service/PaymentServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/io/hhplus/server/domain/unit/service/ReservationServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/io/hhplus/server/domain/unit/service/ReservationServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/io/hhplus/server/intergration/UsersIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/io/hhplus/server/intergration/UsersIntegrationTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,11 +125,13 @@
     "Gradle.PaymentServiceTest.executor": "Run",
     "Gradle.PaymentServiceTest.payTest_lack_balance.executor": "Run",
     "Gradle.PaymentServiceTest.payTest_success.executor": "Run",
+    "Gradle.ReservationIntegrationTest.cancelTest_pay_cancel.executor": "Run",
     "Gradle.ReservationIntegrationTest.executor": "Run",
     "Gradle.ReservationIntegrationTest.reserveTest_ALREADY_RESERVED.executor": "Run",
     "Gradle.ReservationIntegrationTest.reserveTest_ALREADY_RESERVED_lock.executor": "Run",
     "Gradle.ReservationIntegrationTest.reserveTest_complete_in_5min.executor": "Run",
     "Gradle.ReservationServiceTest.executor": "Run",
+    "Gradle.Tests in 'hhplus03_server.test'.executor": "Run",
     "Gradle.UsersIntegrationTest.chargeAndUseTest_lock.executor": "Run",
     "Gradle.UsersIntegrationTest.chargeTest_따닥_lock.executor": "Run",
     "Gradle.UsersIntegrationTest.executor": "Run",
@@ -144,15 +172,15 @@
       <recent name="$PROJECT_DIR$/docker/db" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="io.hhplus.server.domain.reservation.event" />
       <recent name="io.hhplus.server.infrastructure.send" />
       <recent name="io.hhplus.server.domain.send.repository" />
       <recent name="io.hhplus.server.domain.payment.event" />
       <recent name="io.hhplus.server.domain.user" />
-      <recent name="io.hhplus.server.domain.user.service" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.UsersIntegrationTest">
-    <configuration name="ConcertIntegrationTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="Gradle.ReservationIntegrationTest.cancelTest_pay_cancel">
+    <configuration name="ReservationIntegrationTest.cancelTest_pay_cancel" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -165,7 +193,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;io.hhplus.server.intergration.ConcertIntegrationTest&quot;" />
+            <option value="&quot;io.hhplus.server.intergration.ReservationIntegrationTest.cancelTest_pay_cancel&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -176,7 +204,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="PaymentIntegrationTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="ReservationServiceTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -189,7 +217,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;io.hhplus.server.intergration.PaymentIntegrationTest&quot;" />
+            <option value="&quot;io.hhplus.server.domain.unit.service.ReservationServiceTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -200,7 +228,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="PaymentIntegrationTest.payTest_INSUFFICIENT_BALANCE" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="Tests in 'hhplus03_server.test'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -212,8 +240,6 @@
         <option name="taskNames">
           <list>
             <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;io.hhplus.server.intergration.PaymentIntegrationTest.payTest_INSUFFICIENT_BALANCE&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -224,52 +250,48 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="ReservationIntegrationTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="hhplus03_server [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
+        <option name="scriptParameters" />
         <option name="taskDescriptions">
           <list />
         </option>
         <option name="taskNames">
           <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;io.hhplus.server.intergration.ReservationIntegrationTest&quot;" />
+            <option value="build" />
           </list>
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
+      <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="UsersIntegrationTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="hhplus03_server [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
+        <option name="scriptParameters" />
         <option name="taskDescriptions">
           <list />
         </option>
         <option name="taskNames">
           <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;io.hhplus.server.intergration.UsersIntegrationTest&quot;" />
+            <option value="clean" />
           </list>
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
+      <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
     <configuration name="ServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
@@ -287,11 +309,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.UsersIntegrationTest" />
-        <item itemvalue="Gradle.ReservationIntegrationTest" />
-        <item itemvalue="Gradle.PaymentIntegrationTest.payTest_INSUFFICIENT_BALANCE" />
-        <item itemvalue="Gradle.PaymentIntegrationTest" />
-        <item itemvalue="Gradle.ConcertIntegrationTest" />
+        <item itemvalue="Gradle.ReservationIntegrationTest.cancelTest_pay_cancel" />
+        <item itemvalue="Gradle.Tests in 'hhplus03_server.test'" />
+        <item itemvalue="Gradle.ReservationServiceTest" />
+        <item itemvalue="Gradle.hhplus03_server [build]" />
+        <item itemvalue="Gradle.hhplus03_server [clean]" />
       </list>
     </recent_temporary>
   </component>
@@ -354,6 +376,7 @@
       <workItem from="1714675066177" duration="2031000" />
       <workItem from="1714677113755" duration="912000" />
       <workItem from="1715759468195" duration="28124000" />
+      <workItem from="1715989611896" duration="3892000" />
     </task>
     <task id="LOCAL-00006" summary="feat: 유저 포인트 충전 및 사용 - Redisson 적용">
       <option name="closed" value="true" />
@@ -519,6 +542,11 @@
           <properties class="org.springframework.data.mapping.PropertyReferenceException" package="org.springframework.data.mapping" />
           <option name="timeStamp" value="8" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/io/hhplus/server/base/util/JsonUtil.java</url>
+          <line>11</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

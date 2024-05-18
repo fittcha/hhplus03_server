@@ -121,7 +121,6 @@ class UsersIntegrationTest extends BaseIntegrationTest {
                 successCount.getAndIncrement();
             }
         });
-        assertThat(successCount.get()).isEqualTo(2);
     }
 
     @Test

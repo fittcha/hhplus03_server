@@ -5,6 +5,7 @@ import io.hhplus.server.controller.payment.dto.request.CreateRequest;
 import io.hhplus.server.controller.payment.dto.request.PayRequest;
 import io.hhplus.server.controller.payment.dto.response.CreateResponse;
 import io.hhplus.server.controller.payment.dto.response.PayResponse;
+import io.hhplus.server.domain.outbox.entity.Outbox;
 import io.hhplus.server.domain.payment.PaymentExceptionEnum;
 import io.hhplus.server.domain.payment.entity.Payment;
 import io.hhplus.server.domain.payment.repository.PaymentRepository;
@@ -13,8 +14,6 @@ import io.hhplus.server.domain.payment.service.PaymentValidator;
 import io.hhplus.server.domain.payment.service.dto.CancelPaymentResultResDto;
 import io.hhplus.server.domain.reservation.entity.Reservation;
 import io.hhplus.server.domain.reservation.service.ReservationReader;
-import io.hhplus.server.domain.send.entity.Send;
-import io.hhplus.server.domain.send.service.SendService;
 import io.hhplus.server.domain.user.UserExceptionEnum;
 import io.hhplus.server.domain.user.entity.Users;
 import io.hhplus.server.domain.user.service.UserReader;
@@ -23,13 +22,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.logging.LogLevel;
-import org.springframework.context.ApplicationEventPublisher;
 
 import java.math.BigDecimal;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.when;
 import static org.mockito.Mockito.doThrow;
 
@@ -40,8 +39,6 @@ class PaymentServiceTest {
     private PaymentValidator paymentValidator;
     private UserReader userReader;
     private ReservationReader reservationReader;
-    private SendService sendService;
-    private ApplicationEventPublisher eventPublisher;
 
     private Reservation 예약건;
 
@@ -52,16 +49,12 @@ class PaymentServiceTest {
         paymentValidator = Mockito.mock(PaymentValidator.class);
         userReader = Mockito.mock(UserReader.class);
         reservationReader = Mockito.mock(ReservationReader.class);
-        sendService = Mockito.mock(SendService.class);
-        eventPublisher = Mockito.mock(ApplicationEventPublisher.class);
 
         paymentService = new PaymentService(
                 paymentRepository,
                 paymentValidator,
                 userReader,
-                reservationReader,
-                sendService,
-                eventPublisher
+                reservationReader
         );
 
         // 예약 정보 세팅
@@ -132,12 +125,11 @@ class PaymentServiceTest {
                 .price(BigDecimal.valueOf(79000))
                 .build();
         Users 사용자 = new Users(1L, BigDecimal.valueOf(100000));
-        Send send = new Send(1L, Send.Type.RESERVATION, Send.Status.READY, "{}");
+        Outbox outbox = new Outbox(1L, Outbox.Type.RESERVE, Outbox.Status.INIT, "{}");
 
         // when
         when(paymentRepository.findById(paymentId)).thenReturn(결제건);
         when(userReader.findUser(request.userId())).thenReturn(사용자);
-        when(sendService.save(any(Send.class))).thenReturn(send);
         PayResponse response = paymentService.pay(paymentId, request);
 
         // then
