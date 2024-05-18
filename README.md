@@ -7,8 +7,8 @@
 
 - [1. 요구사항 분석](##one)
 - [2. 브랜치 전략과 버전 관리](##two)
-- [3. 동시성 제어 처리 로직 비교 구현]()
-- [4. DB Index 사용과 비교]()
+- [3. 동시성 제어 처리 로직 비교 구현](https://iwannabarmus.tistory.com/30)
+- [4. DB Index 사용과 비교](https://iwannabarmus.tistory.com/36)
 - [5. 대기열 설계 및 구현]()
 - [6. Transaction 범위와 책임 분리 방안 설계](https://iwannabarmus.tistory.com/38)
 - [7. 좌석 예약 정보를 데이터 플랫폼으로 전송 로직 구현](https://iwannabarmus.tistory.com/39)
