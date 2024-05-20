@@ -5,7 +5,6 @@ import io.hhplus.server.controller.payment.dto.request.CreateRequest;
 import io.hhplus.server.controller.payment.dto.request.PayRequest;
 import io.hhplus.server.controller.payment.dto.response.CreateResponse;
 import io.hhplus.server.controller.payment.dto.response.PayResponse;
-import io.hhplus.server.domain.outbox.entity.Outbox;
 import io.hhplus.server.domain.payment.PaymentExceptionEnum;
 import io.hhplus.server.domain.payment.entity.Payment;
 import io.hhplus.server.domain.payment.repository.PaymentRepository;
@@ -39,7 +38,6 @@ class PaymentServiceTest {
     private PaymentValidator paymentValidator;
     private UserReader userReader;
     private ReservationReader reservationReader;
-
     private Reservation 예약건;
 
     @BeforeEach
@@ -125,7 +123,6 @@ class PaymentServiceTest {
                 .price(BigDecimal.valueOf(79000))
                 .build();
         Users 사용자 = new Users(1L, BigDecimal.valueOf(100000));
-        Outbox outbox = new Outbox(1L, Outbox.Type.RESERVE, Outbox.Status.INIT, "{}");
 
         // when
         when(paymentRepository.findById(paymentId)).thenReturn(결제건);

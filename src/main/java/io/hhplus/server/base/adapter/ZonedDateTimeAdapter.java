@@ -16,7 +16,8 @@ public class ZonedDateTimeAdapter extends TypeAdapter<ZonedDateTime> {
         if (value == null) {
             out.nullValue();
         } else {
-            out.value(value.format(DateTimeFormatter.ISO_ZONED_DATE_TIME));
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssZ");
+            out.value(value.format(formatter));
         }
     }
 

@@ -74,6 +74,10 @@ public class PaymentService implements PaymentInterface {
     @Override
     @Transactional
     public CancelPaymentResultResDto cancel(Long paymentId) {
+        if (paymentId == null) {
+            return new CancelPaymentResultResDto(true, null, null);
+        }
+
         Payment payment = paymentRepository.findById(paymentId);
 
         // validator

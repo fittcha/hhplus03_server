@@ -5,6 +5,8 @@ import io.hhplus.server.domain.outbox.repository.OutboxJpaRepository;
 import io.hhplus.server.domain.outbox.repository.OutboxRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class OutboxRepositoryImpl implements OutboxRepository {
 
@@ -22,5 +24,10 @@ public class OutboxRepositoryImpl implements OutboxRepository {
     @Override
     public Outbox findById(Long sendId) {
         return outboxJpaRepository.findById(sendId).orElse(null);
+    }
+
+    @Override
+    public List<Outbox> findAllByStatus(Outbox.Status status) {
+        return outboxJpaRepository.findAllByStatus(status);
     }
 }
