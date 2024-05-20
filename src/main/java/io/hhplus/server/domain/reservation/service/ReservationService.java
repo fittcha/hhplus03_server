@@ -1,9 +1,6 @@
 package io.hhplus.server.domain.reservation.service;
 
-import io.hhplus.server.base.kafka.KafkaConstants;
-import io.hhplus.server.base.kafka.service.KafkaProducer;
 import io.hhplus.server.base.redis.RedissonLock;
-import io.hhplus.server.base.util.JsonUtil;
 import io.hhplus.server.controller.reservation.dto.request.CancelRequest;
 import io.hhplus.server.controller.reservation.dto.request.ReserveRequest;
 import io.hhplus.server.controller.reservation.dto.response.ReserveResponse;
@@ -13,13 +10,15 @@ import io.hhplus.server.domain.concert.entity.ConcertDate;
 import io.hhplus.server.domain.concert.entity.Seat;
 import io.hhplus.server.domain.concert.service.ConcertReader;
 import io.hhplus.server.domain.concert.service.ConcertService;
-import io.hhplus.server.domain.outbox.entity.Outbox;
-import io.hhplus.server.domain.outbox.service.OutboxService;
+import io.hhplus.server.domain.payment.service.PaymentService;
 import io.hhplus.server.domain.reservation.entity.Reservation;
+import io.hhplus.server.domain.reservation.event.CancelEvent;
+import io.hhplus.server.domain.reservation.event.ReserveEvent;
 import io.hhplus.server.domain.reservation.repository.ReservationRepository;
 import io.hhplus.server.domain.reservation.service.dto.GetReservationAndPaymentResDto;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,8 +33,8 @@ public class ReservationService implements ReservationInterface {
     private final ReservationMonitor reservationMonitor;
     private final ConcertReader concertReader;
     private final ConcertService concertService;
-    private final OutboxService outboxService;
-    private final KafkaProducer kafkaProducer;
+    private final PaymentService paymentService;
+    private final ApplicationEventPublisher eventPublisher;
 
     @PostConstruct
     public void init() {
@@ -55,10 +54,8 @@ public class ReservationService implements ReservationInterface {
         Concert concert = concertReader.findConcert(reservation.getConcertId());
         ConcertDate concertDate = concertReader.findConcertDate(reservation.getConcertDateId());
 
-        // Outbox 데이터 등록, 예약 완료 kafka 발행
-        String jsonData = JsonUtil.toJson(reservation);
-        Outbox outbox = outboxService.save(Outbox.toEntity(Outbox.Type.RESERVE, Outbox.Status.INIT, jsonData));
-        kafkaProducer.publish(KafkaConstants.RESERVATION_TOPIC, outbox.getOutboxId(), jsonData);
+        // 예약완료 이벤트 발행
+        eventPublisher.publishEvent(new ReserveEvent(this, null, reservation.getReservationId()));
 
         return ReserveResponse.from(reservation, concert, concertDate);
     }
@@ -73,10 +70,13 @@ public class ReservationService implements ReservationInterface {
 
         reservation.toCancel();
 
-        // Outbox 데이터 등록, 예약 취소 kafka 발행
-        String jsonData = JsonUtil.toJson(reservation);
-        Outbox outbox = outboxService.save(Outbox.toEntity(Outbox.Type.CANCEL, Outbox.Status.INIT, jsonData));
-        kafkaProducer.publish(KafkaConstants.CANCEL_TOPIC, outbox.getOutboxId(), jsonData);
+        // 결제 내역 환불 처리
+        paymentService.refundReservationCancelled(reservation.getReservationId());
+        // 좌석 상태 변경
+        concertService.patchSeatStatus(reservation.getConcertDateId(), reservation.getSeatNum(), Seat.Status.AVAILABLE);
+
+        // 예약취소 이벤트 발행
+        eventPublisher.publishEvent(new CancelEvent(this, null, reservation.getReservationId()));
     }
 
     @Override

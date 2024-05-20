@@ -1,7 +1,6 @@
 package io.hhplus.server.domain.unit.service;
 
 import io.hhplus.server.base.exception.CustomException;
-import io.hhplus.server.base.kafka.service.KafkaProducer;
 import io.hhplus.server.controller.reservation.dto.request.CancelRequest;
 import io.hhplus.server.controller.reservation.dto.request.ReserveRequest;
 import io.hhplus.server.controller.reservation.dto.response.ReserveResponse;
@@ -12,7 +11,7 @@ import io.hhplus.server.domain.concert.entity.Seat;
 import io.hhplus.server.domain.concert.service.ConcertReader;
 import io.hhplus.server.domain.concert.service.ConcertService;
 import io.hhplus.server.domain.outbox.entity.Outbox;
-import io.hhplus.server.domain.outbox.service.OutboxService;
+import io.hhplus.server.domain.payment.service.PaymentService;
 import io.hhplus.server.domain.reservation.ReservationExceptionEnum;
 import io.hhplus.server.domain.reservation.entity.Reservation;
 import io.hhplus.server.domain.reservation.repository.ReservationRepository;
@@ -25,6 +24,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.logging.LogLevel;
+import org.springframework.context.ApplicationEventPublisher;
 
 import java.util.List;
 
@@ -42,8 +42,8 @@ class ReservationServiceTest {
     private ReservationMonitor reservationMonitor;
     private ConcertReader concertReader;
     private ConcertService concertService;
-    private OutboxService outboxService;
-    private KafkaProducer kafkaProducer;
+    private PaymentService paymentService;
+    private ApplicationEventPublisher eventPublisher;
 
     private Reservation 예약건;
 
@@ -55,8 +55,8 @@ class ReservationServiceTest {
         reservationMonitor = Mockito.mock(ReservationMonitor.class);
         concertReader = Mockito.mock(ConcertReader.class);
         concertService = Mockito.mock(ConcertService.class);
-        outboxService = Mockito.mock(OutboxService.class);
-        kafkaProducer = Mockito.mock(KafkaProducer.class);
+        paymentService = Mockito.mock(PaymentService.class);
+        eventPublisher = Mockito.mock(ApplicationEventPublisher.class);
 
         reservationService = new ReservationService(
                 reservationRepository,
@@ -64,8 +64,8 @@ class ReservationServiceTest {
                 reservationMonitor,
                 concertReader,
                 concertService,
-                outboxService,
-                kafkaProducer
+                paymentService,
+                eventPublisher
         );
 
         // 예약 정보 세팅
@@ -107,7 +107,6 @@ class ReservationServiceTest {
         when(reservationRepository.save(request.toEntity())).thenReturn(예약건);
         when(concertReader.findConcert(anyLong())).thenReturn(Concert.builder().build());
         when(concertReader.findConcertDate(anyLong())).thenReturn(ConcertDate.builder().build());
-        when(outboxService.save(any(Outbox.class))).thenReturn(outbox);
         ReserveResponse response = reservationService.reserve(request);
 
         // then
@@ -124,7 +123,6 @@ class ReservationServiceTest {
 
         // when
         when(reservationRepository.findByIdAndUserId(reservationId, request.userId())).thenReturn(예약건);
-        when(outboxService.save(any(Outbox.class))).thenReturn(outbox);
         reservationService.cancel(reservationId, request);
     }
 
