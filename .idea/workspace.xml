@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7e2ccb01-a990-45a5-a6f7-ad379bc6548e" name="Changes" comment="feat: nGrinder 설정">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/io/hhplus/server/load_test/SimpleHttpGetTest.groovy" beforeDir="false" />
-    </list>
+    <list default="true" id="7e2ccb01-a990-45a5-a6f7-ad379bc6548e" name="Changes" comment="feat: k6 부하테스트" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -65,6 +60,7 @@
         <option value="Interface" />
         <option value="Record" />
         <option value="Class" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -110,7 +106,9 @@
     "Docker.docker.k6: Compose Deployment.executor": "Run",
     "Docker.docker: Compose Deployment.executor": "Run",
     "Docker.k6.k6: Compose Deployment.executor": "Run",
+    "Docker.k6.prometheus: Compose Deployment.executor": "Run",
     "Docker.k6: Compose Deployment.executor": "Run",
+    "Docker.kafka/docker-compose-kafka.yml: Compose Deployment.executor": "Run",
     "Docker.redis/docker-compose-redis.yml: Compose Deployment.executor": "Run",
     "Gradle.Build hhplus03_server.executor": "Run",
     "Gradle.ConcertIntegrationTest.executor": "Run",
@@ -136,6 +134,7 @@
     "Gradle.hhplus03_server [build].executor": "Run",
     "Gradle.hhplus03_server [clean].executor": "Run",
     "Gradle.hhplus03_server [jar].executor": "Run",
+    "HTTP Request.ServerApplication | #4.executor": "Run",
     "Node.js.test-script.js.executor": "Run",
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
@@ -143,11 +142,12 @@
     "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SONARLINT_PRECOMMIT_ANALYSIS": "true",
-    "Spring Boot.ServerApplication.executor": "Run",
+    "Spring Boot.ServerApplication.executor": "Debug",
     "dart.analysis.tool.window.visible": "false",
     "git-widget-placeholder": "develop",
     "k6.test-script.js.executor": "Run",
     "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/chacha/development/hhplus/hhplus03_server/k6/k6-scripts",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
@@ -167,7 +167,12 @@
     <key name="CreateClassDialog.RecentsKey">
       <recent name="io.hhplus.server.domain.user.service" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/k6/k6-scripts" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/k6/grafana-dashboard" />
+      <recent name="$PROJECT_DIR$/k6/grafana-provisioning/dashboards" />
       <recent name="$PROJECT_DIR$/k6/script" />
       <recent name="$PROJECT_DIR$/docker/db" />
     </key>
@@ -187,10 +192,7 @@
     </option>
   </component>
   <component name="RunManager" selected="Docker.k6: Compose Deployment">
-    <configuration name="test-script.js" type="NodeJSConfigurationType" activateToolWindowBeforeRun="false" temporary="true" path-to-js-file="test-script.js" working-dir="$PROJECT_DIR$/k6/scripts">
-      <EXTENSION ID="com.jetbrains.nodejs.run.NodeJSProfilingRunConfigurationExtension">
-        <profiling do-profile="true" />
-      </EXTENSION>
+    <configuration name="ServerApplication | #4" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/ServerApplication.http" index="4" requestIdentifier="#4" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="ServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
@@ -203,27 +205,6 @@
     <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
       <deployment type="docker-compose.yml">
         <settings />
-      </deployment>
-      <method v="2" />
-    </configuration>
-    <configuration name="docker: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="sourceFilePath" value="k6/docker/docker-compose.yml" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
-    <configuration name="docker.k6: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="services">
-            <list>
-              <option value="k6" />
-            </list>
-          </option>
-          <option name="sourceFilePath" value="k6/docker/docker-compose.yml" />
-        </settings>
       </deployment>
       <method v="2" />
     </configuration>
@@ -248,21 +229,42 @@
       </deployment>
       <method v="2" />
     </configuration>
+    <configuration name="k6.prometheus: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="prometheus" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="k6/docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="kafka/docker-compose-kafka.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="sourceFilePath" value="docker/kafka/docker-compose-kafka.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
     <list>
+      <item itemvalue="Docker.k6.prometheus: Compose Deployment" />
+      <item itemvalue="Docker.kafka/docker-compose-kafka.yml: Compose Deployment" />
       <item itemvalue="Docker.k6.k6: Compose Deployment" />
-      <item itemvalue="Docker.docker.k6: Compose Deployment" />
-      <item itemvalue="Docker.docker: Compose Deployment" />
       <item itemvalue="Docker.k6: Compose Deployment" />
-      <item itemvalue="Node.js.test-script.js" />
+      <item itemvalue="HTTP Request.ServerApplication | #4" />
       <item itemvalue="Spring Boot.ServerApplication" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Docker.k6: Compose Deployment" />
-        <item itemvalue="Node.js.test-script.js" />
+        <item itemvalue="Docker.kafka/docker-compose-kafka.yml: Compose Deployment" />
         <item itemvalue="Docker.k6.k6: Compose Deployment" />
-        <item itemvalue="Docker.docker: Compose Deployment" />
-        <item itemvalue="Docker.docker.k6: Compose Deployment" />
+        <item itemvalue="Docker.k6.prometheus: Compose Deployment" />
+        <item itemvalue="HTTP Request.ServerApplication | #4" />
       </list>
     </recent_temporary>
   </component>
@@ -330,6 +332,7 @@
       <workItem from="1716375752836" duration="6647000" />
       <workItem from="1716384833741" duration="1240000" />
       <workItem from="1716426718601" duration="1314000" />
+      <workItem from="1716433247777" duration="21808000" />
     </task>
     <task id="LOCAL-00006" summary="feat: 유저 포인트 충전 및 사용 - Redisson 적용">
       <option name="closed" value="true" />
@@ -459,7 +462,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716302929161</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="feat: k6 부하테스트">
+      <option name="closed" value="true" />
+      <created>1716470237887</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1716470237887</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -495,7 +506,8 @@
     <MESSAGE value="docs: UPDATE README.md" />
     <MESSAGE value="docs: test 정리" />
     <MESSAGE value="feat: nGrinder 설정" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: nGrinder 설정" />
+    <MESSAGE value="feat: k6 부하테스트" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: k6 부하테스트" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -506,5 +518,9 @@
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
