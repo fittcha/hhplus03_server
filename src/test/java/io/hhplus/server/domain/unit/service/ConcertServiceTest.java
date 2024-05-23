@@ -19,7 +19,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.logging.LogLevel;
-import org.springframework.transaction.support.TransactionTemplate;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -41,7 +40,6 @@ class ConcertServiceTest {
     private ConcertService concertService;
     private ConcertRepository concertRepository;
     private ConcertValidator concertValidator;
-    private TransactionTemplate transactionTemplate;
 
     private Concert 임영웅_콘서트;
     private Place 상암_월드컵경기장;

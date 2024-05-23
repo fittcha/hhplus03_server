@@ -1,18 +1,21 @@
 package io.hhplus.server.domain.reservation.event;
 
-import io.hhplus.server.domain.reservation.entity.Reservation;
 import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.springframework.context.ApplicationEvent;
 
 @Getter
+@Setter
+@ToString
 public class ReserveEvent extends ApplicationEvent {
 
-    private final Long outboxId;
-    private final Reservation reservation;
+    private Long outboxId;
+    private final Long reservationId;
 
-    public ReserveEvent(Object source, Long outboxId, Reservation reservation) {
+    public ReserveEvent(Object source, Long outboxId, Long reservationId) {
         super(source);
         this.outboxId = outboxId;
-        this.reservation = reservation;
+        this.reservationId = reservationId;
     }
 }
