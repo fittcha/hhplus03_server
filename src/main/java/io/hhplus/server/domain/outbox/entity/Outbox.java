@@ -28,6 +28,8 @@ public class Outbox extends BaseDateTimeEntity {
 
     private String jsonData;
 
+    private int retryCount = 0;
+
     @Builder
     public Outbox(Long outboxId, Type type, Status status, String jsonData) {
         this.outboxId = outboxId;
@@ -48,6 +50,10 @@ public class Outbox extends BaseDateTimeEntity {
         this.status = status;
     }
 
+    public void plusRetryCount() {
+        this.retryCount++;
+    }
+
     public enum Type {
         RESERVE,
         CANCEL
@@ -55,7 +61,9 @@ public class Outbox extends BaseDateTimeEntity {
 
     public enum Status {
         INIT,
-        DONE
+        DONE,
+        RETRY,
+        FAIL
     }
 
     @Override

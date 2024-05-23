@@ -18,6 +18,7 @@ public class SendCommReqDto {
     }
 
     public enum DataType {
-        RESERVATION
+        RESERVATION,
+        CANCEL
     }
 }

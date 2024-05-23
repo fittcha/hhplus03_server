@@ -1,14 +1,11 @@
 package io.hhplus.server.domain.reservation.event;
 
-import io.hhplus.server.base.util.JsonUtil;
-import io.hhplus.server.domain.concert.entity.Seat;
-import io.hhplus.server.domain.concert.service.ConcertService;
+import io.hhplus.server.base.kafka.KafkaConstants;
+import io.hhplus.server.base.kafka.service.KafkaProducer;
+import io.hhplus.server.domain.outbox.entity.Outbox;
 import io.hhplus.server.domain.outbox.service.OutboxService;
-import io.hhplus.server.domain.payment.service.PaymentService;
-import io.hhplus.server.domain.reservation.entity.Reservation;
 import io.hhplus.server.domain.reservation.service.ReservationMonitor;
-import io.hhplus.server.domain.send.dto.SendCommReqDto;
-import io.hhplus.server.domain.send.service.SendService;
+import io.hhplus.server.domain.reservation.service.ReservationReader;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.event.TransactionPhase;
@@ -19,37 +16,41 @@ import org.springframework.transaction.event.TransactionalEventListener;
 public class ReservationEventListener {
 
     private final OutboxService outboxService;
+    private final KafkaProducer kafkaProducer;
     private final ReservationMonitor reservationMonitor;
-    private final SendService sendService;
-    private final PaymentService paymentService;
-    private final ConcertService concertService;
+    private final ReservationReader reservationReader;
+
+    @TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
+    public void occupyReservation(ReserveEvent event) {
+        // 예약 임시 점유 모니터링
+        reservationMonitor.occupyReservation(event.getReservationId());
+    }
+
+    @TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
+    public void saveOutboxReserve(ReserveEvent event) {
+        // Outbox 데이터 등록
+        Outbox outbox = outboxService.save(Outbox.toEntity(Outbox.Type.RESERVE, Outbox.Status.INIT, String.valueOf(event.getReservationId())));
+        // set outboxId
+        event.setOutboxId(outbox.getOutboxId());
+    }
 
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
     public void onReservedEvent(ReserveEvent event) {
-        // 발행 완료
-        outboxService.toPublished(event.getOutboxId());
+        // 예약 완료 kafka 발행
+        kafkaProducer.publish(KafkaConstants.RESERVATION_TOPIC, event.getOutboxId(), String.valueOf(event.getReservationId()));
+    }
 
-        // 예약 임시 점유 모니터링
-        reservationMonitor.occupyReservation(event.getReservation().getReservationId());
-
-        // 예약 정보 전송
-        String jsonData = JsonUtil.toJson(event.getReservation());
-        sendService.send(new SendCommReqDto(SendCommReqDto.DataType.RESERVATION, jsonData));
+    @TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
+    public void saveOutboxCancel(CancelEvent event) {
+        // Outbox 데이터 등록
+        Outbox outbox = outboxService.save(Outbox.toEntity(Outbox.Type.CANCEL, Outbox.Status.INIT, String.valueOf(event.getReservationId())));
+        // set outboxId
+        event.setOutboxId(outbox.getOutboxId());
     }
 
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
     public void onCancelEvent(CancelEvent event) {
-        // 발행 완료
-        outboxService.toPublished(event.getOutboxId());
-
-        Reservation reservation = event.getReservation();
-        // 결제 내역 환불 처리
-        paymentService.refundReservationCancelled(reservation.getReservationId());
-        // 좌석 상태 변경
-        concertService.patchSeatStatus(reservation.getConcertDateId(), reservation.getSeatNum(), Seat.Status.AVAILABLE);
-        // 예약 정보 전송
-        String jsonData = JsonUtil.toJson(event.getReservation());
-        sendService.send(new SendCommReqDto(SendCommReqDto.DataType.RESERVATION, jsonData));
+        // 예약 완료 kafka 발행
+        kafkaProducer.publish(KafkaConstants.CANCEL_TOPIC, event.getOutboxId(), String.valueOf(event.getReservationId()));
     }
 }
-

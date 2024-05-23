@@ -16,6 +16,22 @@ jobs:
         image: redis
         ports:
           - 6379:6379
+      zookeeper:
+        image: wurstmeister/zookeeper
+        ports:
+          - 2181:2181
+      kafka:
+        image: wurstmeister/kafka
+        ports:
+          - 9092:9092
+        env:
+          KAFKA_ADVERTISED_HOST_NAME: kafka
+          KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+          KAFKA_LISTENERS: INTERNAL://:9093,EXTERNAL://:9092
+          KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT
+          KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+        depends_on:
+          - zookeeper
 
     steps:
       - name: Checkout
