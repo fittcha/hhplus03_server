@@ -11,7 +11,7 @@ public class WaitingConstants {
     public static final String WAIT_KEY = "waiting:wait";
     public static final String ACTIVE_KEY = "waiting:active";
 
-    public static final int MAX_ACTIVE_USER = 2000;
+    public static final int MAX_ACTIVE_USER = 200;
     public static final int ENTER_10_SECONDS = 300;
     public static final long AUTO_EXPIRED_TIME = 10 * 60 * 1000;
 }
