@@ -1,4 +1,7 @@
 # hhplus03_server
+<a href="https://hhpluscertificateofcompletion.oopy.io/">
+  <img src="https://static.spartacodingclub.kr/hanghae99/plus/completion/badge_black.svg" />
+</a>
 
 # [항해 플러스 백엔드 3주차] 서버 구축
 ### *시나리오 - 콘서트 예약 서비스*
