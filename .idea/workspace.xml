@@ -4,18 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7e2ccb01-a990-45a5-a6f7-ad379bc6548e" name="Changes" comment="feat: 서비스 -&gt; kafka 발행 시 관심사 분리 (로직 후 kafka 발행까지만 관심)">
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/event/ReservationEventListener.java" afterDir="false" />
+    <list default="true" id="7e2ccb01-a990-45a5-a6f7-ad379bc6548e" name="Changes" comment="feat: k6 부하테스트">
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/base/adapter/ZonedDateTimeAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/base/adapter/ZonedDateTimeAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/base/kafka/service/KafkaProducer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/base/kafka/service/KafkaProducer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/consumer/CancelConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/consumer/CancelConsumer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/consumer/ReserveConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/consumer/ReserveConsumer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/event/CancelEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/event/CancelEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/event/ReserveEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/event/ReserveEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/service/ReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/hhplus/server/domain/reservation/service/ReservationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/io/hhplus/server/domain/unit/service/ReservationServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/io/hhplus/server/domain/unit/service/ReservationServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,6 +85,16 @@
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/fittcha/hhplus03_server.git&quot;,
     &quot;accountId&quot;: &quot;c87c943a-7733-4f35-8c29-45dcbc68a53c&quot;
+  },
+  &quot;recentNewPullRequestHead&quot;: {
+    &quot;server&quot;: {
+      &quot;useHttp&quot;: false,
+      &quot;host&quot;: &quot;github.com&quot;,
+      &quot;port&quot;: null,
+      &quot;suffix&quot;: null
+    },
+    &quot;owner&quot;: &quot;fittcha&quot;,
+    &quot;repository&quot;: &quot;hhplus03_server&quot;
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
@@ -112,66 +113,66 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Docker.docker.k6: Compose Deployment.executor": "Run",
-    "Docker.docker: Compose Deployment.executor": "Run",
-    "Docker.k6.k6: Compose Deployment.executor": "Run",
-    "Docker.k6.prometheus: Compose Deployment.executor": "Run",
-    "Docker.k6: Compose Deployment.executor": "Run",
-    "Docker.kafka/docker-compose-kafka.yml: Compose Deployment.executor": "Run",
-    "Docker.redis/docker-compose-redis.yml: Compose Deployment.executor": "Run",
-    "Gradle.Build hhplus03_server.executor": "Run",
-    "Gradle.ConcertIntegrationTest.executor": "Run",
-    "Gradle.ConcertServiceTest.executor": "Run",
-    "Gradle.PaymentIntegrationTest.executor": "Run",
-    "Gradle.PaymentIntegrationTest.payTest_INSUFFICIENT_BALANCE.executor": "Run",
-    "Gradle.PaymentServiceTest.executor": "Run",
-    "Gradle.PaymentServiceTest.payTest_lack_balance.executor": "Run",
-    "Gradle.PaymentServiceTest.payTest_success.executor": "Run",
-    "Gradle.ReservationIntegrationTest.cancelTest_pay_cancel.executor": "Run",
-    "Gradle.ReservationIntegrationTest.executor": "Run",
-    "Gradle.ReservationIntegrationTest.reserveTest_ALREADY_RESERVED.executor": "Run",
-    "Gradle.ReservationIntegrationTest.reserveTest_ALREADY_RESERVED_lock.executor": "Run",
-    "Gradle.ReservationIntegrationTest.reserveTest_complete_in_5min.executor": "Run",
-    "Gradle.ReservationServiceTest.executor": "Run",
-    "Gradle.Tests in 'hhplus03_server.test'.executor": "Run",
-    "Gradle.UsersIntegrationTest.chargeAndUseTest_lock.executor": "Run",
-    "Gradle.UsersIntegrationTest.chargeTest_따닥_lock.executor": "Run",
-    "Gradle.UsersIntegrationTest.executor": "Run",
-    "Gradle.UsersIntegrationTest.useTest_use_before_lack_lock.executor": "Run",
-    "Gradle.UsersServiceTest.executor": "Run",
-    "Gradle.WaitingServiceTest.executor": "Run",
-    "Gradle.hhplus03_server [build].executor": "Run",
-    "Gradle.hhplus03_server [clean].executor": "Run",
-    "Gradle.hhplus03_server [jar].executor": "Run",
-    "HTTP Request.ServerApplication | #4.executor": "Run",
-    "Node.js.test-script.js.executor": "Run",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
-    "Spring Boot.ServerApplication.executor": "Debug",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "develop",
-    "k6.test-script.js.executor": "Run",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/chacha/development/hhplus/hhplus03_server/k6/k6-scripts",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_interpreter_path": "node",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Docker.docker.k6: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.k6.k6: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.k6.prometheus: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.k6: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.kafka/docker-compose-kafka.yml: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.redis/docker-compose-redis.yml: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Build hhplus03_server.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ConcertIntegrationTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ConcertServiceTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PaymentIntegrationTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PaymentIntegrationTest.payTest_INSUFFICIENT_BALANCE.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PaymentServiceTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PaymentServiceTest.payTest_lack_balance.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PaymentServiceTest.payTest_success.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ReservationIntegrationTest.cancelTest_pay_cancel.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ReservationIntegrationTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ReservationIntegrationTest.reserveTest_ALREADY_RESERVED.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ReservationIntegrationTest.reserveTest_ALREADY_RESERVED_lock.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ReservationIntegrationTest.reserveTest_complete_in_5min.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ReservationServiceTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Tests in 'hhplus03_server.test'.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.UsersIntegrationTest.chargeAndUseTest_lock.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.UsersIntegrationTest.chargeTest_따닥_lock.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.UsersIntegrationTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.UsersIntegrationTest.useTest_use_before_lack_lock.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.UsersServiceTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.WaitingServiceTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.hhplus03_server [build].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.hhplus03_server [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.hhplus03_server [jar].executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.ServerApplication | #4.executor&quot;: &quot;Run&quot;,
+    &quot;Node.js.test-script.js.executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
+    &quot;Spring Boot.ServerApplication.executor&quot;: &quot;Debug&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
+    &quot;k6.test-script.js.executor&quot;: &quot;Run&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/chacha/development/hhplus/hhplus03_server/k6/k6-scripts&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
@@ -344,7 +345,13 @@
       <workItem from="1716375752836" duration="6647000" />
       <workItem from="1716384833741" duration="1240000" />
       <workItem from="1716426718601" duration="1314000" />
-      <workItem from="1716433247777" duration="21808000" />
+      <workItem from="1716433247777" duration="22390000" />
+      <workItem from="1719421587704" duration="118000" />
+      <workItem from="1719928365227" duration="2213000" />
+      <workItem from="1720100788442" duration="1497000" />
+      <workItem from="1722427148035" duration="597000" />
+      <workItem from="1723122050402" duration="862000" />
+      <workItem from="1723124343574" duration="780000" />
     </task>
     <task id="LOCAL-00006" summary="feat: 유저 포인트 충전 및 사용 - Redisson 적용">
       <option name="closed" value="true" />
@@ -482,11 +489,38 @@
       <option name="project" value="LOCAL" />
       <updated>1716470237887</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="feat: k6 부하테스트">
+      <option name="closed" value="true" />
+      <created>1716470441933</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1716470441933</updated>
+    </task>
+    <task id="LOCAL-00024" summary="feat: k6 부하테스트">
+      <option name="closed" value="true" />
+      <created>1716470831378</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1716470831379</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+        <option value="GitHub.CommitStatus" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">

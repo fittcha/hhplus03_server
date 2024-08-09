@@ -1,7 +1,6 @@
 package io.hhplus.server.domain.reservation.entity;
 
 import io.hhplus.server.base.entity.BaseDateTimeEntity;
-import io.hhplus.server.domain.payment.entity.Payment;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -10,8 +9,6 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
 
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -41,9 +38,6 @@ public class Reservation extends BaseDateTimeEntity {
     private Reservation.Status status;
 
     private ZonedDateTime reservedAt;
-
-    @OneToMany(mappedBy = "reservation", cascade = CascadeType.REMOVE)
-    private List<Payment> paymentList = new ArrayList<>();
 
     @Builder
     public Reservation(Long userId, Long concertId, Long concertDateId, int seatNum, Status status, ZonedDateTime reservedAt) {
