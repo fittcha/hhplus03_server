@@ -9,9 +9,6 @@ import io.hhplus.server.domain.concert.entity.Seat;
 import io.hhplus.server.domain.concert.repository.ConcertRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.retry.annotation.Backoff;
-import org.springframework.retry.annotation.Recover;
-import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -62,16 +59,10 @@ public class ConcertService implements ConcertInterface {
 
     @Override
     @Transactional
-    @Retryable(value = RuntimeException.class, maxAttempts = 3, backoff = @Backoff(delay = 2000))
     public void patchSeatStatus(Long concertDateId, int seatNum, Seat.Status status) {
         Seat seat = concertRepository.findSeatByConcertDateIdAndSeatNum(concertDateId, seatNum);
         if (seat != null) {
             seat.patchStatus(status);
         }
-    }
-
-    @Recover
-    public void recoverSeatStatusEvent(RuntimeException e, Long concertDateId, int seatNum, Seat.Status status) {
-        log.error("All the seatStatusEvent retries failed. concertDateId: {}, seatNum: {}, status: {} error: {}", concertDateId, seatNum, status, e.getMessage());
     }
 }

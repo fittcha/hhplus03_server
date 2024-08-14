@@ -1,7 +1,7 @@
 package io.hhplus.server.base.kafka.service;
 
-import io.hhplus.server.domain.send.entity.Send;
-import io.hhplus.server.domain.send.service.SendService;
+import io.hhplus.server.domain.outbox.entity.Outbox;
+import io.hhplus.server.domain.outbox.service.OutboxService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.ProducerRecord;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class KafkaProducerListener implements ProducerListener<String, String> {
 
-    private final SendService sendService;
+    private final OutboxService outboxService;
 
     @Override
     public void onError(ProducerRecord producerRecord, RecordMetadata recordMetadata, Exception exception) {
@@ -26,7 +26,7 @@ public class KafkaProducerListener implements ProducerListener<String, String> {
         // 발행 실패 -> 재시도 필요 상태 마킹 :: RETRY
         String key = (String) producerRecord.key();
         Long sendId = Long.valueOf(key);
-        Send send = sendService.findById(sendId);
-        sendService.updateStatus(send, Send.Status.RETRY);
+        Outbox outbox = outboxService.findById(sendId);
+        outboxService.updateStatus(outbox, Outbox.Status.RETRY);
     }
 }

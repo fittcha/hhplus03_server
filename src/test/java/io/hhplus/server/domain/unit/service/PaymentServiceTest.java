@@ -13,9 +13,6 @@ import io.hhplus.server.domain.payment.service.PaymentValidator;
 import io.hhplus.server.domain.payment.service.dto.CancelPaymentResultResDto;
 import io.hhplus.server.domain.reservation.entity.Reservation;
 import io.hhplus.server.domain.reservation.service.ReservationReader;
-import io.hhplus.server.domain.send.entity.Send;
-import io.hhplus.server.domain.send.event.SendEventPublisher;
-import io.hhplus.server.domain.send.service.SendService;
 import io.hhplus.server.domain.user.UserExceptionEnum;
 import io.hhplus.server.domain.user.entity.Users;
 import io.hhplus.server.domain.user.service.UserReader;
@@ -41,9 +38,6 @@ class PaymentServiceTest {
     private PaymentValidator paymentValidator;
     private UserReader userReader;
     private ReservationReader reservationReader;
-    private SendService sendService;
-    private SendEventPublisher sendEventPublisher;
-
     private Reservation 예약건;
 
     @BeforeEach
@@ -53,16 +47,12 @@ class PaymentServiceTest {
         paymentValidator = Mockito.mock(PaymentValidator.class);
         userReader = Mockito.mock(UserReader.class);
         reservationReader = Mockito.mock(ReservationReader.class);
-        sendService = Mockito.mock(SendService.class);
-        sendEventPublisher = Mockito.mock(SendEventPublisher.class);
 
         paymentService = new PaymentService(
                 paymentRepository,
                 paymentValidator,
                 userReader,
-                reservationReader,
-                sendService,
-                sendEventPublisher
+                reservationReader
         );
 
         // 예약 정보 세팅
@@ -133,12 +123,10 @@ class PaymentServiceTest {
                 .price(BigDecimal.valueOf(79000))
                 .build();
         Users 사용자 = new Users(1L, BigDecimal.valueOf(100000));
-        Send send = new Send(1L, Send.Type.RESERVATION, Send.Status.READY, "{}");
 
         // when
         when(paymentRepository.findById(paymentId)).thenReturn(결제건);
         when(userReader.findUser(request.userId())).thenReturn(사용자);
-        when(sendService.save(any(Send.class))).thenReturn(send);
         PayResponse response = paymentService.pay(paymentId, request);
 
         // then

@@ -8,8 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -24,9 +22,6 @@ public class ConcertDate extends BaseDateTimeEntity {
 
     @Column(nullable = false)
     private ZonedDateTime concertDate;
-
-    @OneToMany(mappedBy = "concertDate", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Seat> seats = new ArrayList<>();
 
     @Builder
     public ConcertDate(Long concertDateId, ZonedDateTime concertDate) {

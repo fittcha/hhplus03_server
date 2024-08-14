@@ -10,22 +10,21 @@ import io.hhplus.server.domain.concert.entity.ConcertDate;
 import io.hhplus.server.domain.concert.entity.Seat;
 import io.hhplus.server.domain.concert.service.ConcertReader;
 import io.hhplus.server.domain.concert.service.ConcertService;
+import io.hhplus.server.domain.outbox.entity.Outbox;
+import io.hhplus.server.domain.payment.service.PaymentService;
 import io.hhplus.server.domain.reservation.ReservationExceptionEnum;
 import io.hhplus.server.domain.reservation.entity.Reservation;
-import io.hhplus.server.domain.reservation.event.ReservationEventPublisher;
 import io.hhplus.server.domain.reservation.repository.ReservationRepository;
 import io.hhplus.server.domain.reservation.service.ReservationMonitor;
 import io.hhplus.server.domain.reservation.service.ReservationService;
 import io.hhplus.server.domain.reservation.service.ReservationValidator;
 import io.hhplus.server.domain.reservation.service.dto.GetReservationAndPaymentResDto;
-import io.hhplus.server.domain.send.entity.Send;
-import io.hhplus.server.domain.send.event.SendEventPublisher;
-import io.hhplus.server.domain.send.service.SendService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.logging.LogLevel;
+import org.springframework.context.ApplicationEventPublisher;
 
 import java.util.List;
 
@@ -43,9 +42,8 @@ class ReservationServiceTest {
     private ReservationMonitor reservationMonitor;
     private ConcertReader concertReader;
     private ConcertService concertService;
-    private SendService sendService;
-    private ReservationEventPublisher reservationEventPublisher;
-    private SendEventPublisher sendEventPublisher;
+    private PaymentService paymentService;
+    private ApplicationEventPublisher eventPublisher;
 
     private Reservation 예약건;
 
@@ -57,9 +55,8 @@ class ReservationServiceTest {
         reservationMonitor = Mockito.mock(ReservationMonitor.class);
         concertReader = Mockito.mock(ConcertReader.class);
         concertService = Mockito.mock(ConcertService.class);
-        sendService = Mockito.mock(SendService.class);
-        reservationEventPublisher = Mockito.mock(ReservationEventPublisher.class);
-        sendEventPublisher = Mockito.mock(SendEventPublisher.class);
+        paymentService = Mockito.mock(PaymentService.class);
+        eventPublisher = Mockito.mock(ApplicationEventPublisher.class);
 
         reservationService = new ReservationService(
                 reservationRepository,
@@ -67,9 +64,8 @@ class ReservationServiceTest {
                 reservationMonitor,
                 concertReader,
                 concertService,
-                sendService,
-                reservationEventPublisher,
-                sendEventPublisher
+                paymentService,
+                eventPublisher
         );
 
         // 예약 정보 세팅
@@ -104,14 +100,13 @@ class ReservationServiceTest {
     void reserveTest_success() {
         // given
         ReserveRequest request = new ReserveRequest(1L, 1L, 1, 1L);
-        Send send = new Send(1L, Send.Type.RESERVATION, Send.Status.READY, "{}");
+        Outbox outbox = new Outbox(1L, Outbox.Type.RESERVE, Outbox.Status.INIT, "{}");
 
         // when
         when(reservationRepository.findOneByConcertDateIdAndSeatNum(request.concertDateId(), request.seatNum())).thenReturn(null);
         when(reservationRepository.save(request.toEntity())).thenReturn(예약건);
         when(concertReader.findConcert(anyLong())).thenReturn(Concert.builder().build());
         when(concertReader.findConcertDate(anyLong())).thenReturn(ConcertDate.builder().build());
-        when(sendService.save(any(Send.class))).thenReturn(send);
         ReserveResponse response = reservationService.reserve(request);
 
         // then
@@ -124,11 +119,10 @@ class ReservationServiceTest {
         // given
         Long reservationId = 1L;
         CancelRequest request = new CancelRequest(1L);
-        Send send = new Send(1L, Send.Type.RESERVATION, Send.Status.READY, "{}");
+        Outbox outbox = new Outbox(1L, Outbox.Type.CANCEL, Outbox.Status.INIT, "{}");
 
         // when
         when(reservationRepository.findByIdAndUserId(reservationId, request.userId())).thenReturn(예약건);
-        when(sendService.save(any(Send.class))).thenReturn(send);
         reservationService.cancel(reservationId, request);
     }
 

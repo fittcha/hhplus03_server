@@ -22,6 +22,7 @@ import java.util.concurrent.TimeUnit;
 @Component
 @RequiredArgsConstructor
 public class ReservationMonitor {
+    // TODO 임시 점유 로직 변경하기
     /* 예약 요청을 5분 동안 임시 점유하고, 5분 후 상태를 추적하여 점유 해제 처리하는 모니터링 클래스 */
 
     private final ReservationRepository reservationRepository;

@@ -1,4 +1,4 @@
-package io.hhplus.server.domain.send.entity;
+package io.hhplus.server.domain.outbox.entity;
 
 import io.hhplus.server.base.entity.BaseDateTimeEntity;
 import jakarta.persistence.*;
@@ -14,11 +14,11 @@ import java.util.Objects;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @DynamicUpdate
-public class Send extends BaseDateTimeEntity {
+public class Outbox extends BaseDateTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long sendId;
+    private Long outboxId;
 
     @Column(nullable = false)
     private Type type;
@@ -31,15 +31,15 @@ public class Send extends BaseDateTimeEntity {
     private int retryCount = 0;
 
     @Builder
-    public Send(Long sendId, Type type, Status status, String jsonData) {
-        this.sendId = sendId;
+    public Outbox(Long outboxId, Type type, Status status, String jsonData) {
+        this.outboxId = outboxId;
         this.type = type;
         this.status = status;
         this.jsonData = jsonData;
     }
 
-    public static Send toEntity(Type type, Status status, String jsonData) {
-        return Send.builder()
+    public static Outbox toEntity(Type type, Status status, String jsonData) {
+        return Outbox.builder()
                 .type(type)
                 .status(status)
                 .jsonData(jsonData)
@@ -55,14 +55,14 @@ public class Send extends BaseDateTimeEntity {
     }
 
     public enum Type {
-        RESERVATION
+        RESERVE,
+        CANCEL
     }
 
     public enum Status {
-        READY,
-        PUBLISHED,
+        INIT,
+        DONE,
         RETRY,
-        SUCCESS,
         FAIL
     }
 
@@ -70,12 +70,12 @@ public class Send extends BaseDateTimeEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Send send = (Send) o;
-        return Objects.equals(sendId, send.sendId);
+        Outbox outbox = (Outbox) o;
+        return Objects.equals(outboxId, outbox.outboxId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(sendId);
+        return Objects.hashCode(outboxId);
     }
 }

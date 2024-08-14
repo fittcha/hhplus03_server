@@ -8,8 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -30,15 +28,10 @@ public class Concert extends BaseDateTimeEntity {
     @JoinColumn(name = "place_id")
     private Place place;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "concert_id")
-    private List<ConcertDate> concertDateList = new ArrayList();
-
     @Builder
-    public Concert(String name, Place place, List<ConcertDate> concertDateList) {
+    public Concert(String name, Place place) {
         this.name = name;
         this.place = place;
-        this.concertDateList = concertDateList;
     }
 
     @Override
